@@ -10,6 +10,7 @@ typedef struct{
 
 
 typedef struct{
+  char nom[50];
   int pv;
   int pvmax;
   int attaque;
