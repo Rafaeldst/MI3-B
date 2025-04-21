@@ -1,0 +1,87 @@
+#include <SDL2/SDL.h>            // Librairie principale SDL
+#include <SDL2/SDL_image.h>      // Pour charger des images PNG
+#include <stdbool.h>             // Pour utiliser le type bool
+
+// Taille de la fenêtre
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
+const int SPEED = 2;             // Vitesse de déplacement
+
+int main() {
+    SDL_Init(SDL_INIT_VIDEO);    // Initialiser la vidéo SDL
+    IMG_Init(IMG_INIT_PNG);      // Initialiser SDL_image pour charger les PNG
+
+    // Créer la fenêtre du jeu
+    SDL_Window* window = SDL_CreateWindow("2 Joueurs SDL2",
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, // Centrer la fenêtre
+        WINDOW_WIDTH, WINDOW_HEIGHT, 0);                // Taille et options
+
+    // Créer un moteur de rendu matériel
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    // Charger l'image du joueur 1 (fille)
+    SDL_Surface* surface1 = IMG_Load("dresseuse_fille.png");    // Charge en surface
+    // Charger l'image du joueur 2 (garçon)
+    SDL_Surface* surface2 = IMG_Load("dresseur_garcon.png");    // Charge en surface
+
+    // Convertir les surfaces en textures exploitables par SDL
+    SDL_Texture* player1 = SDL_CreateTextureFromSurface(renderer, surface1);
+    SDL_Texture* player2 = SDL_CreateTextureFromSurface(renderer, surface2);
+
+    // Libérer les surfaces, plus nécessaires après conversion en texture
+    SDL_FreeSurface(surface1);
+    SDL_FreeSurface(surface2);
+
+    // Position et taille du joueur 1
+    SDL_Rect pos1 = {100, 100, 64, 64}; // x, y, largeur, hauteur
+    // Position et taille du joueur 2
+    SDL_Rect pos2 = {300, 100, 64, 64};
+
+    bool running = true;         // Booléen pour contrôler la boucle principale
+    SDL_Event event;             // Structure pour gérer les événements
+
+    // Boucle de jeu principale
+    while (running) {
+        // Gérer les événements (fermeture de la fenêtre, etc.)
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) // Si on clique sur la croix
+                running = false;        // Quitter la boucle
+        }
+
+        // Obtenir l'état des touches du clavier
+        const Uint8* keys = SDL_GetKeyboardState(NULL);
+
+        // Déplacement joueur 1 (flèches directionnelles)
+        if (keys[SDL_SCANCODE_UP])    pos1.y -= SPEED;
+        if (keys[SDL_SCANCODE_DOWN])  pos1.y += SPEED;
+        if (keys[SDL_SCANCODE_LEFT])  pos1.x -= SPEED;
+        if (keys[SDL_SCANCODE_RIGHT]) pos1.x += SPEED;
+
+        // Déplacement joueur 2 (ZQSD)
+        if (keys[SDL_SCANCODE_Z])     pos2.y -= SPEED;
+        if (keys[SDL_SCANCODE_S])     pos2.y += SPEED;
+        if (keys[SDL_SCANCODE_Q])     pos2.x -= SPEED;
+        if (keys[SDL_SCANCODE_D])     pos2.x += SPEED;
+
+        // Effacer l’écran
+        SDL_RenderClear(renderer);
+        // Dessiner joueur 1
+        SDL_RenderCopy(renderer, player1, NULL, &pos1);
+        // Dessiner joueur 2
+        SDL_RenderCopy(renderer, player2, NULL, &pos2);
+        // Afficher tout à l’écran
+        SDL_RenderPresent(renderer);
+
+        SDL_Delay(16); // Petite pause pour limiter à ~60 FPS
+    }
+
+    // Libération des ressources
+    SDL_DestroyTexture(player1);
+    SDL_DestroyTexture(player2);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    IMG_Quit(); // Fermer SDL_image
+    SDL_Quit(); // Fermer SDL
+
+    return 0; // Fin du programme
+}
