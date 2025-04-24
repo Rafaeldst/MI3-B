@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
-#define nombre_effet //nombre de tous les effets possibles du jeu
+#define NOMBRE_EFFET 7//nombre de tous les effets possibles du jeu
+#define TAILLE_EQUIPE 3
 
 typedef struct{
   char nom[32];
@@ -10,7 +11,7 @@ typedef struct{
   int tour_actif;
   int tour_recharge;
   int barre_action;// les personnages chargent une barre d'action pour attaquer grâce a leur vitesse comme dans raid shadow legends
-  char effet_special[nombre_effet];
+  char effet_special[NOMBRE_EFFET];
 } Competence;
 
 typedef struct{
