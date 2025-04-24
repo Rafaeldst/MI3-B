@@ -1,5 +1,7 @@
 #include <stdlib.h>
 
+#define nombre_effet //nombre de tous les effets possibles du jeu
+
 typedef struct{
   char nom[32];
   int valeur;
@@ -7,8 +9,9 @@ typedef struct{
   char type[20]; // soin dégat ..?
   int tour_actif;
   int tour_recharge;
+  int barre_action;// les personnages chargent une barre d'action pour attaquer grâce a leur vitesse comme dans raid shadow legends
+  char effet_special[nombre_effet];
 } Competence;
-
 
 typedef struct{
   char nom[50];
@@ -23,35 +26,25 @@ typedef struct{
 }  Combattant;
 
 
-void degat(Combattant combattant,int degat){
+void degat(Combattant combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
   combattant.pv=combattant.pv-degat;
 }
 
-void soin(Combattant combattant, int soin){
-  combattant.pv=combattant.pv+soin;
-}
+void appliquer_technique()//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
 
 Combattant charger_combattant() //fonction qui charge les données d'un combattant contenues dans un fichier
 
-Technique charger_technique() //fonction qui charge les données d'une technique contenues dans un fichier
+Competence charger_competence() //fonction qui charge les données d'une technique contenues dans un fichier
+
+void creer_equipe(Combattant* Equipe1,Combattant* Equipe2) //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
 
 void combat() //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
-  int tour=1;
-int a;
-while(zeus.pv>0 && hades.pv>0){
-  if (tour%2==0){
-    scanf("%d",&a);
-    if(a==1)}
-      degat(hades,CompeteneceZeus.valeur);}
-    }
-  else{
-    scanf("%sd";&a);
-    if(a==1){
-      degat(zeus,Competencehades.valeur);}}
-  
-  tour=tour+1;//inclure un système de tour max pour éviter qu'il y ait des scénarios où le game ne peut pas se finir
+
 
 int main(){
-
+  Combattant Equipe1[3];
+  Combattant Equipe2[3];
+  
+    
   return 0;
 }
