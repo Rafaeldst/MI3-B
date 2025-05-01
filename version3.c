@@ -57,7 +57,7 @@ void soin(Combattant* combattant,soin){
 
 void acceleration_divine(Combattant* combattant){
   Effet effet;
-  effet.nom="acceleration_divine";
+  strcpy(effet.nom, "acceleration_divine");
   effet.tour_restant=3;
   Combattant->effet_special[nbr_effet_actif]=effet;
   Combattant->nbr_effet_actif++;
