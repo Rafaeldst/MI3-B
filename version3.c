@@ -83,6 +83,10 @@ char* personnages_disponibles[8] = {
     "Apollo", "Ares", "Athena", "Hera"
 };
 
+char* personnages_disponibles[8] = {
+    "Zeus.txt", "Poseidon.txt", "Hades.txt", "Hermes.txt",
+    "Apollo.txt", "Ares.txt", "Athena.txt", "Hera.txt"
+};
 // pour suivre quels personnages  sont déjà pris
 int deja_choisi[8] = {0};
 
