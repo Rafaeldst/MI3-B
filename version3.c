@@ -2,7 +2,8 @@
 
 #define NOMBRE_EFFET 7//nombre de tous les effets possibles du jeu
 #define TAILLE_EQUIPE 3
-
+//degat soin bouclier_solide
+//bouclier se protege et donne 20% des dégats pdt 2 tours
 typedef struct{
   char nom[32];
   int valeur;
