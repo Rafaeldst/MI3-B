@@ -12,7 +12,6 @@ typedef struct{
   char cible[20];
   int tour_actif;
   int tour_recharge;
-  char effet_special[NOMBRE_EFFET];
 } Competence;
 
 typedef struct{
@@ -25,6 +24,7 @@ typedef struct{
   int vitesse;
   int barre_action;// les personnages chargent une barre d'action pour attaquer grâce a leur vitesse comme dans raid shadow legends
   char categorie[32];
+  char effet_special[NOMBRE_EFFET];
   Competence competence[4];
 }  Combattant;
 
