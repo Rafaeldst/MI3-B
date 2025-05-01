@@ -83,7 +83,7 @@ char* personnages_disponibles[8] = {
     "Apollo", "Ares", "Athena", "Hera"
 };
 
-char* personnages_disponibles[8] = {
+char* fichier_personnages[8] = {
     "Zeus.txt", "Poseidon.txt", "Hades.txt", "Hermes.txt",
     "Apollo.txt", "Ares.txt", "Athena.txt", "Hera.txt"
 };
