@@ -57,6 +57,8 @@ void appliquer_technique(Combattant* cible,Competence competence,Combattant* lan
   if (strcmp(competence.type,"soin")==0){
     soin(cible,competence.valeur);
   }
+  if (strcmp(competence.type,"acceleration divine")==0){
+    
   
   
 }
