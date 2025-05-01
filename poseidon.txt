@@ -1,0 +1,4 @@
+Poséidon
+Mage
+210 210 65 35 45 65
+attaque_poseidon.txt rafale_magique.txt tsunami.txt maremotrice.txt

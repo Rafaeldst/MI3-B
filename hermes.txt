@@ -1,0 +1,4 @@
+Hermès
+Assassin
+195 195 72 28 75 85
+attaque_hermes.txt acceleration.txt acceleration_divine.txt fureur_furtive.txt
