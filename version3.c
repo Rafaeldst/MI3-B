@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define NOMBRE_EFFET 7//nombre de tous les effets possibles du jeu
 #define TAILLE_EQUIPE 3
