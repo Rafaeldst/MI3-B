@@ -187,11 +187,11 @@ void maj_vitesse(Combattant* combattant){
 
 int charge(Combattant combattant){
   if (combattant.barre_action<99){
-return 0;return 1;}
+return 0;}return 1;}
 
 int vivant(Combattant combattant){
   if (combattant.pv==0){
-return 0;return 1;}
+return 0;}return 1;}
 
 int pret(Combattant combattant){
 return (charge(combattant)&&vivant(combattant));}
