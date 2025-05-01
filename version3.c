@@ -59,8 +59,9 @@ void acceleration_divine(Combattant* combattant){
   Effet effet;
   strcpy(effet.nom, "acceleration_divine");
   effet.tour_restant=3;
-  Combattant->effet_special[nbr_effet_actif]=effet;
-  Combattant->nbr_effet_actif++;
+  combattant->effet_special[nbr_effet_actif]=effet;
+  combattant->nbr_effet_actif++;
+  combattant->vitesse=combattant->vitesse+30;
 }
 
 void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
