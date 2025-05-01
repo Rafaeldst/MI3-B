@@ -35,7 +35,10 @@ void verifier_erreur_fichier(FILE* fichier){
 }
 
 void degat(Combattant combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
-  combattant.pv=combattant.pv-degat;
+  int degats_totaux=degat*(100-combattant.defense)/100;
+  combattant.pv=combattant.pv-degats_totaux;
+  if (combattant.pv<0){
+    combattant.pv=0;}
 }
 
 void appliquer_technique()//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
