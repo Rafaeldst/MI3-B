@@ -1,0 +1,3 @@
+Fureur Furtive
+Inflige des dégâts tout en rendant Hermès invisible pendant 1 tour.
+Degats Ennemi 25 1 4

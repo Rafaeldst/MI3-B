@@ -1,0 +1,3 @@
+Frappe Impitoyable
+Inflige des dégâts augmentés par la défense de la cible.
+Degats Ennemi 40 0 0

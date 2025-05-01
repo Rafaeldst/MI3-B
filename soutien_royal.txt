@@ -1,0 +1,3 @@
+Soutien Royal
+Restaure des PV à tous les alliés proches.
+Soin Allié 30 0 4

@@ -1,0 +1,3 @@
+Bouclier Solide
+Arès se protège et bloque 20% des dégâts pendant 2 tours.
+Bonus Soi 20 2 3

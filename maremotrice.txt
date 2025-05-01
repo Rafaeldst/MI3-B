@@ -1,0 +1,3 @@
+Marée Motrice
+Poséidon crée une onde puissante qui frappe l'ennemi.
+Degats Ennemi 30 0 3

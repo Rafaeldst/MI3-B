@@ -1,0 +1,3 @@
+Projection Magique
+Le personnage lance une onde magique contre l'ennemi.
+Degats Ennemi 25 0 0

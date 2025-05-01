@@ -1,0 +1,3 @@
+Foudre Divine
+Zeus invoque un éclair destructeur du ciel.
+Degats Ennemi 45 0 3

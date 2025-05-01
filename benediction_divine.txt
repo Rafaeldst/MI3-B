@@ -1,0 +1,3 @@
+Bénédiction Divine
+Augmente la régénération des PV d'un allié pendant 3 tours.
+Bonus Allié 10 3 2

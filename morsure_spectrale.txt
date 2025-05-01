@@ -1,0 +1,3 @@
+Morsure Spectrale
+Inflige des dégâts en drainant la vie de la cible.
+Degats Ennemi 35 0 2
