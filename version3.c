@@ -44,6 +44,15 @@ void degat(Combattant combattant,int degat){//fonction qui inflige les dégats �
 
 void appliquer_technique()//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
 
+int choisir_cible(Combattant equipe[]){
+  printf("Choisissez une cible :\n");
+}
+int choix;
+scanf("%d",&choix);
+while(choix<1 || choix>6){
+  scanf("%d",&choix);}
+return choix;}
+
 Combattant charger_combattant(const char* fichier_combattant){ //fonction qui charge les données d'un combattant contenues dans un fichier
   Combattant c;
   FILE* fichier= fopen(fichier_combattant,"r");
