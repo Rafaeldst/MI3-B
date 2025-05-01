@@ -1,0 +1,3 @@
+rafale magique
+Le mage invoque une rafale magique de plus grande puissance.
+Degats Ennemi 25 0 2

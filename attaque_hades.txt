@@ -1,0 +1,3 @@
+Attaque de Base - Hadès
+Hadès frappe avec sa faux.
+Degats Ennemi 25 0 0

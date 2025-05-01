@@ -1,0 +1,3 @@
+Provocation Défensive
+Le tank provoque ses ennemis, les forçant à l'attaquer pendant 1 tour.
+Malus Ennemi -100 1 2

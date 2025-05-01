@@ -1,0 +1,3 @@
+Attaque de Base - Poséidon
+Poséidon frappe avec son trident.
+Degats Ennemi 18 0 0

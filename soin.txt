@@ -1,0 +1,3 @@
+Soin Mineur
+Soigne légèrement un allié.
+Soin Allié 20 0 2

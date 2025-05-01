@@ -1,0 +1,3 @@
+Attaque de Base - Zeus
+Zeus frappe directement l'ennemi avec sa baguette.
+Degats Ennemi 20 0 0
