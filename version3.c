@@ -32,6 +32,7 @@ typedef struct{
   int barre_action;// les personnages chargent une barre d'action pour attaquer grâce a leur vitesse comme dans raid shadow legends
   char categorie[32];
   Effet effet_special[NOMBRE_EFFET];
+  int nbr_effet_actif;
   Competence competence[4];
 }  Combattant;
 
