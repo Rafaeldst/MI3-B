@@ -55,7 +55,50 @@ Combattant charger_combattant(const char* fichier_combattant){ //fonction qui ch
 
 Competence charger_competence() //fonction qui charge les données d'une technique contenues dans un fichier
 
-void creer_equipe(Combattant* Equipe1,Combattant* Equipe2) //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
+
+char* personnages_disponibles[8] = {
+    "Zeus", "Poseidon", "Hades", "Hermes",
+    "Apollo", "Ares", "Athena", "Hera"
+};
+
+// pour suivre quels personnages  sont déjà pris
+int deja_choisi[8] = {0};
+
+void afficher_personnages_disponibles() {
+    printf(" Les Personnages disponibles sont:\n");
+    for (int i = 0; i < 8; i++) {
+        if (deja_choisi[i] == 0) {
+            printf("%d. %s\n", i + 1, personnages_disponibles[i]);
+        }
+    }
+}
+void creer_equipe(Combattant* Equipe1,Combattant* Equipe2){ //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
+
+    int choix, i;
+
+    for (i = 0; i < 3; i++) {
+        // Joueur 1
+        afficher_personnages_disponibles();
+        printf("Joueur 1 - Choisissez un personnage (1-8) : \n");
+        scanf("%d", &choix);
+        while (choix < 1 || choix > 8 || deja_choisi[choix - 1] != 0) {
+            printf("Choix invalide ou déjà pris. Réessayez : \n");
+            scanf("%d", &choix);
+        }
+        deja_choisi[choix - 1] = 1;  // empeche ce personnage d'être pris 
+        // Joueur 2
+        afficher_personnages_disponibles();
+        printf("Joueur 2 - Choisissez un personnage (1-8) : \n ");
+        scanf("%d", &choix);
+        while (choix < 1 || choix > 8 ||  deja_choisi[choix - 1] != 0) {
+            printf("Choix invalide ou déjà pris. Réessayez : ");
+            scanf("%d", &choix);
+        }
+        deja_choisi[choix - 1] = 1;
+    }
+
+    printf("Équipes créées avec succès ! DEBUT DE LA PARTIE \n");
+}
 
 void combat() //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 
