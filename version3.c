@@ -55,20 +55,31 @@ void soin(Combattant* combattant,soin){
     combattant->pv=combattant->pvmax);}
 }
 
+void acceleration_divine(Combattant* combattant){
+  Effet effet;
+  effet.tour_restant=3;
+  Combattant->effet_special[nbr_effet_actif]=effet;
+  Combattant->nbr_effet_actif++;
+}
+
 void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
 
   if (strcmp(competence.type,"degat")==0){
+    choisir_cible();
     degat(cible,competence.valeur);
   }
   if (strcmp(competence.type,"soin")==0){
+    choisir_cible();
     soin(cible,competence.valeur);
   }
   if (strcmp(competence.type,"acceleration divine")==0){
     
   
   
+  }
 }
+  
 int choisir_cible(Combattant equipe[]){
   printf("Choisissez une cible :\n");
 }
