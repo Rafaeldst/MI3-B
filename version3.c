@@ -182,8 +182,41 @@ printf("\n");
     printf("Équipes créées avec succès ! DEBUT DE LA PARTIE \n");
 }
 
-void combat() //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
+void maj_vitesse(Combattant* combattant){
+  combattant->barre_action=combattant->barre_action+combattant->vitesse;}
 
+int charge(Combattant combattant){
+  if (combattant.barre_action<99){
+return 0;return 1;}
+
+int vivant(Combattant combattant){
+  if (combattant.pv==0){
+return 0;return 1;}
+
+int pret(Combattant combattant){
+return (charge(combattant)&&vivant(combattant));}
+
+void combat(){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
+int tour=0;
+while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv>0 && Equipe2[1].pv>0 && Equipe2[2].pv>0) && tour < 500){
+  maj_vitesse(Equipe1[0]);
+  maj_vitesse(Equipe2[0]);
+  maj_vitesse(Equipe1[1]);
+  maj_vitesse(Equipe2[1]);
+  maj_vitesse(Equipe1[2]);
+  maj_vitesse(Equipe2[2]);
+  if (tour%2==0){// joueur 1
+    if (pret(equipe1[0]){
+      //action du joueur
+  }
+
+  else{//joueur 2
+
+  }
+  tour++;
+
+}
+}
 
 int main(){
   Combattant Equipe1[3];
