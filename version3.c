@@ -8,6 +8,7 @@ typedef struct{
   int valeur;
   char description[512];
   char type[20]; // soin dégat ..?
+  char cible[20];
   int tour_actif;
   int tour_recharge;
   char effet_special[NOMBRE_EFFET];
@@ -42,9 +43,9 @@ void appliquer_technique()//fonction qui va faire des if pour trouver si la tech
 Combattant charger_combattant(const char* fichier_combattant){ //fonction qui charge les données d'un combattant contenues dans un fichier
   Combattant c;
   FILE* fichier= fopen(fichier_combattant,"r");
-  verifier_erreur_fichier(fichier);
+  verifier_erreur_fichier(fichier,fichier_combattant);
   char competence1[100],competence2[100],competence3[100],competence4[100];
-  fscanf(fichier,"%s %s %f %f %f %f %f %f %s %s %s %s",c.nom,c.categorie,&c.pv,&c.pvmax,&c.attaque,&c.defense,&c.agilite,&c.vitesse,competence1,competence2,competence3,competence4);
+  fscanf(fichier,"%s %s %d %d %d %d %d %d %s %s %s %s",c.nom,c.categorie,&c.pv,&c.pvmax,&c.attaque,&c.defense,&c.agilite,&c.vitesse,competence1,competence2,competence3,competence4);
   c.competence[0]=charger_competence(competence1);
   c.competence[1]=charger_competence(competence2);
   c.competence[2]=charger_competence(competence3);
@@ -53,8 +54,16 @@ Combattant charger_combattant(const char* fichier_combattant){ //fonction qui ch
   return c;
 }
 
-Competence charger_competence() //fonction qui charge les données d'une technique contenues dans un fichier
-
+Competence charger_competence(const char* fichier_competence){//fonction qui charge les données d'une technique contenues dans un fichier
+  Competence c;
+  FILE* fichier=fopen(fichier_competence,"r");
+  verifier_erreur_fichier(fichier,fichier_competence);
+  fgets(c.nom,32,fichier);
+  fgets(c.description,256,fichier);
+  fscanf(fichier,%s %s %d %d %d,c.nom,c.cible,c.valeur,c.tour_actif,c.tour_recharge);
+  fclose(f);
+  return c;
+}
 
 char* personnages_disponibles[8] = {
     "Zeus", "Poseidon", "Hades", "Hermes",
