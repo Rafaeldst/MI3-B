@@ -35,15 +35,31 @@ void verifier_erreur_fichier(FILE* fichier){
     exit(EXIT_FAILURE);}
 }
 
-void degat(Combattant combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
-  int degats_totaux=degat*(100-combattant.defense)/100;
-  combattant.pv=combattant.pv-degats_totaux;
-  if (combattant.pv<0){
-    combattant.pv=0;}
+void degat(Combattant* combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
+  int degats_totaux=degat*(100-combattant->defense)/100;
+  combattant->pv=combattant->pv-degats_totaux;
+  if (combattant->pv<0){
+    combattant->pv=0;}
 }
 
-void appliquer_technique()//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
+void soin(Combattant* combattant,soin){
+  combattant->pv=combattant->pv+soin;
+  if(combattant->pv > combattant->pvmax){
+    combattant->pv=combattant->pvmax);}
+}
 
+void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
+  printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
+
+  if (strcmp(competence.type,"degat")==0){
+    degat(cible,competence.valeur);
+  }
+  if (strcmp(competence.type,"soin")==0){
+    soin(cible,competence.valeur);
+  }
+  
+  
+}
 int choisir_cible(Combattant equipe[]){
   printf("Choisissez une cible :\n");
 }
