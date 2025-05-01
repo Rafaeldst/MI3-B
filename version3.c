@@ -112,6 +112,13 @@ void creer_equipe(Combattant* Equipe1,Combattant* Equipe2){ //fonction qui perme
         afficher_personnages_disponibles();
         printf("Joueur 2 - Choisissez un personnage (1-8) : \n ");
         scanf("%d", &choix);
+
+        switch(i){
+          case 1:
+            Equipe2[0]=charger_combattant("zeus.txt");
+            
+
+      
         while (choix < 1 || choix > 8 ||  deja_choisi[choix - 1] != 0) {
             printf("Choix invalide ou déjà pris. Réessayez : ");
             scanf("%d", &choix);
