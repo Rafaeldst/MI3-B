@@ -96,7 +96,22 @@ void creer_equipe(Combattant* Equipe1,Combattant* Equipe2){ //fonction qui perme
         }
         deja_choisi[choix - 1] = 1;
     }
+  
+ printf(" Composition des équipes:\n");
 
+printf("Équipe 1 : :\n");
+for (int j = 0; j < TAILLE_EQUIPE; j++) {
+    printf("%s", equipe1[j].nom);
+    if (j < TAILLE_EQUIPE - 1) printf(" | ");
+}
+printf("\n");
+
+printf("Équipe 2 : ");
+for (int j = 0; j < TAILLE_EQUIPE; j++) {
+    printf("%s", equipe2[j].nom);
+    if (j < TAILLE_EQUIPE - 1) printf(" | ");
+}
+printf("\n");
     printf("Équipes créées avec succès ! DEBUT DE LA PARTIE \n");
 }
 
