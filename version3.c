@@ -82,15 +82,6 @@ void appliquer_technique(Combattant* cible,Competence competence,Combattant* lan
   }
 }
   
-int choisir_cible(Combattant equipe[]){
-  printf("Choisissez une cible :\n");
-}
-int choix;
-scanf("%d",&choix);
-while(choix<1 || choix>6){
-  scanf("%d",&choix);}
-return choix;}
-
 Combattant charger_combattant(const char* fichier_combattant){ //fonction qui charge les données d'un combattant contenues dans un fichier
   Combattant c;
   FILE* fichier= fopen(fichier_combattant,"r");
@@ -196,8 +187,27 @@ return 0;}return 1;}
 int pret(Combattant combattant){
 return (charge(combattant)&&vivant(combattant));}
 
+int choisir_attaque(){
+  printf("choisir une attaque");
+  int n;
+  scanf("%d",&n);
+  while (n<1 || n>4){
+    scanf("%d",&n);}
+  return n;}
+
+int choisir_cible(Combattant equipe[]){
+  printf("Choisissez une cible :\n");
+}
+int choix;
+scanf("%d",&choix);
+while(choix<1 || choix>6){
+  scanf("%d",&choix);}
+return choix;}
+
 void combat(){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 int tour=0;
+int attaque_choisi;
+int cible_choisi;
 while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv>0 && Equipe2[1].pv>0 && Equipe2[2].pv>0) && tour < 500){
   maj_vitesse(Equipe1[0]);
   maj_vitesse(Equipe2[0]);
@@ -207,7 +217,8 @@ while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv
   maj_vitesse(Equipe2[2]);
   if (tour%2==0){// joueur 1
     if (pret(equipe1[0]){
-      //action du joueur
+      attaque_choisi=choisir_attaque();
+      cible_choisi=choisir_cible();}
   }
 
   else{//joueur 2
