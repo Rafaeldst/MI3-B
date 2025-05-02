@@ -58,17 +58,17 @@ void soin(Combattant* combattant,soin){
 
 void riposte_brulante(Combattant* combattant, Competence competence){
   Effet effet;
-  strcpy(effet.nom, "riposte_brulante");
+  strcpy(effet.nom, "c->nom");
   effet.tour_restant=2;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  combattant->pv=combattant->pv-10;
+  degat(combattant,c->valeur);
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void acceleration(Combattant* combattant, Competence* competence){
   Effet effet;
-  strcpy(effet.nom, c.nom);
+  strcpy(effet.nom, c->nom);
   effet.tour_restant=c->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
@@ -78,7 +78,7 @@ void acceleration(Combattant* combattant, Competence* competence){
 
 void protection(Combattant* combattant, Competence* competence){
   Effet effet;
-  strcpy(effet.nom, c.nom);
+  strcpy(effet.nom, c->nom);
   effet.tour_restant=c->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
@@ -86,17 +86,17 @@ void protection(Combattant* combattant, Competence* competence){
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void benediction_divine(Combattant* combattant){
+void benediction_divine(Combattant* combattant, Competence* competence)){
   Effet effet;
-  strcpy(effet.nom, "benediction_divine");
+  strcpy(effet.nom, c->nom);
   effet.tour_restant=3;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  combattant->pv=combattant->pv+10;
+  soin(combattant, c.valeur);
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void frappe_impitoyable(Combattant* combattant,Competence competence){
+void frappe_impitoyable(Combattant* combattant,Competence* competence){
   degat(combattant,competence.valeur+combattant->defense);
   competence->tour_recharge_restant=competence->tour_recharge;
 }
