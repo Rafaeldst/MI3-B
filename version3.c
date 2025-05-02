@@ -136,7 +136,45 @@ void appliquer_technique(Competence competence,Combattant* lanceur){//fonction q
   
   }
 }
-  
+
+void maj_effet(Combattant* combattant) {
+    for (int i = 0; i < combattant->nbr_effet_actif; i++) {
+        combattant->effet_special[i].tour_restant--;
+        if (combattant->effet_special[i]==0){
+            retirer_effet(combattant);
+        }
+    }
+}
+
+void retirer_effet(Combattant* combattant){
+    combattant->nbr_effet_actif--;
+    
+}
+
+void maj_recharge(Combattant* combattant){
+    for (int i = 0; i < 4; i++) {
+        if (combattant->competence[i].tour_recharge > 0) {
+            combattant->competence[i].tour_recharge--;
+        }
+    }
+}
+
+void maj_tous_stats(Combattant* combattant){
+    maj_recharge(combattant);
+    maj_vitesse(combattant);
+    maj_effet(combattant);
+}
+    
+    void maj_tous(Combattant Equipe1[],Combattant Equipe2[]){
+    for (int i=0;i<3;i++){
+        if vivant(Equipe2[i]){
+            maj_tous_stats(Equipe2[i]);
+        }
+        if vivant(Equipe2[i]){
+            maj_tous_stats(Equipe2[i]);
+        }    
+}
+
 Combattant charger_combattant(const char* fichier_combattant){ //fonction qui charge les données d'un combattant contenues dans un fichier
   Combattant c;
   FILE* fichier= fopen(fichier_combattant,"r");
