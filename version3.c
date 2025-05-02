@@ -118,20 +118,20 @@ void tsunami(Combattant equipe[],Competence* competence){
     competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void appliquer_technique(Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
+void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
-  int n;
+  combattant cible;
   if (strcmp(competence.type,"degat")==0){
-    choisir_cible();
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     degat(cible,competence.valeur);
   }
   if (strcmp(competence.type,"soin")==0){
-    n=choisir_cible();
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     soin(cible,competence.valeur);
   }
   if (strcmp(competence.type,"acceleration divine")==0){
-    n=choisir_cible();
-    acceleration(cible,
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
+    acceleration(cible,competence);
     
   
   
@@ -289,16 +289,16 @@ int choisir_attaque(){
     scanf("%d",&n);}
   return n;}
 
-combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equipe2[], Competence competence){
+combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equipe2[], Competence* competence){
   int choix;
   if(lanceur.equipe==1){
-    if(c.cible=="Ennemi"){
+    if(competence->cible=="Ennemi"){
     printf("Choisissez une cible :\n");
     do{
       scanf("%d",&choix);
     }while(choix<1 || choix>3)
     return equipe2[choix];}
-    else if(c.cible=="Allié"){
+    else if(competence->cible=="Allié"){
     printf("Choisissez une cible :\n");
     do{
       scanf("%d",&choix);
@@ -306,13 +306,13 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
     return equipe1[choix];}
   }
   if(lanceur.equipe==2){
-    if(c.cible=="Ennemi"){
+    if(competence->cible=="Ennemi"){
     printf("Choisissez une cible :\n");
     do{
       scanf("%d",&choix);
     }while(choix<1 || choix>3)
     return equipe1[choix];}
-    else if(c.cible=="Allié"){
+    else if(competence->cible=="Allié"){
     printf("Choisissez une cible :\n");
     do{
       scanf("%d",&choix);
