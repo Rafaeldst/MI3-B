@@ -63,16 +63,17 @@ void riposte_brulante(Combattant* combattant, Competence competence){
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
   combattant->pv=combattant->pv-10;
+  competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void acceleration(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, c.nom);
   effet.tour_restant=c.tour_actif;
-  competence->tour_recharge_restant=competence->tour_recharge;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
   combattant->vitesse=combattant->vitesse+c.valeur;
+  competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void benediction_divine(Combattant* combattant){
@@ -82,10 +83,18 @@ void benediction_divine(Combattant* combattant){
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
   combattant->pv=combattant->pv+10;
+  competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void frappe_impitoyable(Combattant* combattant,Competence competence){
   degat(combattant,competence.valeur+combattant->defense);
+  competence->tour_recharge_restant=competence->tour_recharge;
+}
+
+void lumiere_soleil(Combattant* combattant1,Combattant* combattant2,Competence* competence){
+  soin(combattant1,competence->valeur);
+  soin(combattant2,competence->valeur);
+  competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
