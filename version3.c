@@ -66,17 +66,17 @@ void riposte_brulante(Combattant* combattant, Competence competence){
   effet.tour_restant=2;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  degat(combattant,c->valeur);
+  degat(combattant,competence->valeur);
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void acceleration(Combattant* combattant, Competence* competence){
   Effet effet;
-  strcpy(effet.nom, c->nom);
-  effet.tour_restant=c->tour_actif;
+  strcpy(effet.nom, competence->nom);
+  effet.tour_restant=competence->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  combattant->vitesse=combattant->vitesse+c.valeur;
+  combattant->vitesse=combattant->vitesse+competence.valeur;
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
