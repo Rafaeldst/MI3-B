@@ -107,6 +107,13 @@ void lumiere_soleil(Combattant* combattant1,Combattant* combattant2,Competence* 
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
+void tsunami(Combattant equipe[],Competence* competence){
+    for (int i=0;i<3;i++){
+        degat(equipe[i],competence->valeur);
+    }
+    competence->tour_recharge_restant=competence->tour_recharge;
+}
+
 void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
 
