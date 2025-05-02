@@ -64,6 +64,15 @@ void acceleration_divine(Combattant* combattant){
   combattant->vitesse=combattant->vitesse+30;
 }
 
+void riposte_brulante(Combattant* combattant){
+  Effet effet;
+  strcpy(effet.nom, "riposte_brulante");
+  effet.tour_restant=2;
+  combattant->effet_special[nbr_effet_actif]=effet;
+  combattant->nbr_effet_actif++;
+  combattant->pv=combattant->pv-10;
+}
+
 void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
 
