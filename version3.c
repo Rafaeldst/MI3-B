@@ -14,6 +14,7 @@ typedef struct{
   char cible[20];
   int tour_actif;
   int tour_recharge;
+  int tour_recharge_restant;
 } Competence;
 
 typedef struct{
@@ -55,16 +56,7 @@ void soin(Combattant* combattant,soin){
     combattant->pv=combattant->pvmax);}
 }
 
-void acceleration_divine(Combattant* combattant){
-  Effet effet;
-  strcpy(effet.nom, "acceleration_divine");
-  effet.tour_restant=3;
-  combattant->effet_special[nbr_effet_actif]=effet;
-  combattant->nbr_effet_actif++;
-  combattant->vitesse=combattant->vitesse+30;
-}
-
-void riposte_brulante(Combattant* combattant){
+void riposte_brulante(Combattant* combattant, Competence competence){
   Effet effet;
   strcpy(effet.nom, "riposte_brulante");
   effet.tour_restant=2;
@@ -73,13 +65,14 @@ void riposte_brulante(Combattant* combattant){
   combattant->pv=combattant->pv-10;
 }
 
-void acceleration(Combattant* combattant){
+void acceleration(Combattant* combattant, Competence* competence){
   Effet effet;
-  strcpy(effet.nom, "acceleration");
-  effet.tour_restant=2;
+  strcpy(effet.nom, c.nom);
+  effet.tour_restant=c.tour_actif;
+  competence->tour_recharge_restant=competence->tour_recharge;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  combattant->vitesse=combattant->vitesse+30;
+  combattant->vitesse=combattant->vitesse+c.valeur;
 }
 
 void benediction_divine(Combattant* combattant){
