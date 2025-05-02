@@ -69,7 +69,7 @@ void riposte_brulante(Combattant* combattant, Competence competence){
 void acceleration(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, c.nom);
-  effet.tour_restant=c.tour_actif;
+  effet.tour_restant=c->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
   combattant->vitesse=combattant->vitesse+c.valeur;
