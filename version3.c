@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define NOMBRE_EFFET 7//nombre de tous les effets possibles du jeu
 #define TAILLE_EQUIPE 3
@@ -35,6 +36,7 @@ typedef struct{
   Effet effet_special[NOMBRE_EFFET];
   int nbr_effet_actif;
   Competence competence[4];
+  int equipe;
 }  Combattant;
 
 void verifier_erreur_fichier(FILE* fichier){
@@ -44,6 +46,7 @@ void verifier_erreur_fichier(FILE* fichier){
 }
 
 void degat(Combattant* combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
+  
   int degats_totaux=degat*(100-combattant->defense)/100;
   combattant->pv=combattant->pv-degats_totaux;
   if (combattant->pv<0){
@@ -58,7 +61,7 @@ void soin(Combattant* combattant,soin){
 
 void riposte_brulante(Combattant* combattant, Competence competence){
   Effet effet;
-  strcpy(effet.nom, "c->nom");
+  strcpy(effet.nom, c->nom);
   effet.tour_restant=2;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
@@ -114,18 +117,20 @@ void tsunami(Combattant equipe[],Competence* competence){
     competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
+void appliquer_technique(Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
-
+  int n;
   if (strcmp(competence.type,"degat")==0){
     choisir_cible();
     degat(cible,competence.valeur);
   }
   if (strcmp(competence.type,"soin")==0){
-    choisir_cible();
+    n=choisir_cible();
     soin(cible,competence.valeur);
   }
   if (strcmp(competence.type,"acceleration divine")==0){
+    n=choisir_cible();
+    acceleration(cible,
     
   
   
@@ -245,14 +250,37 @@ int choisir_attaque(){
     scanf("%d",&n);}
   return n;}
 
-int choisir_cible(Combattant equipe[]){
-  printf("Choisissez une cible :\n");
+combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equipe2[], Competence competence){
+  int choix;
+  if(lanceur.equipe==1){
+    if(c.cible=="Ennemi"){
+    printf("Choisissez une cible :\n");
+    do{
+      scanf("%d",&choix);
+    }while(choix<1 || choix>3)
+    return equipe2[choix];}
+    else if(c.cible=="Allié"){
+    printf("Choisissez une cible :\n");
+    do{
+      scanf("%d",&choix);
+    }while(choix<1 || choix>3)
+    return equipe1[choix];}
+  }
+  if(lanceur.equipe==2){
+    if(c.cible=="Ennemi"){
+    printf("Choisissez une cible :\n");
+    do{
+      scanf("%d",&choix);
+    }while(choix<1 || choix>3)
+    return equipe1[choix];}
+    else if(c.cible=="Allié"){
+    printf("Choisissez une cible :\n");
+    do{
+      scanf("%d",&choix);
+    }while(choix<1 || choix>3)
+    return equipe2[choix];}
+  }
 }
-int choix;
-scanf("%d",&choix);
-while(choix<1 || choix>6){
-  scanf("%d",&choix);}
-return choix;}
 
 void combat(){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 int tour=0;
@@ -280,6 +308,7 @@ while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv
 }
 
 int main(){
+  srand(time(NULL));
   Combattant Equipe1[3];
   Combattant Equipe2[3];
   
