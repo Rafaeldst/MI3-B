@@ -91,6 +91,10 @@ void benediction_divine(Combattant* combattant){
   combattant->pv=combattant->pv+10;
 }
 
+void frappe_impitoyable(Combattant* combattant,Competence competence){
+  degat(combattant,competence.valeur+combattant->defense);
+}
+
 void appliquer_technique(Combattant* cible,Competence competence,Combattant* lanceur){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
 
