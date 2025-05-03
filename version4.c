@@ -338,7 +338,7 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
   }
   else if (strcmp(competence->type,"VolDeVie")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
-    Vol_de_vie(lanceur,cible,competence->valeur);
+    Vol_de_vie(lanceur,cible,competence);
   }
 }
 
