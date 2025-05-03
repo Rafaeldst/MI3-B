@@ -217,15 +217,15 @@ void maj_tous_stats(Combattant* combattant){
         }    
 }
 
-int charge(Combattant combattant){
-  if (combattant.barre_action<99){
+int charge(Combattant* combattant){
+  if (combattant->barre_action<99){
 return 0;}return 1;}
 
-int vivant(Combattant combattant){
-  if (combattant.pv==0){
+int vivant(Combattant* combattant){
+  if (combattant->pv==0){
 return 0;}return 1;}
 
-int pret(Combattant combattant){
+int pret(Combattant* combattant){
 return (charge(combattant)&&vivant(combattant));}
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
