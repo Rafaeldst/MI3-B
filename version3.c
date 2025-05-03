@@ -324,7 +324,6 @@ int deja_choisi[8] = {0};
 void afficher_personnages_disponibles() {
     printf(" Les Personnages disponibles sont:\n");
     for (int i = 0; i < 8; i++) {
-      printf("%d. %s", i + 1, personnages_disponibles[i]);
         if (deja_choisi[i] == 0) {
             printf("%d. %s\n", i + 1, personnages_disponibles[i]);
         }
