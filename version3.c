@@ -106,9 +106,9 @@ void protection(Combattant* combattant, Competence* competence){
 void regeneration_brulure(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, competence->type);
-  effet.valeur=competence.valeur;
+  effet.valeur=competence->valeur;
   effet.tour_restant=competence->tour_actif;
-  combattant->effet_special[nbr_effet_actif]=effet;
+  combattant->effet_special[combattant->nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
   competence->tour_recharge_restant=competence->tour_recharge;
 }
