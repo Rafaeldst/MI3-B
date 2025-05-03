@@ -67,7 +67,6 @@ void riposte_brulante(Combattant* combattant, Competence* competence){
   effet.tour_restant=competence->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  degat(combattant,competence->valeur);
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
@@ -94,10 +93,9 @@ void protection(Combattant* combattant, Competence* competence){
 void benediction_divine(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, competence->type);
-  effet.tour_restant=3;
+  effet.tour_restant=competence->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  soin(combattant, competence->valeur);
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
@@ -112,12 +110,27 @@ void lumiere_soleil(Combattant* combattant1,Combattant* combattant2,Competence* 
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void tsunami(Combattant equipe[],Competence* competence){
+void regeneration
+
+void invisibilite
+
+void soin_tous(Combattant equipe[],Competence* competence){
+  for (int i=0;i<3;i++){
+          soin(equipe[i],competence->valeur);
+      }
+      competence->tour_recharge_restant=competence->tour_recharge;
+  }
+
+void provocation
+
+void degat_tous(Combattant equipe[],Competence* competence){
     for (int i=0;i<3;i++){
         degat(equipe[i],competence->valeur);
     }
     competence->tour_recharge_restant=competence->tour_recharge;
 }
+
+void Vol_de_vie(Com
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   combattant cible;
