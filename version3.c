@@ -163,11 +163,6 @@ Competence charger_competence(const char* fichier_competence){//fonction qui cha
 }
 
 char* personnages_disponibles[8] = {
-    "Zeus", "Poseidon", "Hades", "Hermes",
-    "Apollo", "Ares", "Athena", "Hera"
-};
-
-char* personnages_disponibles[8] = {
     "Zeus.txt", "Poseidon.txt", "Hades.txt", "Hermes.txt",
     "Apollo.txt", "Ares.txt", "Athena.txt", "Hera.txt"
 };
