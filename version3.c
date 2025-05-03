@@ -475,7 +475,7 @@ while ((Equipe1[0].pv>0 || Equipe1[1].pv>0 || Equipe1[2].pv>0) && (Equipe2[0].pv
             for (int i = 0; i < 3; i++) {
                 if (pret(equipe2[i])) {
                     Competence* attaque = choisir_attaque(&equipe2[i]);
-                    appliquer_technique(attaque, &equipe1[i], equipe1, equipe2);
+                    appliquer_technique(attaque, &equipe2[i], equipe1, equipe2);
                 }
             }
         }
