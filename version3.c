@@ -110,8 +110,6 @@ void lumiere_soleil(Combattant* combattant1,Combattant* combattant2,Competence* 
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void regeneration
-
 void invisibilite
 
 void soin_tous(Combattant equipe[],Competence* competence){
