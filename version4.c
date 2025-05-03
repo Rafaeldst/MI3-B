@@ -275,7 +275,7 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
     }
   }
   else if (strcmp(competence->type,"Provocation")==0){
-    invisibilite_provocation(cible,competence);
+    invisibilite_provocation(lanceur,competence);
   }
   else if (strcmp(competence->type,"Invisibilite")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
