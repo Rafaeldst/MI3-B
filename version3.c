@@ -231,34 +231,34 @@ return (charge(combattant)&&vivant(combattant));}
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   Combattant* cible;
   printf("%s utilise %s !\n",lanceur->nom,competence->nom);
-  if (strcmp(competence.type,"Degats")==0){
+  if (strcmp(competence->type,"Degats")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
-    degat_recharge(cible,competence.valeur);
+    degat_recharge(cible,competence->valeur);
   }
-  else if (strcmp(competence.type,"Soin")==0){
+  else if (strcmp(competence->type,"Soin")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
-    soin_recharge(cible,competence.valeur);
+    soin_recharge(cible,competence->valeur);
   }
-  else if (strcmp(competence.type,"Acceleration")==0){
+  else if (strcmp(competence->type,"Acceleration")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     acceleration(cible,competence);
   }
-  else if (strcmp(competence.type,"Protection")==0){
+  else if (strcmp(competence->type,"Protection")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     protection(cible,competence);
   }
-  else if (strcmp(competence.type,"ProtectionSoiMeme")==0){
+  else if (strcmp(competence->type,"ProtectionSoiMeme")==0){
     protection(lanceur,competence);
   }
-  else if ((strcmp(competence.type,"Regeneration")==0)||(strcmp(competence.type,"Brulure")==0)){
+  else if ((strcmp(competence->type,"Regeneration")==0)||(strcmp(competence->type,"Brulure")==0)){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     regeneration_brulure(cible,competence);
   }
-  else if (strcmp(competence.type,"DegatsDef")==0){
+  else if (strcmp(competence->type,"DegatsDef")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     frappe_impitoyable(cible,competence);
   }
-  else if (strcmp(competence.type,"SoinTous")==0){
+  else if (strcmp(competence->type,"SoinTous")==0){
     if (lanceur->equipe==1){
         soinTous(equipe1);
     }
@@ -266,7 +266,7 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
         soinTous(equipe2);
     }
   }
-  else if (strcmp(competence.type,"DegatsTous")==0){
+  else if (strcmp(competence->type,"DegatsTous")==0){
     if (lanceur->equipe==1){
         degat_tous(equipe2);
     }
@@ -274,17 +274,17 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
         degat_tous(equipe1);
     }
   }
-  else if (strcmp(competence.type,"Provocation")==0){
+  else if (strcmp(competence->type,"Provocation")==0){
     invisibilite_provocation(cible,competence);
   }
-  else if (strcmp(competence.type,"Invisibilite")==0){
+  else if (strcmp(competence->type,"Invisibilite")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     invisibilite_provocation(lanceur,competence);
     degat(cible,competence);
   }
-  else if (strcmp(competence.type,"VolDeVie")==0){
+  else if (strcmp(competence->type,"VolDeVie")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
-    Vol_de_vie(cible,competence.valeur);
+    Vol_de_vie(cible,competence->valeur);
   }
 }
 
