@@ -48,7 +48,7 @@ void verifier_erreur_fichier(FILE* fichier){
 int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
   int n=rand()%100;
   int pv_actuel=combattant->pv;
-  if (combattant->agilite>=n){
+  if (combattant->agilite<n){
     int degats_totaux=degat*(100-combattant->defense)/100;
     combattant->pv=combattant->pv-degats_totaux;
     if (combattant->pv<0){
