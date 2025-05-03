@@ -156,6 +156,78 @@ void effet_deja_actif(Combattant* combattant,Competence* competence,Effet effet)
   }
 }
 
+void maj_vitesse(Combattant* combattant){
+  combattant->barre_action=combattant->barre_action+combattant->vitesse;}
+
+void maj_effet(Combattant* combattant){
+    for (int i = 0; i < combattant->nbr_effet_actif; i++){
+        if (strcmp(combattant->effet_special[i].nom,"Brulure")==0){
+          degat(combattant,combattant->effet_special[i].valeur);
+        }
+        if (strcmp(combattant->effet_special[i].nom,"Regeneration")==0){
+          soin(combattant,combattant->effet_special[i].valeur);
+        }
+        combattant->effet_special[i].tour_restant--;
+        if (combattant->effet_special[i]==0){
+            retirer_stats(combattant,i);  
+            retirer_effet(combattant,i);
+            i--;
+        }
+    }
+}
+
+void retirer_stats(Combattant* combattant,int index){
+  if (strcmp(combattant->effet_special[index].nom,"Acceleration")==0){
+    combattant->vitesse=combattant->vitesse-combattant->effet_special[index].valeur;
+  }
+  else if (strcmp(combattant->effet_special[index].nom,"Protection")==0){
+    combattant->defense=combattant->defense-combattant->effet_special[index].valeur;
+  }
+}
+
+
+void retirer_effet(Combattant* combattant,int index){
+  for (; index < combattant->nbr_effet_actif - 1; index++){
+        combattant->effet_special[index] = combattant->effet_special[index+ 1];
+    }
+    combattant->nbr_effet_actif--;
+}
+
+void maj_recharge(Combattant* combattant){
+    for (int i = 0; i < 4; i++) {
+        if (combattant->competence[i].tour_recharge_restant > 0) {
+            combattant->competence[i].tour_recharge_restant--;
+        }
+    }
+}
+
+void maj_tous_stats(Combattant* combattant){
+    maj_recharge(combattant);
+    maj_vitesse(combattant);
+    maj_effet(combattant);
+}
+    
+    void maj_tous(Combattant Equipe1[],Combattant Equipe2[]){
+    for (int i=0;i<3;i++){
+        if vivant(Equipe2[i]){
+            maj_tous_stats(Equipe2[i]);
+        }
+        if vivant(Equipe2[i]){
+            maj_tous_stats(Equipe2[i]);
+        }    
+}
+
+int charge(Combattant combattant){
+  if (combattant.barre_action<99){
+return 0;}return 1;}
+
+int vivant(Combattant combattant){
+  if (combattant.pv==0){
+return 0;}return 1;}
+
+int pret(Combattant combattant){
+return (charge(combattant)&&vivant(combattant));}
+
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   combattant* cible;
   printf("%s utilise %s !\n",lanceur->nom,competence->nom);
@@ -304,79 +376,6 @@ printf("\n");
     printf("Équipes créées avec succès ! DEBUT DE LA PARTIE \n");
 }
 
-void maj_vitesse(Combattant* combattant){
-  combattant->barre_action=combattant->barre_action+combattant->vitesse;}
-
-void maj_effet(Combattant* combattant){
-    for (int i = 0; i < combattant->nbr_effet_actif; i++){
-        if (strcmp(combattant->effet_special[i].nom,"Brulure")==0){
-          degat(combattant,combattant->effet_special[i].valeur);
-        }
-        if (strcmp(combattant->effet_special[i].nom,"Regeneration")==0){
-          soin(combattant,combattant->effet_special[i].valeur);
-        }
-        combattant->effet_special[i].tour_restant--;
-        if (combattant->effet_special[i]==0){
-            retirer_stats(combattant,i);  
-            retirer_effet(combattant,i);
-            i--;
-        }
-    }
-}
-
-void retirer_stats(Combattant* combattant,int index){
-  if (strcmp(combattant->effet_special[index].nom,"Acceleration")==0){
-    combattant->vitesse=combattant->vitesse-combattant->effet_special[index].valeur;
-  }
-  else if (strcmp(combattant->effet_special[index].nom,"Protection")==0){
-    combattant->defense=combattant->defense-combattant->effet_special[index].valeur;
-  }
-}
-
-
-void retirer_effet(Combattant* combattant,int index){
-  for (; index < combattant->nbr_effet_actif - 1; index++){
-        combattant->effet_special[index] = combattant->effet_special[index+ 1];
-    }
-    combattant->nbr_effet_actif--;
-}
-
-void maj_recharge(Combattant* combattant){
-    for (int i = 0; i < 4; i++) {
-        if (combattant->competence[i].tour_recharge_restant > 0) {
-            combattant->competence[i].tour_recharge_restant--;
-        }
-    }
-}
-
-void maj_tous_stats(Combattant* combattant){
-    maj_recharge(combattant);
-    maj_vitesse(combattant);
-    maj_effet(combattant);
-}
-    
-    void maj_tous(Combattant Equipe1[],Combattant Equipe2[]){
-    for (int i=0;i<3;i++){
-        if vivant(Equipe2[i]){
-            maj_tous_stats(Equipe2[i]);
-        }
-        if vivant(Equipe2[i]){
-            maj_tous_stats(Equipe2[i]);
-        }    
-}
-
-int charge(Combattant combattant){
-  if (combattant.barre_action<99){
-return 0;}return 1;}
-
-int vivant(Combattant combattant){
-  if (combattant.pv==0){
-return 0;}return 1;}
-
-int pret(Combattant combattant){
-return (charge(combattant)&&vivant(combattant));}
-
-      
   Competence choisir_attaque(Combattant combattant) {
     int choix;
     printf("Choisissez une attaque pour %s :\n", combattant.nom);
