@@ -468,16 +468,14 @@ while ((Equipe1[0].pv>0 || Equipe1[1].pv>0 || Equipe1[2].pv>0) && (Equipe2[0].pv
             for (int i = 0; i < 3; i++) {
                 if (pret(equipe1[i])) {
                     Competence* attaque = choisir_attaque(&equipe1[i]);
-                    Combattant* cible = choisir_cible(&equipe1[i], equipe1, equipe2, attaque);
-                    appliquer_technique(&equipe1[i], cible, attaque);
+                    appliquer_technique(attaque, &equipe1[i], equipe1, equipe2);
                 }
             }
         } else { // Équipe 2 joue
             for (int i = 0; i < 3; i++) {
                 if (pret(equipe2[i])) {
                     Competence* attaque = choisir_attaque(&equipe2[i]);
-                    Combattant* cible = choisir_cible(&equipe2[i], equipe2, equipe1, attaque);
-                  appliquer_technique(&equipe2[i], cible, attaque);
+                    appliquer_technique(attaque, &equipe1[i], equipe1, equipe2);
                 }
             }
         }
