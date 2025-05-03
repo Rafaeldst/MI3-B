@@ -57,7 +57,7 @@ void degat(Combattant* combattant,int degat){//fonction qui inflige les dégats 
 void soin(Combattant* combattant,int soin){
   combattant->pv=combattant->pv+soin;
   if(combattant->pv > combattant->pvmax){
-    combattant->pv=combattant->pvmax);}
+    combattant->pv=combattant->pvmax;}
 }
 
 void riposte_brulante(Combattant* combattant, Competence* competence){
