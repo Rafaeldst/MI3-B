@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-#define NOMBRE_EFFET 6//nombre de tous les effets possibles du jeu
+#define NOMBRE_EFFET 6 //nombre de tous les effets possibles du jeu
 #define TAILLE_EQUIPE 3
 //acceleration protection regeneration invisibilite provocation et brulure
 typedef struct{
