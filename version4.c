@@ -280,7 +280,7 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
   else if (strcmp(competence->type,"Invisibilite")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     invisibilite_provocation(lanceur,competence);
-    degat(cible,competence);
+    degat(cible,competence->valeur);
   }
   else if (strcmp(competence->type,"VolDeVie")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
