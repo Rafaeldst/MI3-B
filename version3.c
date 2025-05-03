@@ -122,7 +122,7 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
   combattant cible;
   cible=choisir_cible(lanceur, equipe1, equipe2, competence);
   printf("%s utilise %s sur %s !\n",lanceur->nom,competence->nom,cible.nom);
-  if (strcmp(competence.type,"Degat")==0){
+  if (strcmp(competence.type,"Degats")==0){
     degat(cible,competence.valeur);
   }
   if (strcmp(competence.type,"Soin")==0){
