@@ -54,15 +54,15 @@ void degat(Combattant* combattant,int degat){//fonction qui inflige les dégats 
     combattant->pv=0;}
 }}
 
-void soin(Combattant* combattant,soin){
+void soin(Combattant* combattant,int soin){
   combattant->pv=combattant->pv+soin;
   if(combattant->pv > combattant->pvmax){
     combattant->pv=combattant->pvmax);}
 }
 
-void riposte_brulante(Combattant* combattant, Competence competence){
+void riposte_brulante(Combattant* combattant, Competence* competence){
   Effet effet;
-  strcpy(effet.nom, c->nom);
+  strcpy(effet.nom, competence->nom);
   effet.tour_restant=2;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
@@ -82,8 +82,8 @@ void acceleration(Combattant* combattant, Competence* competence){
 
 void protection(Combattant* combattant, Competence* competence){
   Effet effet;
-  strcpy(effet.nom, c->nom);
-  effet.tour_restant=c->tour_actif;
+  strcpy(effet.nom, competence->nom);
+  effet.tour_restant=competence->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
   combattant->vitesse=combattant->defense+c.valeur;
@@ -92,11 +92,11 @@ void protection(Combattant* combattant, Competence* competence){
 
 void benediction_divine(Combattant* combattant, Competence* competence)){
   Effet effet;
-  strcpy(effet.nom, c->nom);
+  strcpy(effet.nom, competence->nom);
   effet.tour_restant=3;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  soin(combattant, c.valeur);
+  soin(combattant, competence.valeur);
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
@@ -160,7 +160,7 @@ Competence charger_competence(const char* fichier_competence){//fonction qui cha
   fgets(c.nom,32,fichier);
   fgets(c.description,256,fichier);
   fscanf(fichier,%s %s %d %d %d,c.nom,c.cible,c.valeur,c.tour_actif,c.tour_recharge);
-  fclose(f);
+  fclose(fichier);
   return c;
 }
 
