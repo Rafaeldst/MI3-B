@@ -461,9 +461,23 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
 
 void affiche_tous_perso(Combattant Equipe1[],Combattant Equipe2[]){
   for (int i=0;i<3;i++{
+    printf("\n");
     printf("nom %d %s\n",i,Equipe1[i].nom);
-    printf("%d\n",Equipe[i].pv);
-    printf("%d\n",
+    printf("%d\n",Equipe1[i].pv);
+    printf("%d\n",Equipe1[i].attaque);
+    printf("%d\n",Equipe1[i].defense);
+    printf("%d\n",Equipe1[i].vitesse);
+    printf("%d\n",Equipe1[i].barre_action);
+  }
+  for (int i=0;i<3;i++{
+    printf("\n");
+    printf("nom %d %s\n",i,Equipe1[i].nom);
+    printf("%d\n",Equipe2[i].pv);
+    printf("%d\n",Equipe2[i].attaque);
+    printf("%d\n",Equipe2[i].defense);
+    printf("%d\n",Equipe2[i].vitesse);
+    printf("%d\n",Equipe2[i].barre_action);
+  }
 }
 
 
@@ -471,7 +485,7 @@ void combat(Combattant Equipe1[],Combattant Equipe2[]){ //fonction qui lance une
 int tour=0;
 while ((Equipe1[0].pv>0 || Equipe1[1].pv>0 || Equipe1[2].pv>0) && (Equipe2[0].pv>0 || Equipe2[1].pv>0 || Equipe2[2].pv>0) || tour < 100){
    maj_tous(equipe1, equipe2);
-  
+  affiche_tous_perso(Equipe1,Equipe2);
   if (tour % 2 == 0) { // Équipe 1 joue
             for (int i = 0; i < 3; i++) {
                 if (pret(equipe1[i])) {
