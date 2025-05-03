@@ -343,8 +343,8 @@ void retirer_effet(Combattant* combattant,int index){
 
 void maj_recharge(Combattant* combattant){
     for (int i = 0; i < 4; i++) {
-        if (combattant->competence[i].tour_recharge > 0) {
-            combattant->competence[i].tour_recharge--;
+        if (combattant->competence[i].tour_recharge_restant > 0) {
+            combattant->competence[i].tour_recharge_restant--;
         }
     }
 }
