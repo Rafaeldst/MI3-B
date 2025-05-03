@@ -158,7 +158,7 @@ void effet_deja_actif(Combattant* combattant,Competence* competence,Effet effet)
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   combattant* cible;
-  printf("%s utilise %s sur %s !\n",lanceur->nom,competence->nom,cible.nom);
+  printf("%s utilise %s !\n",lanceur->nom,competence->nom);
   if (strcmp(competence.type,"Degats")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     degat_recharge(cible,competence.valeur);
