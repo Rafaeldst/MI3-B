@@ -87,7 +87,7 @@ void acceleration(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, competence->type);
   effet.tour_restant=competence->tour_actif;
-  combattant->effet_special[nbr_effet_actif]=effet;
+  combattant->effet_special[combattant->nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
   combattant->vitesse=combattant->vitesse+competence->valeur;
   competence->tour_recharge_restant=competence->tour_recharge;
@@ -97,9 +97,9 @@ void protection(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, competence->type);
   effet.tour_restant=competence->tour_actif;
-  combattant->effet_special[nbr_effet_actif]=effet;
+  combattant->effet_special[combattant->nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  combattant->vitesse=combattant->defense+competence->valeur;
+  combattant->defense=combattant->defense+competence->valeur;
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
