@@ -57,10 +57,31 @@ int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats �
   return pv_actuel-combattant->pv;
 }
 
+void degat_recharge(Combattant* combattant,int degat,Competence* competence){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
+  int n=rand()%100;
+  int pv_actuel=combattant->pv;
+  if (combattant->agilite>=n){
+    int degats_totaux=degat*(100-combattant->defense)/100;
+    combattant->pv=combattant->pv-degats_totaux;
+    if (combattant->pv<0){
+      combattant->pv=0;}
+  }
+  competence->tour_recharge_restant=competence->tour_recharge;
+  return pv_actuel-combattant->pv;
+}
+
+
 void soin(Combattant* combattant,int soin){
   combattant->pv=combattant->pv+soin;
   if(combattant->pv > combattant->pvmax){
     combattant->pv=combattant->pvmax;}
+}
+
+void soin_recharge(Combattant* combattant,int soin,Competence* competence){
+  combattant->pv=combattant->pv+soin;
+  if(combattant->pv > combattant->pvmax){
+    combattant->pv=combattant->pvmax;}
+  competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void acceleration(Combattant* combattant, Competence* competence){
@@ -132,11 +153,11 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
   printf("%s utilise %s sur %s !\n",lanceur->nom,competence->nom,cible.nom);
   if (strcmp(competence.type,"Degats")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
-    degat(cible,competence.valeur);
+    degat_recharge(cible,competence.valeur);
   }
   else if (strcmp(competence.type,"Soin")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
-    soin(cible,competence.valeur);
+    soin_recharge(cible,competence.valeur);
   }
   else if (strcmp(competence.type,"Acceleration")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
@@ -170,9 +191,13 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
         degat_tous(equipe1);
     }
   }
+  else if (strcmp(competence.type,"Provocation")==0)){
+    invisibilite_provocation(cible,competence);
+  }
   else if ((strcmp(competence.type,"Invisibilite")==0)||(strcmp(competence.type,"Provocation")==0)){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
-    invisibilite_provocation(cible,competence);
+    invisibilite_provocation(lanceur,competence);
+    degat(cible,competence);
   }
   else if (strcmp(competence.type,"VolDeVie")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
