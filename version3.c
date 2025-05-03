@@ -229,7 +229,7 @@ int pret(Combattant* combattant){
 return (charge(combattant)&&vivant(combattant));}
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
-  combattant* cible;
+  Combattant* cible;
   printf("%s utilise %s !\n",lanceur->nom,competence->nom);
   if (strcmp(competence.type,"Degats")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
