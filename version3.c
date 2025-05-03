@@ -46,28 +46,22 @@ void verifier_erreur_fichier(FILE* fichier){
     exit(EXIT_FAILURE);}
 }
 
-void degat(Combattant* combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
+int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
   int n=rand()%100;
-  if (combattant.agilite>=n){
-  int degats_totaux=degat*(100-combattant->defense)/100;
-  combattant->pv=combattant->pv-degats_totaux;
-  if (combattant->pv<0){
-    combattant->pv=0;}
-}}
+  int pv_actuel=combattant->pv;
+  if (combattant->agilite>=n){
+    int degats_totaux=degat*(100-combattant->defense)/100;
+    combattant->pv=combattant->pv-degats_totaux;
+    if (combattant->pv<0){
+      combattant->pv=0;}
+  }
+  return pv_actuel-combattant->pv;
+}
 
 void soin(Combattant* combattant,int soin){
   combattant->pv=combattant->pv+soin;
   if(combattant->pv > combattant->pvmax){
     combattant->pv=combattant->pvmax;}
-}
-
-void riposte_brulante(Combattant* combattant, Competence* competence){
-  Effet effet;
-  strcpy(effet.nom, competence->type);
-  effet.tour_restant=competence->tour_actif;
-  combattant->effet_special[nbr_effet_actif]=effet;
-  combattant->nbr_effet_actif++;
-  competence->tour_recharge_restant=competence->tour_recharge;
 }
 
 void acceleration(Combattant* combattant, Competence* competence){
@@ -90,9 +84,10 @@ void protection(Combattant* combattant, Competence* competence){
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void benediction_divine(Combattant* combattant, Competence* competence){
+void regeneration_brulure(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, competence->type);
+  effet.valeur=competence.valeur;
   effet.tour_restant=competence->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
@@ -110,7 +105,14 @@ void lumiere_soleil(Combattant* combattant1,Combattant* combattant2,Competence* 
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void invisibilite
+void invisibilite_provocation(Combattant* combattant, Competence* competence){
+  Effet effet;
+  strcpy(effet.nom, competence->type);
+  effet.tour_restant=competence->tour_actif;
+  combattant->effet_special[nbr_effet_actif]=effet;
+  combattant->nbr_effet_actif++;
+  competence->tour_recharge_restant=competence->tour_recharge;
+}
 
 void soin_tous(Combattant equipe[],Competence* competence){
   for (int i=0;i<3;i++){
@@ -119,8 +121,6 @@ void soin_tous(Combattant equipe[],Competence* competence){
       competence->tour_recharge_restant=competence->tour_recharge;
   }
 
-void provocation
-
 void degat_tous(Combattant equipe[],Competence* competence){
     for (int i=0;i<3;i++){
         degat(equipe[i],competence->valeur);
@@ -128,7 +128,10 @@ void degat_tous(Combattant equipe[],Competence* competence){
     competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void Vol_de_vie(Com
+void Vol_de_vie(Combattant* lanceur,Combattant* cible,Competence* competence){
+  int degat_inflige=degat(cible,competence.valeur);
+  soin(lanceur,degat_inflige/2);
+}
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   combattant cible;
@@ -145,7 +148,8 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
   }
   if (strcmp(competence.type,"Protection")==0){
     protection(cible,competence);
-  
+  if ((strcmp(competence.type,"Regeneration")==0)||(strcmp(competence.type,"Brulure")==0)){
+    regeneration_brulure(cible,competence);
   
   }
 }
