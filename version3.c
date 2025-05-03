@@ -435,7 +435,34 @@ while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv
       cible_choisi=choisir_cible(equipe1[i],equipe1,equipe2,attaque_choisi);}}
     
   }
-  
+  void combat(Combattant equipe1[3], Combattant equipe2[3]) {
+    int tour = 0;
+
+    while (tour < 100 &&
+           (equipe1[0].pv > 0 || equipe1[1].pv > 0 || equipe1[2].pv > 0) &&
+           (equipe2[0].pv > 0 || equipe2[1].pv > 0 || equipe2[2].pv > 0)) {
+
+        maj_tous(equipe1, equipe2);
+
+        if (tour % 2 == 0) { // Équipe 1 joue
+            for (int i = 0; i < 3; i++) {
+                if (pret(equipe1[i])) {
+                    Competence* attaque = choisir_attaque(&equipe1[i]);
+                    Combattant* cible = choisir_cible(&equipe1[i], equipe1, equipe2, attaque);
+                }
+            }
+        } else { // Équipe 2 joue
+            for (int i = 0; i < 3; i++) {
+                if (pret(equipe2[i])) {
+                    Competence* attaque = choisir_attaque(&equipe2[i]);
+                    Combattant* cible = choisir_cible(&equipe2[i], equipe2, equipe1, attaque);
+                }
+            }
+        }
+
+        tour++;
+    }
+}
 
   else{//joueur 2
     for (int i=0;i<3;i++){
