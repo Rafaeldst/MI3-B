@@ -160,7 +160,7 @@ Competence charger_competence(const char* fichier_competence){//fonction qui cha
   verifier_erreur_fichier(fichier,fichier_competence);
   fgets(c.nom,32,fichier);
   fgets(c.description,256,fichier);
-  fscanf(fichier,%s %s %d %d %d,c.nom,c.cible,c.valeur,c.tour_actif,c.tour_recharge);
+  fscanf(fichier,%s %s %s %s %d %d %d,c.nom,c.descriptio,c.type,c.cible,c.valeur,c.tour_actif,c.tour_recharge);
   fclose(fichier);
   return c;
 }
