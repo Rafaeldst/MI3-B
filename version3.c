@@ -21,6 +21,7 @@ typedef struct{
 typedef struct{
   char nom[32];
   int tour_restant;
+  int valeur;
 } Effet;
 
 typedef struct{
@@ -240,7 +241,7 @@ void maj_effet(Combattant* combattant) {
 }
 
 void retirer_stats(Combattant* combattant,int index){
-
+  if (combattant.effet_special[index]=="
 }
 
 void retirer_effet(Combattant* combattant,int index){
