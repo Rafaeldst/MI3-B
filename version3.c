@@ -86,11 +86,11 @@ void protection(Combattant* combattant, Competence* competence){
   effet.tour_restant=competence->tour_actif;
   combattant->effet_special[nbr_effet_actif]=effet;
   combattant->nbr_effet_actif++;
-  combattant->vitesse=combattant->defense+c.valeur;
+  combattant->vitesse=combattant->defense+competence.valeur;
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void benediction_divine(Combattant* combattant, Competence* competence)){
+void benediction_divine(Combattant* combattant, Competence* competence){
   Effet effet;
   strcpy(effet.nom, competence->nom);
   effet.tour_restant=3;
@@ -119,18 +119,16 @@ void tsunami(Combattant equipe[],Competence* competence){
 }
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
-  printf("%s utilise %s sur %s !\n",lanceur->nom;cible->lanceur);
   combattant cible;
+  cible=choisir_cible(lanceur, equipe1, equipe2, competence);
+  printf("%s utilise %s sur %s !\n",lanceur->nom,competence->nom,cible.nom);
   if (strcmp(competence.type,"degat")==0){
-    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     degat(cible,competence.valeur);
   }
   if (strcmp(competence.type,"soin")==0){
-    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     soin(cible,competence.valeur);
   }
   if (strcmp(competence.type,"acceleration divine")==0){
-    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     acceleration(cible,competence);
     
   
