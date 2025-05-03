@@ -54,7 +54,6 @@ int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats �
     if (combattant->pv<0){
       combattant->pv=0;}
   }
-  return pv_actuel-combattant->pv;
 }
 
 void degat_recharge(Combattant* combattant,int degat,Competence* competence){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
