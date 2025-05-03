@@ -378,7 +378,7 @@ Combattant* charger_combattant(const char* fichier_combattant){ //fonction qui c
 
 const char* personnages_disponibles[8] = {
     "Zeus.txt", "Poseidon.txt", "Hades.txt", "Hermes.txt",
-    "Apollo.txt", "Ares.txt", "Athena.txt", "Hera.txt"
+    "Apollon.txt", "Ares.txt", "Athena.txt", "Hera.txt"
 };
 // pour suivre quels personnages  sont déjà pris
 int deja_choisi[8] = {0};
