@@ -54,6 +54,7 @@ int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats �
     if (combattant->pv<0){
       combattant->pv=0;}
   }
+  return pv_actuel-combattant->pv;
 }
 
 void degat_recharge(Combattant* combattant,int degat,Competence* competence){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
@@ -66,7 +67,6 @@ void degat_recharge(Combattant* combattant,int degat,Competence* competence){//f
       combattant->pv=0;}
   }
   competence->tour_recharge_restant=competence->tour_recharge;
-  return pv_actuel-combattant->pv;
 }
 
 
@@ -157,7 +157,7 @@ void effet_deja_actif(Combattant* combattant,Competence* competence,Effet effet)
 }
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
-  combattant cible;
+  combattant* cible;
   printf("%s utilise %s sur %s !\n",lanceur->nom,competence->nom,cible.nom);
   if (strcmp(competence.type,"Degats")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
@@ -202,10 +202,10 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
         degat_tous(equipe1);
     }
   }
-  else if (strcmp(competence.type,"Provocation")==0)){
+  else if (strcmp(competence.type,"Provocation")==0){
     invisibilite_provocation(cible,competence);
   }
-  else if ((strcmp(competence.type,"Invisibilite")==0)||(strcmp(competence.type,"Provocation")==0)){
+  else if (strcmp(competence.type,"Invisibilite")==0){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     invisibilite_provocation(lanceur,competence);
     degat(cible,competence);
@@ -237,7 +237,7 @@ Competence charger_competence(const char* fichier_competence){//fonction qui cha
   verifier_erreur_fichier(fichier);
   fgets(c.nom,32,fichier);
   fgets(c.description,256,fichier);
-  fscanf(fichier,%s %s %d %d %d,c.type,c.cible,c.valeur,c.tour_actif,c.tour_recharge);
+  fscanf(fichier,"%s %s %d %d %d",c.type,c.cible,c.valeur,c.tour_actif,c.tour_recharge);
   fclose(fichier);
   return c;
 }
