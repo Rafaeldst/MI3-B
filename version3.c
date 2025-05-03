@@ -151,6 +151,7 @@ void Vol_de_vie(Combattant* lanceur,Combattant* cible,Competence* competence){
 void effet_deja_actif(Combattant* combattant,Competence* competence,Effet effet){
   for (int i=0;i<combattant->nbr_effet_actif;i++){
     if (strcmp(combattant->effet_special[i].nom,effet.nom)==0){
+      retirer_stats(combattant,i);
       effet_special[i]=effet;
     }
   }
@@ -220,7 +221,7 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
 Combattant charger_combattant(const char* fichier_combattant){ //fonction qui charge les données d'un combattant contenues dans un fichier
   Combattant c;
   FILE* fichier= fopen(fichier_combattant,"r");
-  verifier_erreur_fichier(fichier,fichier_combattant);
+  verifier_erreur_fichier(fichier);
   char competence1[100],competence2[100],competence3[100],competence4[100];
   fscanf(fichier,"%s %s %d %d %d %d %d %d %s %s %s %s",c.nom,c.categorie,&c.pv,&c.pvmax,&c.attaque,&c.defense,&c.agilite,&c.vitesse,competence1,competence2,competence3,competence4);
   c.competence[0]=charger_competence(competence1);
@@ -234,7 +235,7 @@ Combattant charger_combattant(const char* fichier_combattant){ //fonction qui ch
 Competence charger_competence(const char* fichier_competence){//fonction qui charge les données d'une technique contenues dans un fichier
   Competence c;
   FILE* fichier=fopen(fichier_competence,"r");
-  verifier_erreur_fichier(fichier,fichier_competence);
+  verifier_erreur_fichier(fichier);
   fgets(c.nom,32,fichier);
   fgets(c.description,256,fichier);
   fscanf(fichier,%s %s %d %d %d,c.type,c.cible,c.valeur,c.tour_actif,c.tour_recharge);
