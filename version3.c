@@ -242,7 +242,7 @@ Competence charger_competence(const char* fichier_competence){//fonction qui cha
   return c;
 }
 
-char* personnages_disponibles[8] = {
+char personnages_disponibles[8] = {
     "Zeus.txt", "Poseidon.txt", "Hades.txt", "Hermes.txt",
     "Apollo.txt", "Ares.txt", "Athena.txt", "Hera.txt"
 };
@@ -309,10 +309,10 @@ void maj_vitesse(Combattant* combattant){
 void maj_effet(Combattant* combattant){
     for (int i = 0; i < combattant->nbr_effet_actif; i++){
         if (strcmp(combattant->effet_special[i].nom,"Brulure")==0){
-          degat(combattant,combattant->effet_special[index].valeur);
+          degat(combattant,combattant->effet_special[i].valeur);
         }
         if (strcmp(combattant->effet_special[i].nom,"Regeneration")==0){
-          soin(combattant,combattant->effet_special[index].valeur);
+          soin(combattant,combattant->effet_special[i].valeur);
         }
         combattant->effet_special[i].tour_restant--;
         if (combattant->effet_special[i]==0){
