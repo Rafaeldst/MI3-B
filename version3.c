@@ -388,11 +388,10 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
     }
     if(strcmp(competence->cible, "Ennemi") == 0){
     printf("Choisissez une cible :\n");
-    scanf("%d",&choix);
-    while (choix<1 || choix>3 || est_invisible(equipe2[choix] || !(vivant(equipe2[choix])){
-      scanf("%d",&choix);
-    }
-    return equipe2[choix];}
+      do{
+        scanf("%d",&choix);
+      }while (choix<1 || choix>3 || est_invisible(equipe2[choix] || !(vivant(equipe2[choix])
+      return equipe2[choix];}
     else if(strcmp(competence->cible, "Allié") ==0){
     printf("Choisissez une cible :\n");
     do{
@@ -410,9 +409,9 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
     }
     if(strcmp(competence->cible, "Ennemi") == 0){
     printf("Choisissez une cible :\n");
-    while (choix<1 || choix>3 || est_invisible(equipe1[choix]) || !(vivant(equipe1[choix]){
-      scanf("%d",&choix);
-    }
+      do{
+        scanf("%d",&choix);
+      }while (choix<1 || choix>3 || est_invisible(equipe1[choix]) || !(vivant(equipe1[choix])
     return equipe1[choix];}
     else if(strcmp(competence->cible, "Allié") ==0){
     printf("Choisissez une cible :\n");
