@@ -130,7 +130,9 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
   }
   if (strcmp(competence.type,"Acceleration")==0){
     acceleration(cible,competence);
-    
+  }
+  if (strcmp(competence.type,"Protection")==0){
+    protection(cible,competence);
   
   
   }
