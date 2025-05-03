@@ -240,7 +240,7 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
   int choix;
   if(lanceur->equipe==1){
     for(int i=0; i<3;i++){
-        for(int j=0;j<=equipe2[i]->nbr_effet_actif;j++){
+        for(int j=0;j<equipe2[i]->nbr_effet_actif;j++){
             if(strcmp(equipe2[i]->effet_special[j].nom,"Provocation")==0){
                 return equipe2[i];
             }
@@ -261,7 +261,7 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
   }
   if(lanceur->equipe==2){
      for(int i=0; i<3;i++){
-        for(int j=0;j<=equipe1[i]->nbr_effet_actif;j++){
+        for(int j=0;j<equipe1[i]->nbr_effet_actif;j++){
             if(strcmp(equipe1[i]->effet_special[j].nom,"Provocation")==0){
                 return equipe1[i];
             }
