@@ -250,13 +250,13 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
     printf("Choisissez une cible :\n");
       do{
         scanf("%d",&choix);
-      }while (choix<1 || choix>3 || est_invisible(equipe2[choix]) || !(vivant(equipe2[choix])));
+      }while (choix<0 || choix>2 || est_invisible(equipe2[choix]) || !(vivant(equipe2[choix])));
       return equipe2[choix];}
     else if(strcmp(competence->cible, "Allié") ==0){
     printf("Choisissez une cible :\n");
     do{
       scanf("%d",&choix);
-    }while(choix<1 || choix>3);
+    }while(choix<0 || choix>2);
     return equipe1[choix];}
   }
   if(lanceur->equipe==2){
@@ -271,13 +271,13 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
     printf("Choisissez une cible :\n");
       do{
         scanf("%d",&choix);
-      }while (choix<1 || choix>3 || est_invisible(equipe1[choix]) || !(vivant(equipe1[choix])));
+      }while (choix<0 || choix>2 || est_invisible(equipe1[choix]) || !(vivant(equipe1[choix])));
     return equipe1[choix];}
     else if(strcmp(competence->cible, "Allié") ==0){
     printf("Choisissez une cible :\n");
     do{
       scanf("%d",&choix);
-    }while(choix<1 || choix>3);
+    }while(choix<0 || choix>2);
     return equipe2[choix];}
   }
 }
