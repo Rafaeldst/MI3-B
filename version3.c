@@ -488,7 +488,8 @@ int main(){
   srand(time(NULL));
   Combattant Equipe1[TAILLE_EQUIPE];
   Combattant Equipe2[TAILLE_EQUIPE];
+  creer_equipe(Equipe1,Equipe2);
+  combat(Equipe1,Equipe2);
   
-    
   return 0;
 }
