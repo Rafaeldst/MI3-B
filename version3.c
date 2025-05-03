@@ -308,13 +308,31 @@ return 0;}return 1;}
 int pret(Combattant combattant){
 return (charge(combattant)&&vivant(combattant));}
 
-int choisir_attaque(){
-  printf("choisir une attaque");
-  int n;
-  scanf("%d",&n);
-  while (n<1 || n>4){
-    scanf("%d",&n);}
-  return n;}
+int choisir_attaque(Combattant combattant) {
+    int choix;
+    printf("Choisissez une attaque pour %s :\n", combattant.nom);
+
+    for (int i = 0; i < 4; i++) {
+        printf("%d. %s - %s", i + 1, combattant.competence[i].nom, combattant.competence[i].description);
+        if (combattant.competence[i].tour_recharge_restant > 0) {
+            printf(" (recharge %d tours restants)\n", combattant.competence[i].tour_recharge_restant);
+        }
+        printf("\n");
+    }
+        
+    do{
+    printf("Entrez un nombre entre 1 et 4  correspndant a l'attaque de votre personnage: \n");
+        scanf("%d", &choix);
+        if(choix < 1 || choix > 4) {
+            printf("Choix invalide.\n");
+        } else if (combattant.competence[choix - 1].tour_recharge_restant > 0) {
+            printf("Cette compétence est encore en recharge.\n");
+            choix = -1;
+        }
+    } while (choix < 1 || choix > 4);
+
+    return choix - 1; 
+}
 
 combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equipe2[], Competence* competence){
   int choix;
