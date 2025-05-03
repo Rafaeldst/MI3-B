@@ -1,3 +1,3 @@
 Bouclier Solide
 Arès se protège et augmente sa défense pendant 2 tours.
-Protection Soi 20 2 3
+ProtectionSoisMeme Sois 20 2 3
