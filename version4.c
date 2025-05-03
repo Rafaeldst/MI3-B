@@ -228,6 +228,52 @@ return 0;}return 1;}
 int pret(Combattant* combattant){
 return (charge(combattant)&&vivant(combattant));}
 
+Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence){
+  int choix;
+  if(lanceur->equipe==1){
+    for(int i=0; i<3;i++){
+        for(int j=0;j<=equipe2[i]->nbr_effet_actif;j++){
+            if(strcmp(equipe2[i]->effet_special[j].nom,"Provocation")==0){
+                return equipe2[i];
+            }
+        }
+    }
+    if(strcmp(competence->cible, "Ennemi") == 0){
+    printf("Choisissez une cible :\n");
+      do{
+        scanf("%d",&choix);
+      }while (choix<1 || choix>3 || est_invisible(equipe2[choix]) || !(vivant(equipe2[choix])));
+      return equipe2[choix];}
+    else if(strcmp(competence->cible, "Allié") ==0){
+    printf("Choisissez une cible :\n");
+    do{
+      scanf("%d",&choix);
+    }while(choix<1 || choix>3);
+    return equipe1[choix];}
+  }
+  if(lanceur->equipe==2){
+     for(int i=0; i<3;i++){
+        for(int j=0;j<=equipe1[i]->nbr_effet_actif;j++){
+            if(strcmp(equipe1[i]->effet_special[j].nom,"Provocation")==0){
+                return equipe1[i];
+            }
+        }
+    }
+    if(strcmp(competence->cible, "Ennemi") == 0){
+    printf("Choisissez une cible :\n");
+      do{
+        scanf("%d",&choix);
+      }while (choix<1 || choix>3 || est_invisible(equipe1[choix]) || !(vivant(equipe1[choix])));
+    return equipe1[choix];}
+    else if(strcmp(competence->cible, "Allié") ==0){
+    printf("Choisissez une cible :\n");
+    do{
+      scanf("%d",&choix);
+    }while(choix<1 || choix>3);
+    return equipe2[choix];}
+  }
+}
+
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   Combattant* cible;
   printf("%s utilise %s !\n",lanceur->nom,competence->nom);
@@ -416,52 +462,6 @@ int est_invisible(Combattant* combattant){
                 return 1;
             }}
   return 0;
-}
-      
-Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence){
-  int choix;
-  if(lanceur->equipe==1){
-    for(int i=0; i<3;i++){
-        for(int j=0;j<=equipe2[i]->nbr_effet_actif;j++){
-            if(strcmp(equipe2[i]->effet_special[j].nom,"Provocation")==0){
-                return equipe2[i];
-            }
-        }
-    }
-    if(strcmp(competence->cible, "Ennemi") == 0){
-    printf("Choisissez une cible :\n");
-      do{
-        scanf("%d",&choix);
-      }while (choix<1 || choix>3 || est_invisible(equipe2[choix]) || !(vivant(equipe2[choix])));
-      return equipe2[choix];}
-    else if(strcmp(competence->cible, "Allié") ==0){
-    printf("Choisissez une cible :\n");
-    do{
-      scanf("%d",&choix);
-    }while(choix<1 || choix>3);
-    return equipe1[choix];}
-  }
-  if(lanceur->equipe==2){
-     for(int i=0; i<3;i++){
-        for(int j=0;j<=equipe1[i]->nbr_effet_actif;j++){
-            if(strcmp(equipe1[i]->effet_special[j].nom,"Provocation")==0){
-                return equipe1[i];
-            }
-        }
-    }
-    if(strcmp(competence->cible, "Ennemi") == 0){
-    printf("Choisissez une cible :\n");
-      do{
-        scanf("%d",&choix);
-      }while (choix<1 || choix>3 || est_invisible(equipe1[choix]) || !(vivant(equipe1[choix])));
-    return equipe1[choix];}
-    else if(strcmp(competence->cible, "Allié") ==0){
-    printf("Choisissez une cible :\n");
-    do{
-      scanf("%d",&choix);
-    }while(choix<1 || choix>3);
-    return equipe2[choix];}
-  }
 }
 
 void affiche_tous_perso(Combattant Equipe1[],Combattant Equipe2[]){
