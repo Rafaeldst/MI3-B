@@ -1,3 +1,3 @@
 Protection Infernale
-Réduit tous les dégâts reçus de 30% pour 3 tours.
+Augmente sa défense de 30 pour 3 tours.
 Protection Soi 30 3 3
