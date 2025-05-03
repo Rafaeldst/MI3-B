@@ -325,28 +325,29 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
   }
 }
 
-void combat(){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
+void combat(Combattant Equipe1[3],Combattant Equipe2[3]){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 int tour=0;
-int attaque_choisi;
-int cible_choisi;
+Competence attaque_choisi;
+Combattant cible_choisi;
 while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv>0 && Equipe2[1].pv>0 && Equipe2[2].pv>0) && tour < 500){
-  maj_vitesse(Equipe1[0]);
-  maj_vitesse(Equipe2[0]);
-  maj_vitesse(Equipe1[1]);
-  maj_vitesse(Equipe2[1]);
-  maj_vitesse(Equipe1[2]);
-  maj_vitesse(Equipe2[2]);
+  maj_tous(equipe1,equipe2);
   if (tour%2==0){// joueur 1
-    if (pret(equipe1[0]){
+    for (int i=0;i<3;i++){
+      if (pret(equipe1[i]){
       attaque_choisi=choisir_attaque();
-      cible_choisi=choisir_cible();}
+      cible_choisi=choisir_cible(equipe1[i],equipe1,equipe2,attaque_choisi);}}
+    
   }
+  
 
   else{//joueur 2
-
+    for (int i=0;i<3;i++){
+      if (pret(equipe2[i]){
+      attaque_choisi=choisir_attaque();
+      cible_choisi=choisir_cible(equipe2[i],equipe1,equipe2,attaque_choisi);}}
+    
   }
   tour++;
-
 }
 }
 
