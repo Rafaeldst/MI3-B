@@ -341,6 +341,7 @@ Combattant* charger_combattant(const char* fichier_combattant){ //fonction qui c
     printf("Erreur d'allocation mémoire pour Combattant\n");
     exit(EXIT_FAILURE);
   }
+  c->nbr_effet_actif=0;
   FILE* fichier= fopen(fichier_combattant,"r");
   verifier_erreur_fichier(fichier);
   char competence1[100],competence2[100],competence3[100],competence4[100];
@@ -397,6 +398,7 @@ void creer_equipe(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui p
             scanf("%d", &choix);
         }
       equipe1[i] = charger_combattant(personnages_disponibles[choix - 1]);
+      equipe1[i]->equipe=1;
       deja_choisi[choix - 1] = 1;  // empeche ce personnage d'être pris 
         // Joueur 2
         afficher_personnages_disponibles();
@@ -409,6 +411,7 @@ void creer_equipe(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui p
         }
         deja_choisi[choix - 1] = 1;
       equipe2[i] = charger_combattant(personnages_disponibles[choix - 1]);
+      equipe2[i]->equipe=2;
     }
   
  printf(" Composition des équipes:\n");
