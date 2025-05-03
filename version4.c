@@ -290,7 +290,11 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
 
 
 Combattant* charger_combattant(const char* fichier_combattant){ //fonction qui charge les données d'un combattant contenues dans un fichier
-  Combattant* c;
+  Combattant* c = malloc(sizeof(Combattant));
+  if (c == NULL) {
+    printf("Erreur d'allocation mémoire pour Combattant\n");
+    exit(EXIT_FAILURE);
+  }
   FILE* fichier= fopen(fichier_combattant,"r");
   verifier_erreur_fichier(fichier);
   char competence1[100],competence2[100],competence3[100],competence4[100];
@@ -304,7 +308,11 @@ Combattant* charger_combattant(const char* fichier_combattant){ //fonction qui c
 }
 
 Competence* charger_competence(const char* fichier_competence){//fonction qui charge les données d'une technique contenues dans un fichier
-  Competence* c;
+ Competence* c = malloc(sizeof(Competence));
+  if (c == NULL) {
+    printf("Erreur d'allocation mémoire pour Competence\n");
+    exit(EXIT_FAILURE);
+  }
   FILE* fichier=fopen(fichier_competence,"r");
   verifier_erreur_fichier(fichier);
   fgets(c->nom,32,fichier);
