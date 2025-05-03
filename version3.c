@@ -99,11 +99,6 @@ void frappe_impitoyable(Combattant* combattant,Competence* competence){
   competence->tour_recharge_restant=competence->tour_recharge;
 }
 
-void lumiere_soleil(Combattant* combattant1,Combattant* combattant2,Competence* competence){
-  soin(combattant1,competence->valeur);
-  soin(combattant2,competence->valeur);
-  competence->tour_recharge_restant=competence->tour_recharge;
-}
 
 void invisibilite_provocation(Combattant* combattant, Competence* competence){
   Effet effet;
@@ -133,30 +128,56 @@ void Vol_de_vie(Combattant* lanceur,Combattant* cible,Competence* competence){
   soin(lanceur,degat_inflige/2);
 }
 
-void appliquer_technique(Competence* competence,Combattant* lanceur,Combattant* cible, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
+void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   combattant cible;
-  cible=choisir_cible(lanceur, equipe1, equipe2, competence);
   printf("%s utilise %s sur %s !\n",lanceur->nom,competence->nom,cible.nom);
   if (strcmp(competence.type,"Degats")==0){
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     degat(cible,competence.valeur);
   }
-  if (strcmp(competence.type,"Soin")==0){
+  else if (strcmp(competence.type,"Soin")==0){
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     soin(cible,competence.valeur);
   }
-  if (strcmp(competence.type,"Acceleration")==0){
+  else if (strcmp(competence.type,"Acceleration")==0){
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     acceleration(cible,competence);
   }
-  if (strcmp(competence.type,"Protection")==0){
+  else if (strcmp(competence.type,"Protection")==0){
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     protection(cible,competence);
   }
-  if ((strcmp(competence.type,"Regeneration")==0)||(strcmp(competence.type,"Brulure")==0)){
+  else if ((strcmp(competence.type,"Regeneration")==0)||(strcmp(competence.type,"Brulure")==0)){
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     regeneration_brulure(cible,competence);
   }
-  if (strcmp(competence.type,"DegatsDef")==0){
+  else if (strcmp(competence.type,"DegatsDef")==0){
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
     frappe_impitoyable(cible,competence);
   }
-  if (strcmp(competence.type,"Protection")==0){
-    protection(cible,competence);
+  else if (strcmp(competence.type,"SoinTous")==0){
+    if (lanceur->equipe==1){
+        soinTous(equipe1);
+    }
+    else{
+        soinTous(equipe2);
+    }
+  }
+  else if (strcmp(competence.type,"DegatsTous")==0){
+    if (lanceur->equipe==1){
+        degat_tous(equipe2);
+    }
+    else{
+        degat_tous(equipe1);
+    }
+  }
+  else if ((strcmp(competence.type,"Invisibilite")==0)||(strcmp(competence.type,"Provocation")==0)){
+    if (lanceur->equipe==1){
+        degat_tous(equipe2);
+    }
+    else{
+        degat_tous(equipe1);
+    }
   }
     
 }
