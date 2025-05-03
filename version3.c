@@ -451,8 +451,8 @@ while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv
 
 int main(){
   srand(time(NULL));
-  Combattant Equipe1[3];
-  Combattant Equipe2[3];
+  Combattant Equipe1[TAILLE_EQUIPE];
+  Combattant Equipe2[TAILLE_EQUIPE];
   
     
   return 0;
