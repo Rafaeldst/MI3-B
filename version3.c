@@ -337,6 +337,13 @@ int choisir_attaque(Combattant combattant) {
 combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equipe2[], Competence* competence){
   int choix;
   if(lanceur.equipe==1){
+    for(int i=1; i<=3;i++){
+        for(int j=0;j<=equipe2[i].nbr_effet_actif,j++){
+            if(strcmp(equipe2[i].effet_special[j].nom,"Provocation")==0){
+                return equipe2[i];
+            }
+        }
+    }
     if(strcmp(competence->cible, "Ennemi") == 0){
     printf("Choisissez une cible :\n");
     do{
@@ -351,6 +358,13 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
     return equipe1[choix];}
   }
   if(lanceur.equipe==2){
+     for(int i=1; i<=3;i++){
+        for(int j=0;j<=equipe1[i].nbr_effet_actif,j++){
+            if(strcmp(equipe1[i].effet_special[j].nom,"Provocation")==0){
+                return equipe1[i];
+            }
+        }
+    }
     if(strcmp(competence->cible, "Ennemi") == 0){
     printf("Choisissez une cible :\n");
     do{
