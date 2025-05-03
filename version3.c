@@ -209,8 +209,8 @@ void maj_tous_stats(Combattant* combattant){
     
     void maj_tous(Combattant Equipe1[],Combattant Equipe2[]){
     for (int i=0;i<3;i++){
-        if vivant(Equipe2[i]){
-            maj_tous_stats(Equipe2[i]);
+        if vivant(Equipe1[i]){
+            maj_tous_stats(Equipe1[i]);
         }
         if vivant(Equipe2[i]){
             maj_tous_stats(Equipe2[i]);
