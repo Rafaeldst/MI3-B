@@ -147,6 +147,23 @@ void Vol_de_vie(Combattant* lanceur,Combattant* cible,Competence* competence){
   soin(lanceur,degat_inflige/2);
 }
 
+void retirer_stats(Combattant* combattant,int index){
+  if (strcmp(combattant->effet_special[index].nom,"Acceleration")==0){
+    combattant->vitesse=combattant->vitesse-combattant->effet_special[index].valeur;
+  }
+  else if (strcmp(combattant->effet_special[index].nom,"Protection")==0){
+    combattant->defense=combattant->defense-combattant->effet_special[index].valeur;
+  }
+}
+
+
+void retirer_effet(Combattant* combattant,int index){
+  for (; index < combattant->nbr_effet_actif - 1; index++){
+        combattant->effet_special[index] = combattant->effet_special[index+ 1];
+    }
+    combattant->nbr_effet_actif--;
+}
+
 void effet_deja_actif(Combattant* combattant,Competence* competence,Effet effet){
   for (int i=0;i<combattant->nbr_effet_actif;i++){
     if (strcmp(combattant->effet_special[i].nom,effet.nom)==0){
@@ -174,23 +191,6 @@ void maj_effet(Combattant* combattant){
             i--;
         }
     }
-}
-
-void retirer_stats(Combattant* combattant,int index){
-  if (strcmp(combattant->effet_special[index].nom,"Acceleration")==0){
-    combattant->vitesse=combattant->vitesse-combattant->effet_special[index].valeur;
-  }
-  else if (strcmp(combattant->effet_special[index].nom,"Protection")==0){
-    combattant->defense=combattant->defense-combattant->effet_special[index].valeur;
-  }
-}
-
-
-void retirer_effet(Combattant* combattant,int index){
-  for (; index < combattant->nbr_effet_actif - 1; index++){
-        combattant->effet_special[index] = combattant->effet_special[index+ 1];
-    }
-    combattant->nbr_effet_actif--;
 }
 
 void maj_recharge(Combattant* combattant){
@@ -227,6 +227,14 @@ return 0;}return 1;}
 
 int pret(Combattant* combattant){
 return (charge(combattant)&&vivant(combattant));}
+
+int est_invisible(Combattant* combattant){
+    for(int j=0;j<combattant->nbr_effet_actif;j++){
+      if(strcmp(combattant->effet_special[j].nom,"Invisibilite")==0){
+                return 1;
+            }}
+  return 0;
+}
 
 Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence){
   int choix;
@@ -457,14 +465,6 @@ printf("\n");
     } while (choix < 1 || choix > 4 || combattant->competence[choix - 1]->tour_recharge_restant > 0);
 
     return combattant->competence[choix - 1];
-}
-
-int est_invisible(Combattant* combattant){
-    for(int j=0;j<combattant->nbr_effet_actif;j++){
-      if(strcmp(combattant->effet_special[j].nom,"Invisibilite")==0){
-                return 1;
-            }}
-  return 0;
 }
 
 void affiche_tous_perso(Combattant Equipe1[],Combattant Equipe2[]){
