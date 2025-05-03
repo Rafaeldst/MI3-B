@@ -3,10 +3,9 @@
 #include <string.h>
 #include <time.h>
 
-#define NOMBRE_EFFET 7//nombre de tous les effets possibles du jeu
+#define NOMBRE_EFFET 6//nombre de tous les effets possibles du jeu
 #define TAILLE_EQUIPE 3
-//degat soin bouclier_solide
-//bouclier se protege et donne 20% des dégats pdt 2 tours
+//acceleration protection regeneration invisibilite provocation et brulure
 typedef struct{
   char nom[32];
   int valeur;
@@ -271,20 +270,32 @@ printf("\n");
 void maj_vitesse(Combattant* combattant){
   combattant->barre_action=combattant->barre_action+combattant->vitesse;}
 
-void maj_effet(Combattant* combattant) {
-    for (int i = 0; i < combattant->nbr_effet_actif; i++) {
+void maj_effet(Combattant* combattant){
+    for (int i = 0; i < combattant->nbr_effet_actif; i++){
+        if (strcmp(combattant->effet_special[i].nom,"Brulure")==0){
+          degat(combattant,combattant->effet_special[index].valeur);
+        }
+        if (strcmp(combattant->effet_special[i].nom,"Regeneration")==0){
+          soin(combattant,combattant->effet_special[index].valeur);
+        }
         combattant->effet_special[i].tour_restant--;
         if (combattant->effet_special[i]==0){
-          retirer_stats(combattant,i);  
-          retirer_effet(combattant,i);
+            retirer_stats(combattant,i);  
+            retirer_effet(combattant,i);
             i--;
         }
     }
 }
 
 void retirer_stats(Combattant* combattant,int index){
-  if (combattant.effet_special[index]=="
+  if (strcmp(combattant->effet_special[index].nom,"Acceleration")==0){
+    combattant->vitesse=combattant->vitesse-combattant->effet_special[index].valeur;
+  }
+  else if (strcmp(combattant->effet_special[index].nom,"Protection")==0){
+    combattant->defense=combattant->defense-combattant->effet_special[index].valeur;
+  }
 }
+
 
 void retirer_effet(Combattant* combattant,int index){
   for (; index < combattant->nbr_effet_actif - 1; index++){
