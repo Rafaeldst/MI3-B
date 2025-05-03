@@ -172,14 +172,13 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
     }
   }
   else if ((strcmp(competence.type,"Invisibilite")==0)||(strcmp(competence.type,"Provocation")==0)){
-    if (lanceur->equipe==1){
-        degat_tous(equipe2);
-    }
-    else{
-        degat_tous(equipe1);
-    }
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
+    invisibilite_provocation(cible,competence);
   }
-    
+  else if (strcmp(competence.type,"VolDeVie")==0){
+    cible=choisir_cible(lanceur, equipe1, equipe2, competence);
+    Vol_de_vie(cible,competence.valeur);
+  }
 }
 
 
