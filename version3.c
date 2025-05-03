@@ -449,31 +449,15 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
 
 void combat(Combattant Equipe1[3],Combattant Equipe2[3]){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 int tour=0;
-Competence attaque_choisi;
-Combattant cible_choisi;
-while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv>0 && Equipe2[1].pv>0 && Equipe2[2].pv>0) && tour < 500){
-  maj_tous(equipe1,equipe2);
-  if (tour%2==0){// joueur 1
-    for (int i=0;i<3;i++){
-      if (pret(equipe1[i]){
-      attaque_choisi=choisir_attaque();
-      cible_choisi=choisir_cible(equipe1[i],equipe1,equipe2,attaque_choisi);}}
-    
-  }
-  void combat(Combattant equipe1[3], Combattant equipe2[3]) {
-    int tour = 0;
-
-    while (tour < 100 &&
-           (equipe1[0].pv > 0 || equipe1[1].pv > 0 || equipe1[2].pv > 0) &&
-           (equipe2[0].pv > 0 || equipe2[1].pv > 0 || equipe2[2].pv > 0)) {
-
-        maj_tous(equipe1, equipe2);
-
-        if (tour % 2 == 0) { // Équipe 1 joue
+while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv>0 && Equipe2[1].pv>0 && Equipe2[2].pv>0) && tour < 100){
+   maj_tous(equipe1, equipe2);
+  
+  if (tour % 2 == 0) { // Équipe 1 joue
             for (int i = 0; i < 3; i++) {
                 if (pret(equipe1[i])) {
                     Competence* attaque = choisir_attaque(&equipe1[i]);
                     Combattant* cible = choisir_cible(&equipe1[i], equipe1, equipe2, attaque);
+                    appliquer_technique(&equipe1[i], cible, attaque);
                 }
             }
         } else { // Équipe 2 joue
@@ -481,6 +465,7 @@ while ((Equipe1[0].pv>0 && Equipe1[1].pv>0 && Equipe1[2].pv>0) && (Equipe2[0].pv
                 if (pret(equipe2[i])) {
                     Competence* attaque = choisir_attaque(&equipe2[i]);
                     Combattant* cible = choisir_cible(&equipe2[i], equipe2, equipe1, attaque);
+                  appliquer_technique(&equipe2[i], cible, attaque);
                 }
             }
         }
