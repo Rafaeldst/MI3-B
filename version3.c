@@ -458,7 +458,15 @@ combattant choisir_cible(Combattant lanceur,Combattant equipe1[], Combattant equ
   }
 }
 
-void combat(Combattant Equipe1[3],Combattant Equipe2[3]){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
+void affiche_tous_perso(Combattant Equipe1[],Combattant Equipe2[]){
+  for (int i=0;i<3;i++{
+    printf("nom %d %s\n",i,Equipe1[i].nom);
+    printf("%d\n",Equipe[i].pv);
+    printf("%d\n",
+}
+
+
+void combat(Combattant Equipe1[],Combattant Equipe2[]){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 int tour=0;
 while ((Equipe1[0].pv>0 || Equipe1[1].pv>0 || Equipe1[2].pv>0) && (Equipe2[0].pv>0 || Equipe2[1].pv>0 || Equipe2[2].pv>0) || tour < 100){
    maj_tous(equipe1, equipe2);
