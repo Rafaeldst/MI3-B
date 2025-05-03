@@ -1,0 +1,3 @@
+Attaque de Base - Hermès
+Hermès frappe avec son bâton d'or.
+Degats Ennemi 22 0 0
