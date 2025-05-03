@@ -133,7 +133,7 @@ void Vol_de_vie(Combattant* lanceur,Combattant* cible,Competence* competence){
   soin(lanceur,degat_inflige/2);
 }
 
-void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
+void appliquer_technique(Competence* competence,Combattant* lanceur,Combattant* cible, Combattant equipe1[], Combattant equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   combattant cible;
   cible=choisir_cible(lanceur, equipe1, equipe2, competence);
   printf("%s utilise %s sur %s !\n",lanceur->nom,competence->nom,cible.nom);
@@ -148,10 +148,17 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant 
   }
   if (strcmp(competence.type,"Protection")==0){
     protection(cible,competence);
+  }
   if ((strcmp(competence.type,"Regeneration")==0)||(strcmp(competence.type,"Brulure")==0)){
     regeneration_brulure(cible,competence);
-  
   }
+  if (strcmp(competence.type,"DegatsDef")==0){
+    frappe_impitoyable(cible,competence);
+  }
+  if (strcmp(competence.type,"Protection")==0){
+    protection(cible,competence);
+  }
+    
 }
 
 
