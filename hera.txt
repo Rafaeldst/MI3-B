@@ -1,4 +1,4 @@
-Héra
+Hera
 Support
 220 220 40 60 55 45
 attaque_hera.txt soin.txt soutien_royal.txt benediction_divine.txt
