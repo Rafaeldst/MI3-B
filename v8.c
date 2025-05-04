@@ -421,9 +421,9 @@ int deja_choisi[8] = {0};
     for (i = 0; i < 3; i++) {
         // Joueur 1
         afficher_personnages_disponibles(deja_choisi,personnages_disponibles);
-        printf("Joueur 1 - Choisissez un personnage (0-7) : \n");
+        printf("Joueur 1 - Choisissez un personnage (1-8) : \n");
         scanf("%d", &choix);
-        while (choix < 0 || choix > 7 || deja_choisi[choix] != 0) {
+        while (choix < 1 || choix > 8 || deja_choisi[choix-1] != 0) {
             printf("Choix invalide ou deja pris. Reessayez : \n");
             scanf("%d", &choix);
         }
@@ -431,17 +431,17 @@ int deja_choisi[8] = {0};
       equipe1[i] = charger_combattant(personnages_disponibles[choix]);
 
       equipe1[i]->equipe=1;
-      deja_choisi[choix] = 1;  // empeche ce personnage d'être pris 
+      deja_choisi[choix-1] = 1;  // empeche ce personnage d'être pris 
         // Joueur 2
         afficher_personnages_disponibles(deja_choisi,personnages_disponibles);
-        printf("Joueur 2 - Choisissez un personnage (0-7) : \n ");
+        printf("Joueur 2 - Choisissez un personnage (1-8) : \n ");
         scanf("%d", &choix);
       
-        while (choix < 0 || choix > 7 ||  deja_choisi[choix] != 0) {
+        while (choix < 1 || choix > 8 ||  deja_choisi[choix] != 0) {
             printf("Choix invalide ou deja pris. Reessayez : ");
             scanf("%d", &choix);
         }
-        deja_choisi[choix] = 1;
+        deja_choisi[choix-1] = 1;
       equipe2[i] = charger_combattant(personnages_disponibles[choix]);
       equipe2[i]->equipe=2;
     }
