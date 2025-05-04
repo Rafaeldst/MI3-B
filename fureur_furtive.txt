@@ -1,3 +1,3 @@
 Fureur Furtive
-Inflige des dégâts tout en rendant Hermès invisible pendant 1 tour.
+Inflige 25 degats tout en rendant Hermes invisible pendant 1 tour.
 Invisibilite Ennemi 25 1 4
