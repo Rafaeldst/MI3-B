@@ -259,18 +259,18 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
     if(strcmp(competence->cible, "Ennemi") == 0){
     printf("Choisissez une cible :\n");
     scanf("%d",&choix);
-    while (choix<0 || choix>2 || est_invisible(equipe2[choix]) || !(vivant(equipe2[choix]))){
+    while (choix<1 || choix>3 || est_invisible(equipe2[choix-1]) || !(vivant(equipe2[choix-1]))){
       printf("Cible incorrect.\n"); 
       scanf("%d",&choix);}
-    return equipe2[choix];}
+    return equipe2[choix-1];}
     else if(strcmp(competence->cible, "Allie") ==0){
     printf("Choisissez une cible :\n");
     scanf("%d",&choix);
-    while(choix<0 || choix>2){
+    while(choix<1 || choix>3){
       scanf("%d",&choix);
       printf("Cible incorrect.\n"); 
     }
-    return equipe1[choix];}
+    return equipe1[choix-1];}
   }
   if(lanceur->equipe==2){
      for(int i=0; i<3;i++){
@@ -283,18 +283,18 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
     if(strcmp(competence->cible, "Ennemi") == 0){
     printf("Choisissez une cible :\n");
     scanf("%d",&choix);
-    while (choix<0 || choix>2 || est_invisible(equipe1[choix]) || !(vivant(equipe1[choix]))){
+    while (choix<1 || choix>3 || est_invisible(equipe1[choix-1]) || !(vivant(equipe1[choix-1]))){
       printf("Cible incorrect.\n"); 
       scanf("%d",&choix);}
-    return equipe1[choix];}
+    return equipe1[choix-1];}
     else if(strcmp(competence->cible, "Allie") ==0){
     printf("Choisissez une cible :\n");
     scanf("%d",&choix);
-    while(choix<0 || choix>2){
+    while(choix<1 || choix>3){
       scanf("%d",&choix);
       printf("Cible incorrect.\n"); 
     }
-    return equipe2[choix];}
+    return equipe2[choix-1];}
 }}
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant* equipe1[], Combattant* equipe2[]){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
@@ -384,15 +384,8 @@ Combattant* charger_combattant(const char* fichier_combattant){ //fonction qui c
   FILE* fichier= fopen(fichier_combattant,"r");
   verifier_erreur_fichier(fichier);
   char competence1[100],competence2[100],competence3[100],competence4[100];
-
   c->barre_action=0;
-
-
   fscanf(fichier,"%s %s %d %d %d %d %d %d %s %s %s %s",c->nom,c->categorie,&(c->pv),&(c->pvmax),&(c->attaque),&(c->defense),&(c->agilite),&(c->vitesse),competence1,competence2,competence3,competence4);
-
-
-
-  
   c->competence[0]=charger_competence(competence1);
   c->competence[1]=charger_competence(competence2);
   c->competence[2]=charger_competence(competence3);
