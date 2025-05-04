@@ -1,4 +1,4 @@
-Hadès
+Hades
 Assassin
 190 190 75 25 70 80
 attaque_hades.txt acceleration.txt ombre_paralysante.txt morsure_spectrale.txt
