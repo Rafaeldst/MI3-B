@@ -1,3 +1,3 @@
 Soutien Royal
-Restaure des PV à tous les alliés proches.
-SoinTous Allié 30 0 4
+Restaure des PV à tous les allies proches.
+SoinTous Allie 30 0 4
