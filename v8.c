@@ -578,15 +578,15 @@ int main(){
 
 
   srand(time(NULL));
-  Combattant* Equipe1[TAILLE_EQUIPE];
-  Combattant* Equipe2[TAILLE_EQUIPE];
-  creer_equipe(Equipe1,Equipe2);
-  combat(Equipe1,Equipe2);
-  if ((Equipe1[0]->pv==0)&&(Equipe1[1]->pv)&&(Equipe1[2]->pv)){
+  Combattant* equipe1[TAILLE_EQUIPE];
+  Combattant* equipe2[TAILLE_EQUIPE];
+  creer_equipe(equipe1,equipe2);
+  combat(equipe1,equipe2);
+  if ((equipe1[0]->pv==0)&&(equipe1[1]->pv)&&(equipe1[2]->pv)){
     printf("l'equipe 1 a gagne");
   }
   else{
-    printf("lequipe 2 a gagne");
+    printf("l'equipe 2 a gagne");
   }
   return 0;
 }
