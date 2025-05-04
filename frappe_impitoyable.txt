@@ -1,3 +1,3 @@
 Frappe Impitoyable
-Inflige des dégâts augmentés par la défense de la cible.
+Inflige 40 de degats augmentes par la défense de la cible.
 DegatsDef Ennemi 40 0 0
