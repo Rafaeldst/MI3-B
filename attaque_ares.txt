@@ -1,3 +1,3 @@
-Attaque de Base - Arès
+Attaque de Base - Ares
 Arès frappe puissamment avec sa lance et inflige 30 degats.
 Degats Ennemi 30 0 0
