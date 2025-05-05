@@ -1,4 +1,4 @@
 Zeus
 Mage
-160 160 40 30 20 
+145 145 40 25 20 30 
 attaque_zeus.txt rafale_magique.txt foudre_divine.txt projection_magique.txt
