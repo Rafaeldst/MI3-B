@@ -1,3 +1,3 @@
 Ombre Paralysante
 Reduit la vitesse de la cible de 30 pendant 2 tours.
-Acceleration Ennemi -30 2 3
+Acceleration Ennemi -30 12 18
