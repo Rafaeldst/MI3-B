@@ -1,3 +1,3 @@
 Lumiere du Soleil
 Soigne tous les allies proches de 25 PV.
-SoinTous Allie 25 0 5
+SoinTous Allie 25 0 18
