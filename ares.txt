@@ -1,4 +1,4 @@
 Ares
 Tank
-170 170 40 22 10 30
+190 190 45 22 10 30
 attaque_ares.txt provocation.txt bouclier_solide.txt frappe_impitoyable.txt
