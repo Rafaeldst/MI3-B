@@ -1,3 +1,3 @@
 Morsure Spectrale
 Inflige 35 degats en drainant la vie de la cible.
-VolDeVie Ennemi 35 0 2
+VolDeVie Ennemi 35 0 12
