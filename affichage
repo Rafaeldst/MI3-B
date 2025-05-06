@@ -1,0 +1,25 @@
+    // Techniques spéciales
+    int entier, a;
+    
+    printf("\n");
+    printf(" %s\n", rapide->nom);
+    printf(" TECHNIQUES SPECIALES\n");
+    printf(" ┌────┬──────────────────────────────────────────┐\n");
+    for(int i=0, i<8, i++){
+    if (i%2==0){
+        a=a+1;
+printf(" │|%d| │ %s", i+1, rapide->competence[a]->nom);
+entier= AFFICHE;
+entier = entier - strlen(rapide->competence[a]->nom) - 8;
+for(int j=O; j<entier; j++){
+printf(" ");}
+printf("  \n")
+}
+else if(i%2==1){
+printf(" │     │ %s", i+1, rapide->competence[a]->description);
+entier= AFFICHE;
+entier = entier - strlen(rapide->competence[a]->description) - 8;
+for(int j=O; j<entier; j++){
+printf(" ");}
+printf("  \n")
+}}
