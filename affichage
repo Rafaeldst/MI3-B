@@ -22,4 +22,5 @@ entier = entier - strlen(rapide->competence[a]->description) - 8;
 for(int j=O; j<entier; j++){
 printf(" ");}
 printf("  \n")
+printf(" └────┴──────────────────────────────────────────┘\n");
 }}
