@@ -457,6 +457,61 @@ printf("\n");
     printf("Equipes creees avec succes ! DEBUT DE LA PARTIE \n");
 }
 
+void creer_equipeIA(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
+  const char* personnages_disponibles[8] = {
+    "zeus.txt", "poseidon.txt", "hades.txt", "hermes.txt",
+    "apollon.txt", "ares.txt", "athena.txt", "hera.txt"
+};
+// pour suivre quels personnages  sont déjà pris
+int deja_choisi[8] = {0};
+    int choix, i;
+
+    for (i = 0; i < 3; i++) {
+        // Joueur 1
+        afficher_personnages_disponibles(deja_choisi,personnages_disponibles);
+        printf("Joueur 1 - Choisissez un personnage (1-8) : \n");
+        scanf("%d", &choix);
+        while (choix < 1 || choix > 8 || deja_choisi[choix-1] != 0) {
+            printf("Choix invalide ou deja pris. Reessayez : \n");
+            scanf("%d", &choix);
+        }
+
+      equipe1[i] = charger_combattant(personnages_disponibles[choix-1]);
+
+      equipe1[i]->equipe=1;
+      deja_choisi[choix-1] = 1;  // empeche ce personnage d'être pris 
+        // Joueur 2
+        afficher_personnages_disponibles(deja_choisi,personnages_disponibles);
+        choix=rand()%8+1;
+      
+        while (choix < 1 || choix > 8 ||  deja_choisi[choix-1] != 0) {
+            printf("Choix invalide ou deja pris. Reessayez : ");
+            choix=rand()%8+1;
+        }
+        printf("Le choix de l'ordinateur est le %d \n ", choix);
+        deja_choisi[choix-1] = 1;
+      equipe2[i] = charger_combattant(personnages_disponibles[choix-1]);
+      equipe2[i]->equipe=2;
+    }
+  
+ printf(" Composition des équipes:\n");
+
+printf("Équipe 1 : :\n");
+for (int j = 0; j < TAILLE_EQUIPE; j++) {
+    printf("%s", equipe1[j]->nom);
+    if (j < TAILLE_EQUIPE - 1) printf(" | ");
+}
+printf("\n");
+
+printf("Équipe 2 : ");
+for (int j = 0; j < TAILLE_EQUIPE; j++) {
+    printf("%s", equipe2[j]->nom);
+    if (j < TAILLE_EQUIPE - 1) printf(" | ");
+}
+printf("\n");
+    printf("Equipes creees avec succes ! DEBUT DE LA PARTIE \n");
+}
+
   Competence* choisir_attaque(Combattant* combattant) {
     int choix;
     printf("\nChoisissez une attaque pour %s :\n", combattant->nom);
@@ -578,15 +633,24 @@ int main(){
 
 
   srand(time(NULL));
+  int mode;
+printf("Choisissez un mode  1V1 ou solo");
+scanf("%d", &mode);
   Combattant* equipe1[TAILLE_EQUIPE];
   Combattant* equipe2[TAILLE_EQUIPE];
-  creer_equipe(equipe1,equipe2);
-  combat(equipe1,equipe2);
+  if(mode==1){
+    creer_equipeIA(equipe1,equipe2);
+    combat(equipe1,equipe2);
+  }
+  if(mode==2){
+    creer_equipe(equipe1,equipe2);
+    combat(equipe1,equipe2);
+  }
   if ((equipe1[0]->pv==0)&&(equipe1[1]->pv)&&(equipe1[2]->pv)){
     printf("l'equipe 1 a gagne");
   }
   else{
-    printf("l'equipe 2 a gagne");
+    printf("lequipe 2 a gagne");
   }
   return 0;
 }
