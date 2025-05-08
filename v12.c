@@ -709,13 +709,13 @@ Competence* choisir_attaqueIAfaiblemoyen(Combattant* combattant) {
 Competence* choisir_attaqueIAfort(Combattant* combattant) {
   int choix;
 
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < NOMBRE_COMPETENCE; i++) {
       printf("\n");
   }
 
   do {
-      choix=rand()%4+1;
-  } while (choix < 1 || choix > 4 || combattant->competence[choix - 1]->tour_recharge_restant > 0);
+      choix=rand()%NOMBRE_COMPETENCE+1;
+  } while (choix < 1 || choix > NOMBRE_COMPETENCE || combattant->competence[choix - 1]->tour_recharge_restant > 0);
   printf("Le choix de l'ordinateur est l'attaque %d :\n", choix);
   return combattant->competence[choix - 1];
 }
