@@ -1,3 +1,3 @@
 Acceleration
-Augmente la vitesse de 30 d un allie pendant 2 tours
+Augmente la vitesse de 30 d un allie pendant 12 tours
 Acceleration Allie 30 12 18
