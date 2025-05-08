@@ -1,0 +1,1 @@
+zeus.txt poseidon.txt hades.txt hermes.txt apollon.txt ares.txt athena.txt hera.txt
