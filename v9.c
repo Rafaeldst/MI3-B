@@ -6,10 +6,10 @@
 
 #include <windows.h>// pour les accents
 
-
+#define TAILLE_AFFICHAGE 107 //multiple de 3 (99)+8
 #define NOMBRE_EFFET 6 //nombre de tous les effets possibles du jeu
 #define TAILLE_EQUIPE 3
-#define SEUIL_ACTION 1000
+#define SEUIL_ACTION 100
 //acceleration protection regeneration invisibilite provocation et brulure
 typedef struct{
   char nom[32];
@@ -43,6 +43,13 @@ typedef struct{
   Competence* competence[4];
   int equipe;
 }  Combattant;
+
+void retirer_retour_ligne(char* chaine){
+  for (int i=0;chaine[i]!='\0';i++){
+    if (chaine[i]=='\n'){
+      chaine[i]='\0';
+  }}
+}
 
 void verifier_erreur_fichier(FILE* fichier){
   if (fichier==NULL){
@@ -379,9 +386,6 @@ void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant*
     cible=choisir_cible(lanceur, equipe1, equipe2, competence, mode, difficulte);
     protection(cible,competence);
   }
-  else if (strcmp(competence->type,"ProtectionSoiMeme")==0){
-    protection(lanceur,competence);
-  }
   else if ((strcmp(competence->type,"Regeneration")==0)||(strcmp(competence->type,"Brulure")==0)){
     cible=choisir_cible(lanceur, equipe1, equipe2, competence, mode, difficulte);
     regeneration_brulure(cible,competence);
@@ -429,7 +433,9 @@ Competence* charger_competence(const char* fichier_competence){//fonction qui ch
      FILE* fichier=fopen(fichier_competence,"r");
      verifier_erreur_fichier(fichier);
      fgets(c->nom,32,fichier);
+    retirer_retour_ligne(c->nom);
      fgets(c->description,256,fichier);
+  retirer_retour_ligne(c->description);
      fscanf(fichier,"%s %s %d %d %d",c->type,c->cible,&(c->valeur),&(c->tour_actif),&(c->tour_recharge));
      c->tour_recharge_restant=0;
      fclose(fichier);
@@ -639,25 +645,761 @@ Competence* choisir_attaqueIAfort(Combattant* combattant) {
   return combattant->competence[choix - 1];
 }
 
-void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[]){
-    printf("\n");
-    printf("nom %s %s %s\n",Equipe1[0]->nom,Equipe1[1]->nom,Equipe1[2]->nom);
-    printf("pv %d %d %d\n",Equipe1[0]->pv,Equipe1[1]->pv,Equipe1[2]->pv);
-    printf("attaque %d %d %d\n",Equipe1[0]->attaque,Equipe1[1]->attaque,Equipe1[2]->attaque);
-    printf("defense %d %d %d\n",Equipe1[0]->defense,Equipe1[1]->defense,Equipe1[2]->defense);
-    printf("vitesse %d %d %d\n",Equipe1[0]->vitesse,Equipe1[1]->vitesse,Equipe1[2]->vitesse);
-    printf("barre %d %d %d\n",Equipe1[0]->barre_action,Equipe1[1]->barre_action,Equipe1[2]->barre_action);
-    printf("equipe %d %d %d\n",Equipe1[0]->equipe,Equipe1[1]->equipe,Equipe1[2]->equipe);
+int compter_chiffre(int n){
+  if(n==0){
+    return 1;
+  }
+  int compteur=0;
+  while (n>0){
+    n/=10;
+    compteur++;
+  }
+  return compteur;
+}
+
+void afficher_effet(Combattant* combattant){
+  for (int i=0;i<combattant->nbr_effet_actif;i++){
+    if (strcmp(combattant->effet_special[i].nom,"Brulure")==0){
+      printf("🔥");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Regeneration")==0){
+        printf("💕");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Acceleration")==0){
+      printf("💨");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Protection")==0){
+      printf("🛡️");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Provocation")==0){
+      printf("😡");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Invisibilite")==0){
+      printf("😶‍🌫️");
+    }
+  }
+}
+
+void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe1_Nom,char* equipe2_Nom,Combattant* attaquant){
+  int a;
+  printf("\n\n\n\n\n\n");
+  if (attaquant->equipe==1){
+    printf("@[%s]",equipe1_Nom);//1
+    for (int i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe1_Nom);i++){
+      printf("@");
+    }
+    printf("\n@");
+
+    for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//2
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//3
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s [1]",Equipe1[0]->nom);
+    a=a-4-strlen(Equipe1[0]->nom);
+    for(int i=0;i<33-4-strlen(Equipe1[0]->nom);i++){
+      printf(" ");a--;
+    }
+    printf("%s [2]",Equipe1[1]->nom);
+    a=a-4-strlen(Equipe1[1]->nom);
+    for(int i=0;i<33-4-strlen(Equipe1[1]->nom);i++){
+      printf(" ");a--;
+    }
+    printf("%s [3]",Equipe1[2]->nom);
+    a=a-4-strlen(Equipe1[2]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//4
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%d/%d",Equipe1[0]->pv,Equipe1[0]->pvmax);
+    a=a-1-compter_chiffre(Equipe1[0]->pv)-compter_chiffre(Equipe1[0]->pvmax);
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[0]->pv)-compter_chiffre(Equipe1[0]->pvmax);i++){
+      printf(" ");a--;
+    }
+    printf("%d/%d",Equipe1[1]->pv,Equipe1[1]->pvmax);
+    a=a-1-compter_chiffre(Equipe1[1]->pv)-compter_chiffre(Equipe1[1]->pvmax);
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[1]->pv)-compter_chiffre(Equipe1[1]->pvmax);i++){
+      printf(" ");a--;
+    }
+    printf("%d/%d",Equipe1[2]->pv,Equipe1[2]->pvmax);
+    a=a-1-compter_chiffre(Equipe1[2]->pv)-compter_chiffre(Equipe1[2]->pvmax);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//5
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%d/100",Equipe1[0]->barre_action);
+    a=a-1-compter_chiffre(Equipe1[0]->barre_action)-3;
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[0]->barre_action)-3;i++){
+      printf(" ");a--;
+    }
+    printf("%d/100",Equipe1[1]->barre_action);
+    a=a-1-compter_chiffre(Equipe1[1]->barre_action)-3;
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[1]->barre_action)-3;i++){
+      printf(" ");a--;
+    }
+    printf("%d/100",Equipe1[2]->barre_action);
+    a=a-1-compter_chiffre(Equipe1[2]->barre_action)-3;
+    for(int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//6
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    afficher_effet(Equipe1[0]);
+    a=a-Equipe1[0]->nbr_effet_actif*2;
+    for(int i=0;i<33-(Equipe1[0]->nbr_effet_actif*2);i++){
+      printf(" ");
+      a--;
+    }
+    afficher_effet(Equipe1[1]);
+    a=a-Equipe1[1]->nbr_effet_actif*2;
+    for(int i=0;i<33-(Equipe1[1]->nbr_effet_actif*2);i++){
+      printf(" ");
+      a--;
+    }
+    afficher_effet(Equipe1[2]);
+    a=a-(Equipe1[2]->nbr_effet_actif*2);
+    for(int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//7
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//8
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->nom);
+    a=a-strlen(attaquant->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//9
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[1] ");
+    a=a-4;
+    printf("%s",attaquant->competence[0]->nom);
+    a=a-strlen(attaquant->competence[0]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//10
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->competence[0]->description);
+    a=a-strlen(attaquant->competence[0]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//11
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[2] ");
+    a=a-4;
+    printf("%s",attaquant->competence[1]->nom);
+    a=a-strlen(attaquant->competence[1]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//12
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->competence[1]->description);
+    a=a-strlen(attaquant->competence[1]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//13
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[3] ");
+    a=a-4;
+    printf("%s",attaquant->competence[2]->nom);
+    a=a-strlen(attaquant->competence[2]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//14
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->competence[2]->description);
+    a=a-strlen(attaquant->competence[2]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//15
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[4] ");
+    a=a-4;
+    printf("%s",attaquant->competence[3]->nom);
+    a=a-strlen(attaquant->competence[3]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//16
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->competence[3]->description);
+    a=a-strlen(attaquant->competence[3]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//17
+      printf(" ");
+    }
+    printf("@\n");
+
+    for (int i=0;i<TAILLE_AFFICHAGE;i++){//18
+      printf("@");
+    }
+    printf("\n\n");
+    
+    
 
 
-    printf("\n");
-    printf("nom %s %s %s\n",Equipe2[0]->nom,Equipe2[1]->nom,Equipe2[2]->nom);
-    printf("pv %d %d %d\n",Equipe2[0]->pv,Equipe2[1]->pv,Equipe2[2]->pv);
-    printf("attaque %d %d %d\n",Equipe2[0]->attaque,Equipe2[1]->attaque,Equipe2[2]->attaque);
-    printf("defense %d %d %d\n",Equipe2[0]->defense,Equipe2[1]->defense,Equipe2[2]->defense);
-    printf("vitesse %d %d %d\n",Equipe2[0]->vitesse,Equipe2[1]->vitesse,Equipe2[2]->vitesse);
-    printf("barre %d %d %d\n",Equipe2[0]->barre_action,Equipe2[1]->barre_action,Equipe2[2]->barre_action);
-    printf("equipe %d %d %d\n",Equipe2[0]->equipe,Equipe2[1]->equipe,Equipe2[2]->equipe);
+
+
+
+
+  printf("@[%s]",equipe2_Nom);//1
+  for (int i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe2_Nom);i++){
+    printf("@");
+  }
+  printf("\n@");
+
+  for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//2
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//3
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  printf("%s [1]",Equipe2[0]->nom);
+  a=a-4-strlen(Equipe2[0]->nom);
+  for(int i=0;i<33-4-strlen(Equipe2[0]->nom);i++){
+    printf(" ");a--;
+  }
+  printf("%s [2]",Equipe2[1]->nom);
+  a=a-4-strlen(Equipe2[1]->nom);
+  for(int i=0;i<33-4-strlen(Equipe2[1]->nom);i++){
+    printf(" ");a--;
+  }
+  printf("%s [3]",Equipe2[2]->nom);
+  a=a-4-strlen(Equipe2[2]->nom);
+  for (int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//4
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  printf("%d/%d",Equipe2[0]->pv,Equipe2[0]->pvmax);
+  a=a-1-compter_chiffre(Equipe2[0]->pv)-compter_chiffre(Equipe2[0]->pvmax);
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[0]->pv)-compter_chiffre(Equipe2[0]->pvmax);i++){
+    printf(" ");a--;
+  }
+  printf("%d/%d",Equipe2[1]->pv,Equipe2[1]->pvmax);
+  a=a-1-compter_chiffre(Equipe2[1]->pv)-compter_chiffre(Equipe2[1]->pvmax);
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[1]->pv)-compter_chiffre(Equipe2[1]->pvmax);i++){
+    printf(" ");a--;
+  }
+  printf("%d/%d",Equipe2[2]->pv,Equipe2[2]->pvmax);
+  a=a-1-compter_chiffre(Equipe2[2]->pv)-compter_chiffre(Equipe2[2]->pvmax);
+  for (int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//5
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  printf("%d/100",Equipe2[0]->barre_action);
+  a=a-1-compter_chiffre(Equipe2[0]->barre_action)-3;
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[0]->barre_action)-3;i++){
+    printf(" ");a--;
+  }
+  printf("%d/100",Equipe2[1]->barre_action);
+  a=a-1-compter_chiffre(Equipe2[1]->barre_action)-3;
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[1]->barre_action)-3;i++){
+    printf(" ");a--;
+  }
+  printf("%d/100",Equipe2[2]->barre_action);
+  a=a-1-compter_chiffre(Equipe2[2]->barre_action)-3;
+  for(int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//6
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  afficher_effet(Equipe2[0]);
+  a=a-Equipe2[0]->nbr_effet_actif*2;
+  for(int i=0;i<33-(Equipe2[0]->nbr_effet_actif*2);i++){
+    printf(" ");
+    a--;
+  }
+  afficher_effet(Equipe2[1]);
+  a=a-Equipe2[1]->nbr_effet_actif*2;
+  for(int i=0;i<33-(Equipe2[1]->nbr_effet_actif*2);i++){
+    printf(" ");
+    a--;
+  }
+  afficher_effet(Equipe2[2]);
+  a=a-(Equipe2[2]->nbr_effet_actif*2);
+  for(int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//7
+    printf(" ");
+  }
+  printf("@\n");
+
+  for (int i=0;i<TAILLE_AFFICHAGE;i++){//8
+    printf("@");
+  }
+  printf("\n");
+  }
+
+  
+
+
+  else{
+
+    printf("@[%s]",equipe1_Nom);//1
+    for (int i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe1_Nom);i++){
+      printf("@");
+    }
+    printf("\n@");
+
+    for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//2
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//3
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s [1]",Equipe1[0]->nom);
+    a=a-4-strlen(Equipe1[0]->nom);
+    for(int i=0;i<33-4-strlen(Equipe1[0]->nom);i++){
+      printf(" ");a--;
+    }
+    printf("%s [2]",Equipe1[1]->nom);
+    a=a-4-strlen(Equipe1[1]->nom);
+    for(int i=0;i<33-4-strlen(Equipe1[1]->nom);i++){
+      printf(" ");a--;
+    }
+    printf("%s [3]",Equipe1[2]->nom);
+    a=a-4-strlen(Equipe1[2]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//4
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%d/%d",Equipe1[0]->pv,Equipe1[0]->pvmax);
+    a=a-1-compter_chiffre(Equipe1[0]->pv)-compter_chiffre(Equipe1[0]->pvmax);
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[0]->pv)-compter_chiffre(Equipe1[0]->pvmax);i++){
+      printf(" ");a--;
+    }
+    printf("%d/%d",Equipe1[1]->pv,Equipe1[1]->pvmax);
+    a=a-1-compter_chiffre(Equipe1[1]->pv)-compter_chiffre(Equipe1[1]->pvmax);
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[1]->pv)-compter_chiffre(Equipe1[1]->pvmax);i++){
+      printf(" ");a--;
+    }
+    printf("%d/%d",Equipe1[2]->pv,Equipe1[2]->pvmax);
+    a=a-1-compter_chiffre(Equipe1[2]->pv)-compter_chiffre(Equipe1[2]->pvmax);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//5
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%d/100",Equipe1[0]->barre_action);
+    a=a-1-compter_chiffre(Equipe1[0]->barre_action)-3;
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[0]->barre_action)-3;i++){
+      printf(" ");a--;
+    }
+    printf("%d/100",Equipe1[1]->barre_action);
+    a=a-1-compter_chiffre(Equipe1[1]->barre_action)-3;
+    for(int i=0;i<33-1-compter_chiffre(Equipe1[1]->barre_action)-3;i++){
+      printf(" ");a--;
+    }
+    printf("%d/100",Equipe1[2]->barre_action);
+    a=a-1-compter_chiffre(Equipe1[2]->barre_action)-3;
+    for(int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//6
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    afficher_effet(Equipe1[0]);
+    a=a-Equipe1[0]->nbr_effet_actif*2;
+    for(int i=0;i<33-(Equipe1[0]->nbr_effet_actif*2);i++){
+      printf(" ");
+      a--;
+    }
+    afficher_effet(Equipe1[1]);
+    a=a-Equipe1[1]->nbr_effet_actif*2;
+    for(int i=0;i<33-(Equipe1[1]->nbr_effet_actif*2);i++){
+      printf(" ");
+      a--;
+    }
+    afficher_effet(Equipe1[2]);
+    a=a-(Equipe1[2]->nbr_effet_actif*2);
+    for(int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//7
+      printf(" ");
+    }
+    printf("@\n");
+
+    for (int i=0;i<TAILLE_AFFICHAGE;i++){//8
+      printf("@");
+    }
+    printf("\n\n");
+    
+
+
+
+
+  printf("@[%s]",equipe2_Nom);//1
+  for (int i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe2_Nom);i++){
+    printf("@");
+  }
+  printf("\n@");
+
+  for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//2
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//3
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  printf("%s [1]",Equipe2[0]->nom);
+  a=a-4-strlen(Equipe2[0]->nom);
+  for(int i=0;i<33-4-strlen(Equipe2[0]->nom);i++){
+    printf(" ");a--;
+  }
+  printf("%s [2]",Equipe2[1]->nom);
+  a=a-4-strlen(Equipe2[1]->nom);
+  for(int i=0;i<33-4-strlen(Equipe2[1]->nom);i++){
+    printf(" ");a--;
+  }
+  printf("%s [3]",Equipe2[2]->nom);
+  a=a-4-strlen(Equipe2[2]->nom);
+  for (int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//4
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  printf("%d/%d",Equipe2[0]->pv,Equipe2[0]->pvmax);
+  a=a-1-compter_chiffre(Equipe2[0]->pv)-compter_chiffre(Equipe2[0]->pvmax);
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[0]->pv)-compter_chiffre(Equipe2[0]->pvmax);i++){
+    printf(" ");a--;
+  }
+  printf("%d/%d",Equipe2[1]->pv,Equipe2[1]->pvmax);
+  a=a-1-compter_chiffre(Equipe2[1]->pv)-compter_chiffre(Equipe2[1]->pvmax);
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[1]->pv)-compter_chiffre(Equipe2[1]->pvmax);i++){
+    printf(" ");a--;
+  }
+  printf("%d/%d",Equipe2[2]->pv,Equipe2[2]->pvmax);
+  a=a-1-compter_chiffre(Equipe2[2]->pv)-compter_chiffre(Equipe2[2]->pvmax);
+  for (int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//5
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  printf("%d/100",Equipe2[0]->barre_action);
+  a=a-1-compter_chiffre(Equipe2[0]->barre_action)-3;
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[0]->barre_action)-3;i++){
+    printf(" ");a--;
+  }
+  printf("%d/100",Equipe2[1]->barre_action);
+  a=a-1-compter_chiffre(Equipe2[1]->barre_action)-3;
+  for(int i=0;i<33-1-compter_chiffre(Equipe2[1]->barre_action)-3;i++){
+    printf(" ");a--;
+  }
+  printf("%d/100",Equipe2[2]->barre_action);
+  a=a-1-compter_chiffre(Equipe2[2]->barre_action)-3;
+  for(int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//6
+  for (int i=0;i<3;i++){
+    printf(" ");
+    a--;
+  }
+  afficher_effet(Equipe2[0]);
+  a=a-Equipe2[0]->nbr_effet_actif*2;
+  for(int i=0;i<33-(Equipe2[0]->nbr_effet_actif*2);i++){
+    printf(" ");
+    a--;
+  }
+  afficher_effet(Equipe2[1]);
+  a=a-Equipe2[1]->nbr_effet_actif*2;
+  for(int i=0;i<33-(Equipe2[1]->nbr_effet_actif*2);i++){
+    printf(" ");
+    a--;
+  }
+  afficher_effet(Equipe2[2]);
+  a=a-(Equipe2[2]->nbr_effet_actif*2);
+  for(int i=0;i<a-1;i++){
+    printf(" ");
+  }
+  printf("@\n@");
+
+  for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//7
+    printf(" ");
+  }
+  printf("@\n@");
+
+  a=TAILLE_AFFICHAGE-1;//8
+    for (int i=0;i<3;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->nom);
+    a=a-strlen(attaquant->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//9
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[1] ");
+    a=a-4;
+    printf("%s",attaquant->competence[0]->nom);
+    a=a-strlen(attaquant->competence[0]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//10
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->competence[0]->description);
+    a=a-strlen(attaquant->competence[0]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//11
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[2] ");
+    a=a-4;
+    printf("%s",attaquant->competence[1]->nom);
+    a=a-strlen(attaquant->competence[1]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//12
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+
+    printf("%s",attaquant->competence[1]->description);
+    a=a-strlen(attaquant->competence[1]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//13
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[3] ");
+    a=a-4;
+    printf("%s",attaquant->competence[2]->nom);
+    a=a-strlen(attaquant->competence[2]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//14
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->competence[2]->description);
+    a=a-strlen(attaquant->competence[2]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    a=TAILLE_AFFICHAGE-1;//15
+    for (int i=0;i<5;i++){
+      printf(" ");
+      a--;
+    }
+    printf("[4] ");
+    a=a-4;
+    printf("%s",attaquant->competence[3]->nom);
+    a=a-strlen(attaquant->competence[3]->nom);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+
+    printf("@\n@");
+    a=TAILLE_AFFICHAGE-1;//16
+    for (int i=0;i<7;i++){
+      printf(" ");
+      a--;
+    }
+    printf("%s",attaquant->competence[3]->description);
+    a=a-strlen(attaquant->competence[3]->description);
+    for (int i=0;i<a-1;i++){
+      printf(" ");
+    }
+    printf("@\n@");
+
+    for (int i=0;i<TAILLE_AFFICHAGE-2;i++){//17
+      printf(" ");
+    }
+    printf("@\n");
+
+    for (int i=0;i<TAILLE_AFFICHAGE;i++){//18
+      printf("@");
+    }
+    printf("\n\n");
+    
+    
+  
+
+
+
+
+
+
+
+
+  }
+
 }
 
 
@@ -711,14 +1453,13 @@ Combattant* plus_rapide(Combattant* equipe1[],Combattant* equipe2[]){
   }
 }
 
-void combat(Combattant* equipe1[],Combattant* equipe2[],int mode,int difficulte){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
+void combat(Combattant* equipe1[],Combattant* equipe2[],int mode,int difficulte,char* equipe1_Nom,char* equipe2_Nom){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 int tic=0;
 Combattant* rapide;
 while ((equipe1[0]->pv>0 || equipe1[1]->pv>0 || equipe1[2]->pv>0) && (equipe2[0]->pv>0 || equipe2[1]->pv>0 || equipe2[2]->pv>0) || tic < 50000){
    maj_tous(equipe1, equipe2);
-   printf ("\ntic : %d\n||||||||||||||||||||||||||||||||||||||||||||||||||||||",tic);
-   affiche_tous_perso(equipe1,equipe2);
   rapide=plus_rapide(equipe1,equipe2);
+   affiche_tous_perso(equipe1,equipe2,equipe1_Nom,equipe2_Nom,rapide);
     if (pret(rapide)){
       if(mode==1){
         if(difficulte==1){
@@ -765,11 +1506,30 @@ int main(){
 
   SetConsoleOutputCP(CP_UTF8); // pour les accents
 
+  
 
   srand(time(NULL));
   int mode, difficulte;
 printf("Choisissez un mode  1V1 ou solo");
 scanf("%d", &mode);
+
+
+if (mode==2){
+  char equipe1_Nom[256];
+  char equipe2_Nom[256]={"Ordinateur"};
+  printf("Choisissez le nom de l'équipe 1.");
+  scanf("%s",equipe1_Nom);
+}
+  
+if (mode==2){
+  char equipe1_Nom[256];
+  char equipe2_Nom[256];
+  printf("Choisissez le nom de l'équipe 1.");
+  scanf("%s",equipe1_Nom);
+  printf("Choissiez le nom de l'équipe 2.");
+  scanf("%s",equipe2_Nom);
+}
+
   Combattant* equipe1[TAILLE_EQUIPE];
   Combattant* equipe2[TAILLE_EQUIPE];
   if(mode==1){
@@ -777,20 +1537,20 @@ scanf("%d", &mode);
     scanf("%d", &difficulte);
     if(difficulte==1){
       creer_equipeIA(equipe1,equipe2);
-      combat(equipe1,equipe2,mode,difficulte);
+      combat(equipe1,equipe2,mode,difficulte,,equipe1_Nom,equipe2_Nom);
     }
     else if(difficulte==2){
       creer_equipeIA(equipe1,equipe2);
-      combat(equipe1,equipe2,mode,difficulte);
+      combat(equipe1,equipe2,mode,difficulte,,equipe1_Nom,equipe2_Nom);
     }
     else if(difficulte==3){
       creer_equipeIA(equipe1,equipe2);
-      combat(equipe1,equipe2,mode,difficulte);
+      combat(equipe1,equipe2,mode,difficulte,,equipe1_Nom,equipe2_Nom);
     }
   }
   if(mode==2){
     creer_equipe(equipe1,equipe2);
-    combat(equipe1,equipe2,mode,difficulte);
+    combat(equipe1,equipe2,mode,difficulte,,equipe1_Nom,equipe2_Nom);
   }
   if ((equipe1[0]->pv==0)&&(equipe1[1]->pv)&&(equipe1[2]->pv)){
     printf("l'equipe 1 a gagne");
