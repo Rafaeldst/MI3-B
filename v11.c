@@ -107,10 +107,9 @@ int vivant(Combattant* combattant){
 }
 
 int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
-    degat=degat*100000000;
     int n=rand()%100;
     int pv_actuel=combattant->pv;
-    if (combattant->agilite<n){
+    if (combattant->agilite>n){
         int degats_totaux=degat*(100-combattant->defense)/100;
         combattant->pv=combattant->pv-degats_totaux;
     if (combattant->pv<0){
@@ -123,14 +122,16 @@ int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats �
 }
 
 void degat_recharge(Combattant* combattant,int degat,Competence* competence){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
-    degat=degat*100000;
     int n=rand()%100;
     int pv_actuel=combattant->pv;
-    if (combattant->agilite<n){
+    if (combattant->agilite>n){
         int degats_totaux=degat*(100-combattant->defense)/100;
         combattant->pv=combattant->pv-degats_totaux;
         if (combattant->pv<0){
             combattant->pv=0;}
+    }
+    else{
+        printf("\n%s esquive !\n",combattant->nom);
     }
     competence->tour_recharge_restant=competence->tour_recharge;
 }
@@ -1521,7 +1522,7 @@ Combattant* plus_rapide(Combattant* equipe1[],Combattant* equipe2[]){
 void combat(Combattant* equipe1[],Combattant* equipe2[],int mode,int difficulte,char* equipe1_Nom,char* equipe2_Nom){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
 int tic=0;
 Combattant* rapide;
-while ((equipe1[0]->pv>0 || equipe1[1]->pv>0 || equipe1[2]->pv>0) && (equipe2[0]->pv>0 || equipe2[1]->pv>0 || equipe2[2]->pv>0) || tic < 50000){
+while ((equipe1[0]->pv>0 || equipe1[1]->pv>0 || equipe1[2]->pv>0) && (equipe2[0]->pv>0 || equipe2[1]->pv>0 || equipe2[2]->pv>0)&& tic<50000){
    maj_tous(equipe1, equipe2);
   rapide=plus_rapide(equipe1,equipe2);
    affiche_tous_perso(equipe1,equipe2,equipe1_Nom,equipe2_Nom,rapide);
@@ -1643,8 +1644,6 @@ while (mode!=0){
 
 
         if(mode==2){
-            char equipe1_Nom[256];
-        char equipe2_Nom[256];
         printf("Choisissez le nom de l'équipe 1.\n");
         scanf("%s",equipe1_Nom);
         printf("Choisissez le nom de l'équipe 2.\n");
@@ -1655,7 +1654,6 @@ while (mode!=0){
 
 
         afficher_vainqueur(equipe1,equipe2);
-
         liberer_equipes(equipe1,equipe2);
 }
 
