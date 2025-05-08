@@ -249,11 +249,9 @@ int est_invisible(Combattant* combattant){
 int moinsdepv(Combattant* equipe[]){
   int hp=1000;
   int numero;
-  printf("bbbbbb");
   if(vivant(equipe[0]) && (!est_invisible(equipe[0])) && equipe[0]->pv<hp){
     hp=equipe[0]->pv;
     numero=0;
-    printf("ccccccc");
   }
   if(vivant(equipe[1]) && !(est_invisible(equipe[1])) && equipe[1]->pv<hp){
     hp=equipe[1]->pv;
@@ -349,7 +347,6 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
          }
       }
       if(strcmp(competence->cible, "Ennemi") == 0){
-        printf("aaaaaaa");
         choix=moinsdepv(equipe1);
         printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix]->nom);
         return equipe1[choix];}
