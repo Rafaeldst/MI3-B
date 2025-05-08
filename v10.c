@@ -1493,11 +1493,10 @@ int main(){
 
   srand(time(NULL));
   int mode, difficulte;
-printf("Choisissez un mode  1V1 ou solo");
+printf("Choisissez un mode:\n");
+printf("[1] Solo contre l'ordinateur\n");
+printf("[2] Multijoueur 1V1\n");
 scanf("%d", &mode);
-
-
-
 
   Combattant* equipe1[TAILLE_EQUIPE];
   Combattant* equipe2[TAILLE_EQUIPE];
@@ -1506,7 +1505,10 @@ scanf("%d", &mode);
     char equipe2_Nom[256]="Ordinateur";
     printf("Choisissez le nom de l'équipe 1.");
     scanf("%s",equipe1_Nom);
-    printf("Choisissez une difficulté");
+    printf("Choisissez un niveau de difficulté:\n");
+    printf("[1] faible\n");
+    printf("[2] intermediaire\n");
+    printf("[3] fort\n");
     scanf("%d", &difficulte);
     if(difficulte==1){
       creer_equipeIA(equipe1,equipe2);
@@ -1524,18 +1526,18 @@ scanf("%d", &mode);
   if(mode==2){
     char equipe1_Nom[256];
   char equipe2_Nom[256];
-  printf("Choisissez le nom de l'équipe 1.");
+  printf("Choisissez le nom de l'équipe 1.\n");
   scanf("%s",equipe1_Nom);
-  printf("Choissiez le nom de l'équipe 2.");
+  printf("Choissiez le nom de l'équipe 2.\n");
   scanf("%s",equipe2_Nom);
     creer_equipe(equipe1,equipe2);
     combat(equipe1,equipe2,mode,difficulte,equipe1_Nom,equipe2_Nom);
   }
   if ((equipe1[0]->pv==0)&&(equipe1[1]->pv)&&(equipe1[2]->pv)){
-    printf("l'equipe 1 a gagne");
+    printf("l'equipe 1 a gagne\n");
   }
   else{
-    printf("lequipe 2 a gagne");
+    printf("lequipe 2 a gagne\n");
   }
   return 0;
 }
