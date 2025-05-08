@@ -1,3 +1,3 @@
 Protection Infernale
-Augmente la défense d'un allié de 30 pour 3 tours.
+Augmente la défense d'un allié de 30 pour 18 tours.
 Protection Allie 30 18 18
