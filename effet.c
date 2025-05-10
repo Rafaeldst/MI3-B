@@ -1,3 +1,6 @@
+#include "projet.h"
+#include "effet.h"
+
 int vivant(Combattant* combattant){
     if (combattant->pv==0){
         return 0;}
