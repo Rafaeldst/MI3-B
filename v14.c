@@ -538,6 +538,7 @@ void afficher_personnages_disponibles(int deja_choisi[], char personnages_dispon
 void creer_equipe(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
     char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO];
     FILE* fichier=fopen("Liste_Personnage.txt","r");
+  verifier_erreur_fichier(fichier);
     for (int i=0;i<NOMBRE_PERSO;i++){
       fscanf(fichier,"%s",personnages_disponibles[i]);
     };
@@ -595,6 +596,7 @@ printf("\n");
 void creer_equipeIA(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
   char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO];
   FILE* fichier=fopen("Liste_Personnage.txt","r");
+  verifier_erreur_fichier(fichier);
   for (int i=0;i<NOMBRE_PERSO;i++){
     fscanf(fichier,"%s",personnages_disponibles[i]);
   };
