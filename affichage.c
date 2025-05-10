@@ -371,3 +371,24 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     printf("%s",attaquant->competence[3]->description);
     a=a-strlen(attaquant->competence[3]->description);
 }
+
+void afficher_effet(Combattant* combattant){
+  for (int i=0;i<combattant->nbr_effet_actif;i++){
+    if (strcmp(combattant->effet_special[i].nom,"Brulure")==0){
+      printf("🔥");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Regeneration")==0){
+        printf("💕");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Acceleration")==0){
+      printf("💨");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Protection")==0){
+      printf("🛡️");
+    }
+    else if (strcmp(combattant->effet_special[i].nom,"Provocation")==0){
+      printf("😡");
+    }
+  }
+}
+
