@@ -1,4 +1,4 @@
 Hermes
 Assassin
-170 170 45 15 40 40
+135 135 45 15 40 40
 attaque_hermes.txt acceleration.txt acceleration_divine.txt fureur_furtive.txt
