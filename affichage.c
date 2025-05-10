@@ -392,3 +392,14 @@ void afficher_effet(Combattant* combattant){
   }
 }
 
+void afficher_personnages_disponibles(int deja_choisi[], char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO]) {
+    char chaine[TAILLE_NOM_PERSO];
+    printf(" Les Personnages disponibles sont:\n");
+    for (int i = 0; i < NOMBRE_PERSO; i++) {
+        if (deja_choisi[i] == 0) {
+            strcpy(chaine,personnages_disponibles[i]);
+            chaine[strlen(chaine)-4]='\0'; // pour enlever .txt lors de l'affichage
+            printf("%d. %s\n", i + 1, chaine);
+        }
+    }
+}
