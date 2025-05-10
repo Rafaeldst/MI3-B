@@ -11,7 +11,7 @@ CFLAGS = -Wall -Wextra -g
 BUILD_DIR = build
 
 # Fichiers sources
-SRC = projet.c
+SRC = projet.c combat.c affichage.c effet.c
 
 # Headers (pas besoin de toucher les .h directement, ils sont inclus dans les règles)
 HEADERS = projet.h combat.h affichage.h effet.h
