@@ -3,7 +3,84 @@
 #include "combat.h"
 #include "effet.h"
 
+void combat(Combattant* equipe1[],Combattant* equipe2[],int mode,int difficulte,char* equipe1_Nom,char* equipe2_Nom){ //fonction qui lance une boucle jusqu'à ce que le combat s'arrête
+int tic=0;
+Combattant* rapide;
+while ((equipe1[0]->pv>0 || equipe1[1]->pv>0 || equipe1[2]->pv>0) && (equipe2[0]->pv>0 || equipe2[1]->pv>0 || equipe2[2]->pv>0)&& tic<NOMBRE_TIC_MAXIMUM){
+   maj_tous(equipe1, equipe2);
+  rapide=plus_rapide(equipe1,equipe2);
+   affiche_tous_perso(equipe1,equipe2,equipe1_Nom,equipe2_Nom,rapide);
+    if (pret(rapide)){
+      if(mode==1){
+        if(difficulte==1){
+          if(rapide->equipe==1){
+            Competence* attaque = choisir_attaque(rapide);
+            appliquer_technique(attaque, rapide, equipe1, equipe2, mode, difficulte);
+          }
+          else if(rapide->equipe==2){
+            Competence* attaque = choisir_attaqueIAfaiblemoyen(rapide);
+            appliquer_technique(attaque, rapide, equipe1, equipe2, mode, difficulte);
+          }
+        }
+        else if(difficulte==2){
+          if(rapide->equipe==1){
+            Competence* attaque = choisir_attaque(rapide);
+            appliquer_technique(attaque, rapide, equipe1, equipe2, mode, difficulte);
+          }
+          else if(rapide->equipe==2){
+            Competence* attaque = choisir_attaqueIAfaiblemoyen(rapide);
+            appliquer_technique(attaque, rapide, equipe1, equipe2, mode, difficulte);
+          }
+        }
+        else if(difficulte==3){
+          if(rapide->equipe==1){
+            Competence* attaque = choisir_attaque(rapide);
+            appliquer_technique(attaque, rapide, equipe1, equipe2, mode, difficulte);
+          }
+          else if(rapide->equipe==2){
+            Competence* attaque = choisir_attaqueIAfort(rapide);
+            appliquer_technique(attaque, rapide, equipe1, equipe2, mode, difficulte);
+          }
+        }
+      }
+      else if(mode==2){
+        Competence* attaque = choisir_attaque(rapide);
+      appliquer_technique(attaque, rapide, equipe1, equipe2, mode, difficulte);}
+      }
+    tic++;
+    
+}}
+
+void afficher_vainqueur(Combattant* equipe1[], Combattant* equipe2[]) {
+    if(vivant(equipe1[0]) || vivant(equipe1[1]) || vivant(equipe1[2])) {
+        printf("L'équipe 1 a gagné !\n");}
+    else{
+        printf("L'équipe 2 a gagné !\n");
+    }
+}
+
+
+
+void liberer_equipes(Combattant* equipe1[], Combattant* equipe2[]) {
+    for(int i = 0; i < TAILLE_EQUIPE; i++) {
+        for(int j = 0; j < NOMBRE_COMPETENCE; j++) {
+            free(equipe1[i]->competence[j]);
+        }
+        free(equipe1[i]);
+
+        for(int j = 0; j < NOMBRE_COMPETENCE; j++) {
+            free(equipe2[i]->competence[j]);
+        }
+        free(equipe2[i]);
+    }
+}
+
+
+
 int main(){
+
+
+
   srand(time(NULL));
   int mode=-1, difficulte;
 Combattant* equipe1[TAILLE_EQUIPE];
