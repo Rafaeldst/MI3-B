@@ -1,3 +1,3 @@
 Attaque de Base - Hermes
-Hermes frappe avec son baton en or et inflige 22 degats.
-Degats Ennemi 22 0 0
+Hermes frappe avec son baton en or et inflige 50 degats.
+Degats Ennemi 50 0 0
