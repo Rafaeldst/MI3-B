@@ -1,3 +1,6 @@
+#include "affichage.h"
+#include "projet.h"
+
 void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe1_Nom,char* equipe2_Nom,Combattant* attaquant){
   int a;
   printf("\n");
