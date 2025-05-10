@@ -11,27 +11,30 @@ CFLAGS = -Wall -Wextra -g
 BUILD_DIR = build
 
 # Fichiers sources
-SRC = projet.c combat.c affichage.c effet.c
+SRC = projet.c
 
-# Fichiers objets (dans build/)
+# Headers (pas besoin de toucher les .h directement, ils sont inclus dans les règles)
+HEADERS = projet.h combat.h affichage.h effet.h
+
+# Objets compilés
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 
 # Règle principale
 all: $(EXEC)
 
-# Construction de l'exécutable
+# Construction de l'exécutable à partir des objets
 $(EXEC): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^
 
-# Compilation des .c en .o dans build/
-$(BUILD_DIR)/%.o: %.c projet.h | $(BUILD_DIR)
+# Compilation de chaque .c en .o dans le dossier build
+$(BUILD_DIR)/%.o: %.c %.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Créer le dossier build s'il n'existe pas
+# Créer le dossier build si besoin
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-# Nettoyer les fichiers objets et l'exécutable
+# Nettoyer
 clean:
 	rm -rf $(BUILD_DIR) $(EXEC)
 
