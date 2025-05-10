@@ -1,3 +1,6 @@
+#include "projet.h"
+#include "combat.h"
+
 
 int meilleur_scan(){
     int retour = 0;
