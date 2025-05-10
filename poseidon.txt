@@ -1,4 +1,4 @@
 Poseidon
 Mage
-180 180 35 30  15 25
+160 160 40 30  15 25
 attaque_poseidon.txt rafale_magique.txt tsunami.txt maremotrice.txt
