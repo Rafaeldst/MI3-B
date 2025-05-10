@@ -1,3 +1,3 @@
 Tsunami
-Inflige 50 degats a tous les ennemis
-DegatsTous Ennemi 50 0 24
+Inflige 40 degats a tous les ennemis
+DegatsTous Ennemi 40 0 24
