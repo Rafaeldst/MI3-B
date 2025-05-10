@@ -327,10 +327,10 @@ printf("\n");
 
 Competence* choisir_attaque(Combattant* combattant) {
     int choix;
-    printf("\nchoisisser une attaque\n");
+    printf("\nChoisissez une attaque.\n");
     choix=meilleur_scan();
      while (choix < 1 || choix > NOMBRE_COMPETENCE || combattant->competence[choix - 1]->tour_recharge_restant > 0){
-    printf("erreur choisisser une attaque valide\n");
+    printf("Erreur choisissez une attaque valide.\n");
     choix=meilleur_scan();
      }
     return combattant->competence[choix - 1];
