@@ -26,7 +26,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     }
     printf("%s [1]",Equipe1[0]->nom);
     a=a-4-strlen(Equipe1[0]->nom);
-    for(int i=0;i<33-4-strlen(Equipe1[0]->nom);i++){
+    for(size_t i=0;i<33-4-strlen(Equipe1[0]->nom);i++){
       printf(" ");a--;
     }
     printf("%s [2]",Equipe1[1]->nom);
@@ -147,7 +147,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
   }
   printf("%s [2]",Equipe2[1]->nom);
   a=a-4-strlen(Equipe2[1]->nom);
-  for(int i=0;i<33-4-strlen(Equipe2[1]->nom);i++){
+  for(size_t i=0;i<33-4-strlen(Equipe2[1]->nom);i++){
     printf(" ");a--;
   }
   printf("%s [3]",Equipe2[2]->nom);
