@@ -46,7 +46,7 @@ void retirer_stats(Combattant* combattant,int index){
   }
 }
 
-void appliquer_effet(Combattant* combattant,Competence* competence,Effet effet){
+void appliquer_effet(Combattant* combattant,Effet effet){
     combattant->barre_action=0;
     for (int i=0;i<combattant->nbr_effet_actif;i++){//on regarde s'il à déjà l'effet, si oui on applique en enlevant les buffs/ malus precedent
     if (strcmp(combattant->effet_special[i].nom,effet.nom)==0){
@@ -76,7 +76,7 @@ void acceleration(Combattant* combattant, Competence* competence){
     strcpy(effet.nom, competence->type);
     effet.tour_restant=competence->tour_actif;
     effet.valeur=competence->valeur;
-    appliquer_effet(combattant,competence,effet);
+    appliquer_effet(combattant,effet);
     combattant->vitesse=combattant->vitesse+competence->valeur;
     competence->tour_recharge_restant=competence->tour_recharge;
 }
@@ -86,7 +86,7 @@ void protection(Combattant* combattant, Competence* competence){
     strcpy(effet.nom, competence->type);
     effet.tour_restant=competence->tour_actif;
     effet.valeur=competence->valeur;
-    appliquer_effet(combattant,competence,effet);
+    appliquer_effet(combattant,effet);
     combattant->defense=combattant->defense+competence->valeur;
     competence->tour_recharge_restant=competence->tour_recharge;
 }
@@ -96,7 +96,7 @@ void regeneration_brulure(Combattant* combattant, Competence* competence){
     strcpy(effet.nom, competence->type);
     effet.valeur=competence->valeur;
     effet.tour_restant=competence->tour_actif;
-    appliquer_effet(combattant,competence,effet);
+    appliquer_effet(combattant,effet);
     competence->tour_recharge_restant=competence->tour_recharge;
 }
 
@@ -110,7 +110,7 @@ void provocation(Combattant* combattant, Competence* competence){
     Effet effet;
     strcpy(effet.nom, competence->type);
     effet.tour_restant=competence->tour_actif;
-    appliquer_effet(combattant,competence,effet);
+    appliquer_effet(combattant,effet);
     competence->tour_recharge_restant=competence->tour_recharge;
 }
 
