@@ -5,9 +5,6 @@
 void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe1_Nom,char* equipe2_Nom,Combattant* attaquant){
   int a;
   printf("\n");
-  
-
-
     printf("@[%s]",equipe1_Nom);//1
     for (size_t i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe1_Nom);i++){
       printf("@");
@@ -234,50 +231,40 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     printf("@");
   }
   printf("\n");
-  
-
-
-
   printf("\n");
 
-    printf("-----------------%s--------------------\n",attaquant->nom);//1
+  
+    printf("-----------------%s--------------------\n",attaquant->nom);
     printf("\n");
 
-    printf("[1] ");//2
+    printf("[1] ");
     printf("%s",attaquant->competence[0]->nom);
     printf("\n");
-  
-    printf("%s",attaquant->competence[0]->description);//3
-        if(attaquant->competence[0]->tour_recharge_restant != 0){
-    printf("[tour de recharge : %d]", attaquant->competence[0]->tour_recharge_restant);}
-
+    printf("%s",attaquant->competence[0]->description);
+    if(attaquant->competence[0]->tour_recharge_restant != 0){
+    printf("  [tour de recharge : %d]", attaquant->competence[0]->tour_recharge_restant);}
     printf("\n");
-
-
-    printf("[2] ");//4
+  
+    printf("[2] ");
     printf("%s",attaquant->competence[1]->nom);
-        if(attaquant->competence[1]->tour_recharge_restant != 0){
-           printf("[tour de recharge : %d]", attaquant->competence[1]->tour_recharge_restant);}
-    printf("\n");
-
-    printf("%s",attaquant->competence[1]->description);//5
+    if(attaquant->competence[1]->tour_recharge_restant != 0){
+    printf("  [tour de recharge : %d]", attaquant->competence[1]->tour_recharge_restant);}
+    printf("\n")
+    printf("%s",attaquant->competence[1]->description);
     printf("\n");
   
-    printf("[3] ");//6
+    printf("[3] ");
     printf("%s",attaquant->competence[2]->nom);
-  printf("\n");
+    printf("\n");/
     if(attaquant->competence[2]->tour_recharge_restant != 0){
-    printf("[tour de recharge : %d]", attaquant->competence[2]->tour_recharge_restant);}
-
-
+    printf("  [tour de recharge : %d]", attaquant->competence[2]->tour_recharge_restant);}
     printf("\n");
     printf("%s",attaquant->competence[2]->description);
-    printf("\n");
 
     printf("[4] ");
     printf("%s",attaquant->competence[3]->nom);
-        if(attaquant->competence[3]->tour_recharge_restant != 0){
-    printf("[tour de recharge : %d]", attaquant->competence[3]->tour_recharge_restant);}
+    if(attaquant->competence[3]->tour_recharge_restant != 0){
+    printf("  [tour de recharge : %d]", attaquant->competence[3]->tour_recharge_restant);}
     printf("\n");
     printf("%s",attaquant->competence[3]->description);
 }
