@@ -9,7 +9,7 @@ int vivant(Combattant* combattant);
 int degat(Combattant* combattant,int degat);
 void degat_recharge(Combattant* combattant,int degat,Competence* competence);
 void retirer_stats(Combattant* combattant,int index);
-void appliquer_effet(Combattant* combattant,Competence* competence,Effet effet);
+void appliquer_effet(Combattant* combattant,Effet effet);
 void soin(Combattant* combattant,int soin);
 void soin_recharge(Combattant* combattant,int soin,Competence* competence);
 void acceleration(Combattant* combattant, Competence* competence);
