@@ -1,4 +1,4 @@
 Hades
 Assassin
-150 150 40 30  20 25
+130 130 40 30  20 25
 attaque_hades.txt acceleration.txt ombre_paralysante.txt morsure_spectrale.txt
