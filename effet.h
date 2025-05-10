@@ -1,3 +1,6 @@
+#ifndef EFFET_H
+#define EFFET_H
+
 #include "projet.h"
 
 int vivant(Combattant* combattant);
@@ -25,3 +28,5 @@ int charge(Combattant* combattant);
 int pret(Combattant* combattant);
 int moinsdepvennemi(Combattant* equipe[]);
 int moinsdepvallie(Combattant* equipe[]);
+
+#endif
