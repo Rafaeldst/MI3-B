@@ -249,13 +249,13 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     printf("%s",attaquant->competence[1]->nom);
     if(attaquant->competence[1]->tour_recharge_restant != 0){
     printf("  [tour de recharge : %d]", attaquant->competence[1]->tour_recharge_restant);}
-    printf("\n")
+    printf("\n");
     printf("%s",attaquant->competence[1]->description);
     printf("\n");
   
     printf("[3] ");
     printf("%s",attaquant->competence[2]->nom);
-    printf("\n");/
+    printf("\n");
     if(attaquant->competence[2]->tour_recharge_restant != 0){
     printf("  [tour de recharge : %d]", attaquant->competence[2]->tour_recharge_restant);}
     printf("\n");
