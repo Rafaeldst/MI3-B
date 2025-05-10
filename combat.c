@@ -23,7 +23,7 @@ void verifier_erreur_fichier(FILE* fichier){
 }
   Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){
     if (mode!=1 && mode!=2){
-        prinft("Erreeur."\n);
+        prinft("Erreur.\n");
         exit(EXIT_FAILURE);
     }
     int choix;
