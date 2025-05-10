@@ -1,4 +1,4 @@
 Apollon
 Support
-130 130 25 20 30 50
+130 130 35 20 30 50
 attaque_apollon.txt soin.txt lumiere_soleil.txt protection_divine.txt
