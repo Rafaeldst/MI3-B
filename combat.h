@@ -4,7 +4,6 @@
 
 #include "projet.h"
 #include "affichage.h"
-#include "combat.h"
 #include "effet.h"
 
 int meilleur_scan();
