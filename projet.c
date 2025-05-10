@@ -1,3 +1,5 @@
+#include <projet.h>
+
 int main(){
   srand(time(NULL));
   int mode=-1, difficulte;
