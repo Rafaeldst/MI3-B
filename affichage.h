@@ -2,7 +2,6 @@
 #define AFFICHAGE_H
 
 #include "projet.h"
-#include "affichage.h"
 #include "combat.h"
 #include "effet.h"
 
