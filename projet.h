@@ -6,7 +6,7 @@
 #include <string.h>
 #include <time.h>
 
-#define TAILLE_NOM_EQUIPE 32
+#define TAILLE_NOM_EQUIPE 33
 #define NOMBRE_TIC_MAXIMUM 5000
 #define TAILLE_NOM_PERSO 50
 #define TAILLE_NOM_COMPETENCE 32
