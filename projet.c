@@ -51,7 +51,7 @@ while ((equipe1[0]->pv>0 || equipe1[1]->pv>0 || equipe1[2]->pv>0) && (equipe2[0]
     
 }}
 
-void afficher_vainqueur(Combattant* equipe1[], Combattant* equipe2[]) {
+void afficher_vainqueur(Combattant* equipe1[]) {
     if(vivant(equipe1[0]) || vivant(equipe1[1]) || vivant(equipe1[2])) {
         printf("L'équipe 1 a gagné !\n");}
     else{
@@ -150,7 +150,7 @@ while (mode!=0){
         }
 
 
-        afficher_vainqueur(equipe1,equipe2);
+        afficher_vainqueur(equipe1);
         liberer_equipes(equipe1,equipe2);
 }
 
