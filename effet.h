@@ -2,6 +2,9 @@
 #define EFFET_H
 
 #include "projet.h"
+#include "affichage.h"
+#include "combat.h"
+#include "effet.h"
 
 int vivant(Combattant* combattant);
 int degat(Combattant* combattant,int degat);
