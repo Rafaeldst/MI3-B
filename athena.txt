@@ -1,4 +1,4 @@
 Athena
 Tank
-170 170 50 25 35 35
+160 160 50 25 35 35
 attaque_athena.txt provocation.txt riposte_brulante.txt protection_infernal.txt
