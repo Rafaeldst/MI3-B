@@ -1,4 +1,4 @@
 Hera
 Support
-125 125 25 25 25 25
+125 125 30 25 25 25
 attaque_hera.txt soin.txt soutien_royal.txt benediction_divine.txt
