@@ -1,0 +1,29 @@
+CY-FIGHTERS - VERSION MYTHOLOGIE GRECQUE
+
+DESCRIPTION :
+
+Jeu de combat au tour par tour en C, avec des personnages inspirés de la mythologie grecque.
+Chaque équipe est composée de 3 combattants qui utilisent des compétences spéciales pour vaincre l’équipe adverse.
+Le combat est géré avec un système de barre d action, d effets de statut et d une IA.
+
+COMMANDES DE BASE :
+
+1. Compilation du projet :
+   make
+   Cela compile tous les fichiers .c du projet et génère un exécutable nommé :
+   projet
+
+2. Nettoyage des fichiers compilés :
+   make clear
+   Supprime les fichiers objets (.o) et les dossiers temporaires.
+
+3. Recompiler depuis zéro :
+    make re
+
+LANCEMENT DU JEU :
+
+Après compilation, lance le jeu avec la commande :
+./projet
+
+
+
