@@ -9,7 +9,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
 
 
     printf("@[%s]",equipe1_Nom);//1
-    for (int i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe1_Nom);i++){
+    for (size_t i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe1_Nom);i++){
       printf("@");
     }
     printf("\n@");
@@ -31,7 +31,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     }
     printf("%s [2]",Equipe1[1]->nom);
     a=a-4-strlen(Equipe1[1]->nom);
-    for(int i=0;i<33-4-strlen(Equipe1[1]->nom);i++){
+    for(size_t i=0;i<33-4-strlen(Equipe1[1]->nom);i++){
       printf(" ");a--;
     }
     printf("%s [3]",Equipe1[2]->nom);
@@ -125,7 +125,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
 
 
   printf("@[%s]",equipe2_Nom);//1
-  for (int i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe2_Nom);i++){
+  for (size_t i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe2_Nom);i++){
     printf("@");
   }
   printf("\n@");
@@ -142,7 +142,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
   }
   printf("%s [1]",Equipe2[0]->nom);
   a=a-4-strlen(Equipe2[0]->nom);
-  for(int i=0;i<33-4-strlen(Equipe2[0]->nom);i++){
+  for(size_t i=0;i<33-4-strlen(Equipe2[0]->nom);i++){
     printf(" ");a--;
   }
   printf("%s [2]",Equipe2[1]->nom);
