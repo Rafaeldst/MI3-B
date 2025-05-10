@@ -423,5 +423,6 @@ Combattant* plus_rapide(Combattant* equipe1[],Combattant* equipe2[]){
       return equipe2[2];
       break;
   }
+    return NULL;
 }
 
