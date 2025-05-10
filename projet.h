@@ -1,9 +1,10 @@
+#ifndef PROJET_H
+#define PROJET_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-
 
 #define TAILLE_NOM_EQUIPE 32
 #define NOMBRE_TIC_MAXIMUM 5000
@@ -53,3 +54,5 @@ typedef struct{
   Competence* competence[NOMBRE_COMPETENCE];
   int equipe;
 }  Combattant;
+
+#endif
