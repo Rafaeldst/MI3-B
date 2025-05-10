@@ -22,10 +22,6 @@ void verifier_erreur_fichier(FILE* fichier){
     exit(EXIT_FAILURE);}
 }
   Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){
-    if ((mode!=1 && mode!=2)||(difficulte!=1 && difficulte!=2 && difficulte!=3)){
-        printf("Erreur.\n");
-        exit(EXIT_FAILURE);
-    }
     int choix;
     if(lanceur->equipe==1){
         for(int i=0; i<TAILLE_EQUIPE;i++){
@@ -120,7 +116,8 @@ void verifier_erreur_fichier(FILE* fichier){
          return equipe2[choix];}
         }
       }
-  }}
+  }return NULL;
+  }
 
 void appliquer_technique(Competence* competence,Combattant* lanceur, Combattant* equipe1[], Combattant* equipe2[], int mode, int difficulte){//fonction qui va faire des if pour trouver si la technique est un degat,un soin, un endormissement... et applique la technique en conséquence
   Combattant* cible;
