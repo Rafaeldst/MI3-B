@@ -22,7 +22,7 @@ void verifier_erreur_fichier(FILE* fichier){
     exit(EXIT_FAILURE);}
 }
   Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){
-    if (mode!=1 && mode!=2){
+    if ((mode!=1 && mode!=2)||(difficulte!=1 && difficulte!=2 && difficulte!=3)){
         printf("Erreur.\n");
         exit(EXIT_FAILURE);
     }
