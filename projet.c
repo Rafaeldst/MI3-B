@@ -104,7 +104,9 @@ while (mode!=0){
             printf("Choisissez le nom de l'équipe 1.\n");
             scanf(" %32[^\n]", equipe1_Nom);
                 int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF){
+      
+    }
 
             strcpy(equipe2_Nom,"Ordinateur");
             printf("Choisissez un niveau de difficulté:\n[1] faible\n[2] intermediaire\n[3] fort\n");
@@ -132,12 +134,16 @@ while (mode!=0){
         printf("Choisissez le nom de l'équipe 1.\n");
         scanf(" %32[^\n]", equipe1_Nom);
             int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF){
+
+    }
 
         printf("Choisissez le nom de l'équipe 2.\n");
         scanf(" %32[^\n]", equipe2_Nom);
             
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF){
+
+    }
 
             creer_equipe(equipe1,equipe2);
             combat(equipe1,equipe2,mode,difficulte,equipe1_Nom,equipe2_Nom);
