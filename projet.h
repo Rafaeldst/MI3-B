@@ -1,11 +1,13 @@
 #ifndef PROJET_H
 #define PROJET_H
 
+//tous les includes necessaires
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
+//toutes les consatntes utiles au code
 #define TAILLE_NOM_EQUIPE 33
 #define NOMBRE_TIC_MAXIMUM 5000
 #define TAILLE_NOM_PERSO 50
@@ -21,25 +23,26 @@
 #define TAILLE_CIBLE 20
 #define NOMBRE_COMPETENCE 4
 #define SEUIL_ACTION 100
-//acceleration protection regeneration provocation et brulure
-typedef struct{
+
+//toutes les structures utiles au code
+typedef struct{//structure utilisé pour les compétences
   char nom[TAILLE_NOM_COMPETENCE];
   int valeur;
   char description[TAILLE_DESCRIPTION];
-  char type[TAILLE_CIBLE]; // soin dégat ..?
+  char type[TAILLE_CIBLE]; // soin dégat ...
   char cible[TAILLE_CIBLE];
   int tour_actif;
   int tour_recharge;
   int tour_recharge_restant;
-} Competence;
+} Competence; //acceleration protection regeneration provocation et brulure...
 
-typedef struct{
+typedef struct{ //structure utilisé pour les effets
   char nom[TAILLE_NOM_EFFET];
   int tour_restant;
   int valeur;
 } Effet;
 
-typedef struct{
+typedef struct{//structure utilisé pour les combattants
   char nom[TAILLE_NOM_PERSO];
   int pv;
   int pvmax;
