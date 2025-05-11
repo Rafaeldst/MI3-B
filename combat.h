@@ -1,11 +1,12 @@
 #ifndef COMBAT_H
 #define COMBAT_H
 
-
+//tous les includes necessaires
 #include "projet.h"
 #include "affichage.h"
 #include "effet.h"
 
+//toutes les fonctions et procédures déclarées et utilisées dans combat.c
 int meilleur_scan();
 int vivant(Combattant* c);
 void soin_recharge(Combattant* c, int valeur, Competence* competence);
