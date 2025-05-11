@@ -4,7 +4,7 @@
 
 void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe1_Nom,char* equipe2_Nom,Combattant* attaquant){
   int a;
-  printf("\n");
+  printf("\n\n\n");
     printf("@[%s]",equipe1_Nom);//1
     for (size_t i=0;i<TAILLE_AFFICHAGE-3-strlen(equipe1_Nom);i++){
       printf("@");
