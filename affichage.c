@@ -235,7 +235,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
 int bool;
   bool=0;
   if (attaquant->equipe==1){
-    if (vivant(Equipe2[0]) || vivant(Equipe2[1]) || vivant(Equipe2[2]){
+    if (vivant(Equipe2[0]) || vivant(Equipe2[1]) || vivant(Equipe2[2])){
       bool=1;}
     }
   else{
