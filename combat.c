@@ -1,8 +1,9 @@
+//tous les includes necessaires
 #include "projet.h"
 #include "combat.h"
 
 
-int meilleur_scan(){
+int meilleur_scan(){//fonction permettant de verifier q'une valeur correct à été saisie pour ne pas avoir de probléme
     int retour = 0;
     int valeur;
     retour = scanf("%d", &valeur);
@@ -16,12 +17,12 @@ int meilleur_scan(){
 }
 
 
-void verifier_erreur_fichier(FILE* fichier){
+void verifier_erreur_fichier(FILE* fichier){//procédure permettant de vérifier qu'il n y a pas eu d'erreur lors de l'ouverture du fichier
   if (fichier==NULL){
     printf("Erreur lors de l'ouverture du fichier.\n");
     exit(EXIT_FAILURE);}
 }
-  Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){
+  Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){// Détermine la cible selon le type de compétence, l'équipe, le mode et la difficulté
     int choix;
     if(lanceur->equipe==1){
         for(int i=0; i<TAILLE_EQUIPE;i++){
@@ -275,7 +276,7 @@ void creer_equipeIA(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui
   };
   fclose(fichier);
 
-// pour suivre quels personnages  sont déjà pris
+// pour suivre quels personnages sont déjà pris
     int deja_choisi[NOMBRE_PERSO] = {0};
     int choix, i;
 
@@ -293,7 +294,7 @@ void creer_equipeIA(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui
 
       equipe1[i]->equipe=1;
       deja_choisi[choix-1] = 1;  // empeche ce personnage d'être pris 
-        // Joueur 2
+        // Ordinateur
         afficher_personnages_disponibles(deja_choisi,personnages_disponibles);
         choix=rand()%8+1;
       
@@ -336,6 +337,9 @@ Competence* choisir_attaque(Combattant* combattant) {
     return combattant->competence[choix - 1];
 }
 
+// Fonction qui choisit une compétence aléatoire parmi les deux premières
+// utilisée pour une IA de niveau faible ou moyen.
+// Ne choisit que des compétences disponibles (pas en recharge).
 Competence* choisir_attaqueIAfaiblemoyen(Combattant* combattant) {
   int choix;
 
@@ -349,6 +353,9 @@ Competence* choisir_attaqueIAfaiblemoyen(Combattant* combattant) {
   return combattant->competence[choix - 1];
 }
 
+// Fonction qui choisit une compétence aléatoire parmi toutes les compétences disponibles
+// utilisée pour une IA de niveau fort.
+// Ne choisit que des compétences disponibles (pas en recharge).
 Competence* choisir_attaqueIAfort(Combattant* combattant) {
   int choix;
 
@@ -363,7 +370,7 @@ Competence* choisir_attaqueIAfort(Combattant* combattant) {
   return combattant->competence[choix - 1];
 }
 
-int compter_chiffre(int n){
+int compter_chiffre(int n){//compteur
   if(n==0){
     return 1;
   }
@@ -375,7 +382,7 @@ int compter_chiffre(int n){
   return compteur;
 }
 
-Combattant* plus_rapide(Combattant* equipe1[],Combattant* equipe2[]){
+Combattant* plus_rapide(Combattant* equipe1[],Combattant* equipe2[]){// Fonction qui retourne le combattant vivant avec la plus grande valeur de "barre_action" parmi les deux équipes. Cette fonction est utilisée pour déterminer quel combattant jouera en premier lors du tour.
   Combattant c;
   int i;
   c.barre_action=-1;
