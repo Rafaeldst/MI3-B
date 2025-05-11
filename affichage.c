@@ -1,6 +1,6 @@
-
 #include "projet.h"
 #include "affichage.h"
+#include "effet.h"
 
 void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe1_Nom,char* equipe2_Nom,Combattant* attaquant){
   int a;
@@ -233,7 +233,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
   printf("\n");
   printf("\n");
 
-  
+  if (pret(attaquant)){
     printf("-----------------%s--------------------\n",attaquant->nom);
     printf("\n");
 
@@ -270,7 +270,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     printf("  [tour de recharge : %d]", attaquant->competence[3]->tour_recharge_restant);}
     printf("\n");
     printf("%s",attaquant->competence[3]->description);
-}
+}}
 
 void afficher_effet(Combattant* combattant){
   for (int i=0;i<combattant->nbr_effet_actif;i++){
