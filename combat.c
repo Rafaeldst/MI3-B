@@ -326,7 +326,7 @@ printf("\n");
     printf("Equipes creees avec succes ! DEBUT DE LA PARTIE \n");
 }
 
-Competence* choisir_attaque(Combattant* combattant) {
+Competence* choisir_attaque(Combattant* combattant) {//fonction qui permet de chosir l'attaque à utiliser
     int choix;
     printf("\nChoisissez une attaque.\n");
     choix=meilleur_scan();
