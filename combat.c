@@ -23,6 +23,7 @@ void verifier_erreur_fichier(FILE* fichier){//procédure permettant de vérifier
     exit(EXIT_FAILURE);}
 }
 Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){// Détermine la cible selon le type de compétence, l'équipe, le mode et la difficulté    int choix;
+    int choix;
     if(lanceur->equipe==1){
         for(int i=0; i<TAILLE_EQUIPE;i++){
             for(int j=0;j<equipe2[i]->nbr_effet_actif;j++){
@@ -38,7 +39,7 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
                 printf("Cible incorrect.\n"); 
                 choix=meilleur_scan();}
             return equipe2[choix-1];
-            }
+        }
         else if(strcmp(competence->cible, "Allie") ==0){
         printf("Choisissez une cible :\n");
         choix=meilleur_scan();
