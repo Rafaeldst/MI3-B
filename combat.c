@@ -80,40 +80,37 @@ Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant*
                 for(int i=0; i<TAILLE_EQUIPE;i++){
                     for(int j=0;j<equipe1[i]->nbr_effet_actif;j++){
                         if(strcmp(equipe1[i]->effet_special[j].nom,"Provocation")==0){
-                            return equipe1[i];
+                            return equipe1[i];}}}
+                
+                if(strcmp(competence->cible, "Ennemi") == 0){
+                choix=rand()%3+1;
+                while (choix<1 || choix>TAILLE_EQUIPE || !(vivant(equipe1[choix-1]))){
+                  choix=rand()%TAILLE_EQUIPE+1;}
+                printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix-1]->nom);
+                return equipe1[choix-1];}
+                    
+                else if(strcmp(competence->cible, "Allie") ==0){
+                    choix=rand()%TAILLE_EQUIPE+1;
+                    while(choix<1 || choix>TAILLE_EQUIPE || !(vivant(equipe2[choix-1]))){
+                      choix=rand()%3+1;
+                       }
+                    printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix-1]->nom);
+                    return equipe2[choix-1];}
                 }
-           }
-        }
-        if(strcmp(competence->cible, "Ennemi") == 0){
-        choix=rand()%3+1;
-        while (choix<1 || choix>TAILLE_EQUIPE || !(vivant(equipe1[choix-1]))){
-          choix=rand()%TAILLE_EQUIPE+1;}
-        printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix-1]->nom);
-        return equipe1[choix-1];}
-        else if(strcmp(competence->cible, "Allie") ==0){
-        choix=rand()%TAILLE_EQUIPE+1;
-        while(choix<1 || choix>TAILLE_EQUIPE || !(vivant(equipe2[choix-1]))){
-          choix=rand()%3+1;
-       }
-       printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix-1]->nom);
-       return equipe2[choix-1];}
-        }
-        else if(difficulte==2 || difficulte==3){
-          for(int i=0; i<TAILLE_EQUIPE;i++){
-            for(int j=0;j<equipe1[i]->nbr_effet_actif;j++){
-                if(strcmp(equipe1[i]->effet_special[j].nom,"Provocation")==0){
-                   return equipe1[i];
-                }
-           }
-        }
-        if(strcmp(competence->cible, "Ennemi") == 0){
-          choix=moinsdepvennemi(equipe1);
-          printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix]->nom);
-          return equipe1[choix];}
-          else if(strcmp(competence->cible, "Allie") ==0){
-          choix=moinsdepvallie(equipe2);
-         printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix]->nom);
-         return equipe2[choix];}
+            else if(difficulte==2 || difficulte==3){
+                for(int i=0; i<TAILLE_EQUIPE;i++){
+                    for(int j=0;j<equipe1[i]->nbr_effet_actif;j++){
+                        if(strcmp(equipe1[i]->effet_special[j].nom,"Provocation")==0){
+                            return equipe1[i];}}}
+                
+                if(strcmp(competence->cible, "Ennemi") == 0){
+                  choix=moinsdepvennemi(equipe1);
+                  printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix]->nom);
+                  return equipe1[choix];}
+                else if(strcmp(competence->cible, "Allie") ==0){
+                    choix=moinsdepvallie(equipe2);
+                    printf("la cible choisi par l'ordinateur est %s\n", equipe1[choix]->nom);
+                    return equipe2[choix];}
         }
       }
   }return NULL;
@@ -211,13 +208,13 @@ Combattant* charger_combattant(char* fichier_combattant){ //fonction qui charge 
 void creer_equipe(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
     char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO];
     FILE* fichier=fopen("Liste_Personnage.txt","r");
-  verifier_erreur_fichier(fichier);
+    verifier_erreur_fichier(fichier);
     for (int i=0;i<NOMBRE_PERSO;i++){
       fscanf(fichier,"%s",personnages_disponibles[i]);
     };
     fclose(fichier);
-// pour suivre quels personnages  sont déjà pris
-int deja_choisi[NOMBRE_PERSO] = {0};
+    // pour suivre quels personnages  sont déjà pris
+    int deja_choisi[NOMBRE_PERSO] = {0};
     int choix, i;
 
     for (i = 0; i < TAILLE_EQUIPE; i++) {
@@ -230,10 +227,10 @@ int deja_choisi[NOMBRE_PERSO] = {0};
             choix=meilleur_scan();
         }
 
-      equipe1[i] = charger_combattant(personnages_disponibles[choix-1]);
+        equipe1[i] = charger_combattant(personnages_disponibles[choix-1]);
 
-      equipe1[i]->equipe=1;
-      deja_choisi[choix-1] = 1;  // empeche ce personnage d'être pris 
+        equipe1[i]->equipe=1;
+        deja_choisi[choix-1] = 1;  // empeche ce personnage d'être pris 
         // Joueur 2
         afficher_personnages_disponibles(deja_choisi,personnages_disponibles);
         printf("Joueur 2 - Choisissez un personnage (1-8) : \n ");
@@ -244,36 +241,35 @@ int deja_choisi[NOMBRE_PERSO] = {0};
             choix=meilleur_scan();
         }
         deja_choisi[choix-1] = 1;
-      equipe2[i] = charger_combattant(personnages_disponibles[choix-1]);
-      equipe2[i]->equipe=2;
+        equipe2[i] = charger_combattant(personnages_disponibles[choix-1]);
+        equipe2[i]->equipe=2;
     }
   
- printf(" Composition des équipes:\n");
+    printf(" Composition des équipes:\n");
+    printf("Équipe 1 : :\n");
+    for (int j = 0; j < TAILLE_EQUIPE; j++) {
+        printf("%s", equipe1[j]->nom);
+        if (j < TAILLE_EQUIPE - 1) printf(" | ");
+    }
+    printf("\n");
 
-printf("Équipe 1 : :\n");
-for (int j = 0; j < TAILLE_EQUIPE; j++) {
-    printf("%s", equipe1[j]->nom);
-    if (j < TAILLE_EQUIPE - 1) printf(" | ");
-}
-printf("\n");
-
-printf("Équipe 2 : ");
-for (int j = 0; j < TAILLE_EQUIPE; j++) {
-    printf("%s", equipe2[j]->nom);
-    if (j < TAILLE_EQUIPE - 1) printf(" | ");
-}
-printf("\n");
+    printf("Équipe 2 : ");
+    for (int j = 0; j < TAILLE_EQUIPE; j++) {
+        printf("%s", equipe2[j]->nom);
+        if (j < TAILLE_EQUIPE - 1) printf(" | ");
+    }
+    printf("\n");
     printf("Equipes creees avec succes ! DEBUT DE LA PARTIE \n");
 }
 
 void creer_equipeIA(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui permet aux 2 joueurs de choisir ses personnage et mets à jour les équipes
-  char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO];
-  FILE* fichier=fopen("Liste_Personnage.txt","r");
-  verifier_erreur_fichier(fichier);
-  for (int i=0;i<NOMBRE_PERSO;i++){
-    fscanf(fichier,"%s",personnages_disponibles[i]);
-  };
-  fclose(fichier);
+    char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO];
+    FILE* fichier=fopen("Liste_Personnage.txt","r");
+    verifier_erreur_fichier(fichier);
+    for (int i=0;i<NOMBRE_PERSO;i++){
+        fscanf(fichier,"%s",personnages_disponibles[i]);
+    };
+    fclose(fichier);
 
 // pour suivre quels personnages sont déjà pris
     int deja_choisi[NOMBRE_PERSO] = {0};
@@ -289,10 +285,10 @@ void creer_equipeIA(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui
             choix=meilleur_scan();
         }
 
-      equipe1[i] = charger_combattant(personnages_disponibles[choix-1]);
+        equipe1[i] = charger_combattant(personnages_disponibles[choix-1]);
 
-      equipe1[i]->equipe=1;
-      deja_choisi[choix-1] = 1;  // empeche ce personnage d'être pris 
+        equipe1[i]->equipe=1;
+        deja_choisi[choix-1] = 1;  // empeche ce personnage d'être pris 
         // Ordinateur
         afficher_personnages_disponibles(deja_choisi,personnages_disponibles);
         choix=rand()%8+1;
@@ -303,25 +299,25 @@ void creer_equipeIA(Combattant* equipe1[],Combattant* equipe2[]){ //fonction qui
         }
         printf("\n Le choix de l'ordinateur est le %d  ", choix);
         deja_choisi[choix-1] = 1;
-      equipe2[i] = charger_combattant(personnages_disponibles[choix-1]);
-      equipe2[i]->equipe=2;
+        equipe2[i] = charger_combattant(personnages_disponibles[choix-1]);
+        equipe2[i]->equipe=2;
     }
   
- printf(" Composition des équipes:\n");
+    printf(" Composition des équipes:\n");
 
-printf("Équipe 1 : :\n");
-for (int j = 0; j < TAILLE_EQUIPE; j++) {
-    printf("%s", equipe1[j]->nom);
-    if (j < TAILLE_EQUIPE - 1) printf(" | ");
-}
-printf("\n");
+    printf("Équipe 1 : :\n");
+    for (int j = 0; j < TAILLE_EQUIPE; j++) {
+        printf("%s", equipe1[j]->nom);
+        if (j < TAILLE_EQUIPE - 1) printf(" | ");
+        }
+    printf("\n");
 
-printf("Équipe 2 : ");
-for (int j = 0; j < TAILLE_EQUIPE; j++) {
-    printf("%s", equipe2[j]->nom);
-    if (j < TAILLE_EQUIPE - 1) printf(" | ");
-}
-printf("\n");
+    printf("Équipe 2 : ");
+    for (int j = 0; j < TAILLE_EQUIPE; j++) {
+        printf("%s", equipe2[j]->nom);
+        if (j < TAILLE_EQUIPE - 1) printf(" | ");
+    }
+    printf("\n");
     printf("Equipes creees avec succes ! DEBUT DE LA PARTIE \n");
 }
 
@@ -329,7 +325,7 @@ Competence* choisir_attaque(Combattant* combattant) {//fonction qui permet de ch
     int choix;
     printf("\nChoisissez une attaque.\n");
     choix=meilleur_scan();
-     while (choix < 1 || choix > NOMBRE_COMPETENCE || combattant->competence[choix - 1]->tour_recharge_restant > 0){
+    while (choix < 1 || choix > NOMBRE_COMPETENCE || combattant->competence[choix - 1]->tour_recharge_restant > 0){
     printf("Erreur choisissez une attaque valide.\n");
     choix=meilleur_scan();
      }
