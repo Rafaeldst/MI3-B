@@ -109,7 +109,6 @@ void frappe_impitoyable(Combattant* combattant,Competence* competence){ //foncti
 
 void provocation(Combattant* combattant, Competence* competence){ // Applique un effet de provocation au combattant (cible), forçant  l'adversaire à l'attaquer
     Effet effet;
-    Effet effet;
     strcpy(effet.nom, competence->type);
     effet.tour_restant=competence->tour_actif;
     appliquer_effet(combattant,effet);
@@ -134,7 +133,6 @@ void degat_tous(Combattant* equipe[],Competence* competence){// Applique des dé
 }
 
 void Vol_de_vie(Combattant* lanceur,Combattant* cible,Competence* competence){// Vol de vie : inflige des dégâts à la cible et soigne le lanceur d'une partie des dégâts infligés
-    int degat_inflige=degat(cible,competence->valeur);
     int degat_inflige=degat(cible,competence->valeur);
     soin(lanceur,degat_inflige/2);
 }
