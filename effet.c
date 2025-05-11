@@ -9,7 +9,7 @@ int vivant(Combattant* combattant){ //fonction qui vérifie si un combattant est
 }
 
 int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
-  int n=rand()%100;
+    int n=rand()%100;
     if (combattant->agilite<n){
         int pv_actuel=combattant->pv;
         int degats_totaux=degat*(100-combattant->defense)/100;
@@ -25,7 +25,7 @@ int degat(Combattant* combattant,int degat){//fonction qui inflige les dégats �
 }
 
 void degat_recharge(Combattant* combattant,int degat,Competence* competence){//fonction qui inflige les dégats à un personnage mais gère aussi le fait que le personnage meurt ou non
-  int n=rand()%100;
+    int n=rand()%100;
     if (combattant->agilite<n){
         int degats_totaux=degat*(100-combattant->defense)/100;
         combattant->pv=combattant->pv-degats_totaux;
@@ -50,10 +50,10 @@ void retirer_stats(Combattant* combattant,int index){ // retire les effets spéc
 void appliquer_effet(Combattant* combattant,Effet effet){//fonction qui applique un effet à un combattant
     combattant->barre_action=0;
     for (int i=0;i<combattant->nbr_effet_actif;i++){//on regarde s'il à déjà l'effet, si oui on applique en enlevant les buffs/ malus precedent
-    if (strcmp(combattant->effet_special[i].nom,effet.nom)==0){
-        retirer_stats(combattant,i);
-        combattant->effet_special[i]=effet;
-        return;
+        if (strcmp(combattant->effet_special[i].nom,effet.nom)==0){
+            retirer_stats(combattant,i);
+            combattant->effet_special[i]=effet;
+            return;
     }}
     combattant->nbr_effet_actif++;
     combattant->effet_special[combattant->nbr_effet_actif-1]=effet;//s'il ne l'avait pas on applique l'effet
@@ -62,7 +62,7 @@ void appliquer_effet(Combattant* combattant,Effet effet){//fonction qui applique
 void soin(Combattant* combattant,int soin){ // soigne un combattant qui ne peut pas dépasser un seuil de PV max
     combattant->pv=combattant->pv+soin;
     if(combattant->pv > combattant->pvmax){
-    combattant->pv=combattant->pvmax;}
+        combattant->pv=combattant->pvmax;}
 }
 
 void soin_recharge(Combattant* combattant,int soin,Competence* competence){ // soigne un combattant et recharge la compétence
