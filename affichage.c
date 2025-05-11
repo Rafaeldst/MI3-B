@@ -2,7 +2,7 @@
 #include "affichage.h"
 #include "effet.h"
 
-void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe1_Nom,char* equipe2_Nom,Combattant* attaquant){
+void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe1_Nom,char* equipe2_Nom,Combattant* attaquant){ //procédure permettant d'afficher tous les combattants ainsi que leurs point de vie et leur barre d'action
   int a;
   printf("\n\n\n");
     printf("@[%s]",equipe1_Nom);//1
@@ -275,7 +275,7 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     printf("\n");
 }}
 
-void afficher_effet(Combattant* combattant){
+void afficher_effet(Combattant* combattant){ //affiche les effets actifs du combattant
   for (int i=0;i<combattant->nbr_effet_actif;i++){
     if (strcmp(combattant->effet_special[i].nom,"Brulure")==0){
       printf("🔥");
@@ -295,7 +295,7 @@ void afficher_effet(Combattant* combattant){
   }
 }
 
-void afficher_personnages_disponibles(int deja_choisi[], char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO]) {
+void afficher_personnages_disponibles(int deja_choisi[], char personnages_disponibles[NOMBRE_PERSO][TAILLE_NOM_PERSO]) { //procédure qui permet d'afficher les personnage encore disponible
     char chaine[TAILLE_NOM_PERSO];
     printf(" Les Personnages disponibles sont:\n");
     for (int i = 0; i < NOMBRE_PERSO; i++) {
