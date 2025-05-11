@@ -232,8 +232,18 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
   }
   printf("\n");
   printf("\n");
-
-  if (pret(attaquant)){
+int bool;
+  bool=0;
+  if (attaquant->equipe==1){
+    if (vivant(equipe2[0]) || vivant(equipe2[1]) || vivant(equipe2[2]){
+      bool=1;
+    }
+  else{
+    if (vivant(equipe1[0]) || vivant(equipe1[1]) || vivant(equipe1[2]){
+      bool=1;
+    }
+      }
+  if (pret(attaquant)&&(bool==1)){
     printf("-----------------%s--------------------\n",attaquant->nom);
     printf("\n");
 
