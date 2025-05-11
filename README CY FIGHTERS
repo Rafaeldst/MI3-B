@@ -25,5 +25,32 @@ LANCEMENT DU JEU :
 Après compilation, lance le jeu avec la commande :
 ./projet
 
+Écran d’introduction :
+
+- Choix du mode :
+  Tapez  "0" pour  arrêter le programme, "1" pour jouer contre l'ordinareur ou "2" pour jouer en multijoueur.
+
+ Sélection des équipes :
+
+- Les personnages sont affichés avec un numéro correspondant entre 1 et 8.
+- Sélectionnez 3 combattants pour chaque équipe.(pas de doublons possibles)
+
+ Phase de Combat :
+
+Chaque personnage a une barre d'action qui se remplit automatiquement. Quand elle atteint  100, il peut jouer.
+
+ Quand c’est à un personnage de jouer, voici les étapes :
+
+1. **Choisir une compétence (1 à 4)**  
+   → Tapez le numéro correspondant à la compétence à utiliser.
+
+2. **Choisir une cible**  
+   → Une liste d’ennemis (ou alliés si soin) est affichée.  
+   → Tapez le numéro du personnage ciblé.
+ Les effets sont appliqués automatiquement :
+- Dégâts, soins, brûlures, provocations, régénérations, protections, etc.
+- Les compétences ont un temps de recharge (affiché).
+
+Le combat continue jusqu’à ce qu’une équipe n’ait plus de combattants vivants.
 
 
