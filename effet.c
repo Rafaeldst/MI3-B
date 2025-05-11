@@ -1,4 +1,4 @@
-//tous les includes neccesairres
+//tous les includes necessaires
 #include "projet.h"
 #include "effet.h"
 
