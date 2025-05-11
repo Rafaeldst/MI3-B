@@ -22,8 +22,7 @@ void verifier_erreur_fichier(FILE* fichier){//procédure permettant de vérifier
     printf("Erreur lors de l'ouverture du fichier.\n");
     exit(EXIT_FAILURE);}
 }
-  Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){// Détermine la cible selon le type de compétence, l'équipe, le mode et la difficulté
-    int choix;
+Combattant* choisir_cible(Combattant* lanceur,Combattant* equipe1[], Combattant* equipe2[], Competence* competence,int mode, int difficulte){// Détermine la cible selon le type de compétence, l'équipe, le mode et la difficulté    int choix;
     if(lanceur->equipe==1){
         for(int i=0; i<TAILLE_EQUIPE;i++){
             for(int j=0;j<equipe2[i]->nbr_effet_actif;j++){
