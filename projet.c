@@ -1,3 +1,4 @@
+//tous les includes necessaires
 #include "projet.h"
 #include "affichage.h"
 #include "combat.h"
@@ -51,7 +52,7 @@ while ((equipe1[0]->pv>0 || equipe1[1]->pv>0 || equipe1[2]->pv>0) && (equipe2[0]
     
 }}
 
-void afficher_vainqueur(Combattant* equipe1[]) {
+void afficher_vainqueur(Combattant* equipe1[]) { //procédure qui sert à afficher le vainqueur à l'isssu du combat
     if(vivant(equipe1[0]) || vivant(equipe1[1]) || vivant(equipe1[2])) {
         printf("L'équipe 1 a gagné !\n");}
     else{
@@ -61,7 +62,7 @@ void afficher_vainqueur(Combattant* equipe1[]) {
 
 
 
-void liberer_equipes(Combattant* equipe1[], Combattant* equipe2[]) {
+void liberer_equipes(Combattant* equipe1[], Combattant* equipe2[]) { //procédure qui sert à libérer la mémoire des 2 équipes
     for(int i = 0; i < TAILLE_EQUIPE; i++) {
         for(int j = 0; j < NOMBRE_COMPETENCE; j++) {
             free(equipe1[i]->competence[j]);
@@ -79,15 +80,13 @@ void liberer_equipes(Combattant* equipe1[], Combattant* equipe2[]) {
 
 int main(){
 
-
-
-  srand(time(NULL));
+  srand(time(NULL));// obligatoire pour utiliser la fonction rand dans les autres fonctions
   int mode=-1, difficulte;
 Combattant* equipe1[TAILLE_EQUIPE];
 Combattant* equipe2[TAILLE_EQUIPE];
 char equipe1_Nom[TAILLE_NOM_EQUIPE];
 char equipe2_Nom[TAILLE_NOM_EQUIPE];
-while (mode!=0){
+while (mode!=0){ //permet de choisir le mode de jeu( solo contre ordi ou multijoeur)
     printf("Choisissez un mode:\n[0] Arrêter le programme\n[1] Solo contre l'ordinateur\n[2] Multijoueur 1V1\n");
     mode=meilleur_scan();
     while (mode!=0  && mode!=1 && mode!=2){
@@ -99,17 +98,16 @@ while (mode!=0){
                 return 0;
             }
 
-
         if(mode==1){
             printf("Choisissez le nom de l'équipe 1.\n");
-            scanf(" %32[^\n]", equipe1_Nom);
+            scanf(" %32[^\n]", equipe1_Nom);//choix du nom de l'équipe du joueur
                 int c;
     while ((c = getchar()) != '\n' && c != EOF){
       
     }
 
             strcpy(equipe2_Nom,"Ordinateur");
-            printf("Choisissez un niveau de difficulté:\n[1] faible\n[2] intermediaire\n[3] fort\n");
+            printf("Choisissez un niveau de difficulté:\n[1] faible\n[2] intermediaire\n[3] fort\n");//permet de choisir la difficulté de l'ordinateur
             difficulte=meilleur_scan();
             while (difficulte!=1 && difficulte!=2 && difficulte!=3){
                 printf("Erreur de saisie.\n");
@@ -131,14 +129,14 @@ while (mode!=0){
 
 
         if(mode==2){
-        printf("Choisissez le nom de l'équipe 1.\n");
+        printf("Choisissez le nom de l'équipe 1.\n");//choix du nom de l'équipe du joueur 1
         scanf(" %32[^\n]", equipe1_Nom);
             int c;
     while ((c = getchar()) != '\n' && c != EOF){
 
     }
 
-        printf("Choisissez le nom de l'équipe 2.\n");
+        printf("Choisissez le nom de l'équipe 2.\n");//choix du nom de l'équipe du joueur 2
         scanf(" %32[^\n]", equipe2_Nom);
             
     while ((c = getchar()) != '\n' && c != EOF){
