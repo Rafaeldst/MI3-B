@@ -270,8 +270,10 @@ void affiche_tous_perso(Combattant* Equipe1[],Combattant* Equipe2[],char* equipe
     printf("  [tour de recharge : %d]", attaquant->competence[3]->tour_recharge_restant);}
     printf("\n");
     printf("%s",attaquant->competence[3]->description);
-}printf("\n");
-}
+
+    
+    printf("\n");
+}}
 
 void afficher_effet(Combattant* combattant){
   for (int i=0;i<combattant->nbr_effet_actif;i++){
