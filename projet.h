@@ -17,7 +17,7 @@
 #define TAILLE_CATEGORIE_PERSO 32
 #define NOMBRE_PERSO 8
 #define TAILLE_AFFICHAGE 107 //multiple de 3 (99)+8
-#define NOMBRE_EFFET 6 //nombre de tous les effets possibles du jeu
+#define NOMBRE_EFFET 5 //nombre de tous les effets possibles du jeu
 #define TAILLE_EQUIPE 3
 #define TAILLE_TYPE 20
 #define TAILLE_CIBLE 20
