@@ -47,7 +47,7 @@ void retirer_stats(Combattant* combattant,int index){ // retire les effets spéc
   }
 }
 
-void appliquer_effet(Combattant* combattant,Effet effet){
+void appliquer_effet(Combattant* combattant,Effet effet){//fonction qui applique un effet à un combattant
     combattant->barre_action=0;
     for (int i=0;i<combattant->nbr_effet_actif;i++){//on regarde s'il à déjà l'effet, si oui on applique en enlevant les buffs/ malus precedent
     if (strcmp(combattant->effet_special[i].nom,effet.nom)==0){
