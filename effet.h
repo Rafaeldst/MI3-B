@@ -1,10 +1,12 @@
 #ifndef EFFET_H
 #define EFFET_H
 
+//tous les includes necessaires
 #include "projet.h"
 #include "affichage.h"
 #include "combat.h"
 
+//toutes les fonctions et procédures déclarées et utilisées dans effet.c
 int vivant(Combattant* combattant);
 int degat(Combattant* combattant,int degat);
 void degat_recharge(Combattant* combattant,int degat,Competence* competence);
