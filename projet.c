@@ -50,13 +50,15 @@ while ((equipe1[0]->pv>0 || equipe1[1]->pv>0 || equipe1[2]->pv>0) && (equipe2[0]
       }
     tic++;
     
-}}
+}
+   affiche_tous_perso(equipe1,equipe2,equipe1_Nom,equipe2_Nom,rapide);
+}
 
 void afficher_vainqueur(Combattant* equipe1[]) { //procédure qui sert à afficher le vainqueur à l'isssu du combat
     if(vivant(equipe1[0]) || vivant(equipe1[1]) || vivant(equipe1[2])) {
-        printf("L'équipe 1 a gagné !\n");}
+        printf("\n\nL'équipe 1 a gagné !\n\n");}
     else{
-        printf("L'équipe 2 a gagné !\n");
+        printf("\n\nL'équipe 2 a gagné !\n\n");
     }
 }
 
